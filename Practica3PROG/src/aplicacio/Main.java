@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Main {
 
 	static Scanner teclat = new Scanner(System.in);
+	//procediment
 	public static void altaUsuari() {
 		
 		System.out.println ("Posa les dades del usuari: ");
@@ -22,7 +23,7 @@ public class Main {
 	}
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 	}
 
 }

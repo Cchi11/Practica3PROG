@@ -9,16 +9,16 @@ public class Bens extends Producte{   //Clase feta per Chenxing Chi
 	
 	/**
 	 * Constructor de Bens
-	 * @param name
-	 * @param descripcio
-	 * @param tip
-	 * @param b
-	 * @param dat		
-	 * @param amplada  dimensions
-	 * @param alçada	dimensions
-	 * @param fons		dimensions
-	 * @param pes		pes del bé
-	 * @param data		data d'intercanvi
+	 * @param name conte el nom del producte
+	 * @param descripcio conte la descripcio del producte
+	 * @param tip conte el tipus del producte
+	 * @param b conte el be del producte
+	 * @param dat conte la data de creacio del producte
+	 * @param amplada dimensions
+	 * @param alçada dimensions
+	 * @param fons	dimensions
+	 * @param pes	pes del bé
+	 * @param data	data d'intercanvi
 	 */
 	public Bens (String name, String descripcio, String tip, boolean b, String dat, int amplada, int alçada, int fons, int pes, String data) {
 		super (name, descripcio, tip, b, dat);
