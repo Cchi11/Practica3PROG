@@ -1,8 +1,8 @@
-package dadesProductesServeis;
+package peticions;
 
 public class LlistaPeticions { //Clase realitzada per Pol Regy
 	private int nElem;
-	private Peticio[] llista;
+	private Peticions[] llista;
 	
 	
 	/** Constructor de la llista de peticions
@@ -11,7 +11,7 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 	 */
 	public LlistaPeticions (int n) {
 		nElem = 0;
-		llista = new Peticio [n];
+		llista = new Peticions [n];
 	}
 	
 	

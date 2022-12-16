@@ -111,4 +111,8 @@ public class Peticions {		//Clase feta per Òscar Cabré
 		this.valoracioUserRebPet = valoracioUserRebPet;
 	}
 	
+	public String toString() {
+		return ("PETICIO => idPeticio:\t"+idPeticio+"\tuserPeticio:\t"+userPeticio+"\tuserRebPet:\t"+userRebPet+"\tproducAcons:\t"+producAcons+"\tproducOfe:\t"+producOfe+"\tresposat:\t"+resposat+"\tvaloracioUserPeticio:\t"+valoracioUserPeticio+"\tvaloracioUserRebPet:\t"+valoracioUserRebPet);
+	}
+	
 }
