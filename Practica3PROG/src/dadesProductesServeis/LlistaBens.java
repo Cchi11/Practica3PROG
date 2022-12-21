@@ -22,4 +22,9 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 	public int getNumElem() {
 		return nElem;
 	}
+	
+	public void afegirBe (Bens b) {
+		nElem++;
+		llista[nElem]= b;
+	}
 }
