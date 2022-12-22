@@ -2,6 +2,7 @@ package aplicacio;
 
 import java.util.Scanner;
 
+
 import usuaris.Usuaris;
 
 public class Main {
