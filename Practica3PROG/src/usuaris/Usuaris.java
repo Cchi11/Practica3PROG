@@ -4,8 +4,8 @@ public class Usuaris {   //Clase feta per Gerard Altadill
 	private String alies;
 	private String correu;
 	private int codiPost;
-	private String ofertaProd;
-	private String intercanvis;
+	private int ofertaProd;
+	private int  intercanvis;
 	
 	/** Constructor de la classe usuaris
 	 * 
@@ -15,12 +15,12 @@ public class Usuaris {   //Clase feta per Gerard Altadill
 	 * @param oferProd conte la oferta produida
 	 * @param intercanvi conte l'intercanvi de l'usuari
 	 */
-	public Usuaris (String ali, String corre, int cPost, String oferProd, String interc) {
+	public Usuaris (String ali, String corre, int cPost) {
 		alies = ali;
 		correu = corre;
 		codiPost = cPost;
-		ofertaProd = oferProd;
-		intercanvis = interc;
+		ofertaProd = 0;
+		intercanvis = 0;
 	}
 	
 	/** getter
@@ -51,7 +51,7 @@ public class Usuaris {   //Clase feta per Gerard Altadill
 	 * 
 	 * @return l'oferta produida
 	 */
-	public String getOfertaProd () {
+	public int getOfertaProd () {
 		return (ofertaProd);
 	}
 	
@@ -59,7 +59,15 @@ public class Usuaris {   //Clase feta per Gerard Altadill
 	 * 
 	 * @return l'intercanvi de l'usuari
 	 */
-	public String getIntercanvis () {
+	public int getIntercanvis () {
 		return (intercanvis);
+	}
+	
+	public Usuaris copia() {
+		Usuaris copia = new Usuaris (alies, correu, codiPost);
+		copia.intercanvis=this.intercanvis;
+		copia.ofertaProd=this.ofertaProd;
+		return copia;
+		
 	}
 }

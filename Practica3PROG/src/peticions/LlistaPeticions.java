@@ -22,5 +22,10 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 	public int getNElem() {
 		return(nElem);
 	}
+	
+	public void afegirPeticio (Peticions p) {
+		nElem++;
+		llista[nElem] = p;
+	}
 
 }

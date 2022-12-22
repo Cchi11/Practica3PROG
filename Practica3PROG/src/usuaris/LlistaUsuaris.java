@@ -21,4 +21,11 @@ public class LlistaUsuaris {			//Clase feta per Chenxing Chi
 		public int getNumElem() {
 			return nElem;
 		}
+		
+		public void donaAlta (Usuaris a) {
+			llista[nElem] = a.copia();
+			nElem++;
+		}
+		
+		
 }
