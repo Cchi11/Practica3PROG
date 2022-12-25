@@ -6,10 +6,13 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
+		<item key="selection" value="mainGrafic"/>
 		<list key="findhistory">
+			<item value="LoginGUI"/>
 			<item value="v"/>
 		</list>
 		<list key="replacehistory">
+			<item value="mainGrafic"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
