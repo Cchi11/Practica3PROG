@@ -2,6 +2,8 @@ package interficieGrafica;
 import javax.swing.*;
 
 public class MainGrafic extends JFrame {
+	
+	private Object[] opcions;
 
 	public MainGrafic() {
 		// Demanar dades a l'usuari.
