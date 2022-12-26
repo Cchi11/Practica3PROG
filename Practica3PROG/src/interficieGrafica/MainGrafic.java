@@ -22,6 +22,7 @@ public class MainGrafic extends JFrame {
 		 }
 		 else
 		 {
+			 
 		 }
 		
 		 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

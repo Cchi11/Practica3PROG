@@ -1,0 +1,7 @@
+package fitxers;
+
+public class FitxerSerialitzat {
+	public static void main(String[] args) {
+		LlistaUsuaris objectToSerialize = new LlistaUsuaris();
+	}
+}

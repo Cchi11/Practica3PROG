@@ -1,8 +1,13 @@
 package aplicacio;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
-
+//import fitxers.LlistaUsuaris;
 import usuaris.Usuaris;
 
 public class Main {
@@ -33,25 +38,48 @@ public class Main {
 	//procediment
 	public static void altaUsuari() {
 			
-			System.out.println ("Introdueix els següents camps: ");
+		System.out.println ("Introdueix els següents camps: ");
 			
-			System.out.println ("Usuari:");
-			String nom = teclat.nextLine();
+		System.out.println ("Usuari:");
+		String nom = teclat.nextLine();
 			
-			System.out.println ("Correu del usuari: ");
-			String correu = teclat.nextLine();
-			
-			System.out.println ("Codi postal del usuari");
-			String cPost = teclat.nextLine();
-			int codiPost = Integer.parseInt(cPost);
-			
-			Usuaris usuari = new Usuaris (nom, correu, codiPost);
-			
-		}
+		System.out.println ("Correu del usuari: ");
+		String correu = teclat.nextLine();
 		
+		System.out.println ("Codi postal del usuari");
+		String cPost = teclat.nextLine();
+		int codiPost = Integer.parseInt(cPost);
+		
+		Usuaris objectToSerialize = new Usuaris(nom, correu, codiPost); 
+		
+	    try (FileOutputStream fos = new FileOutputStream("serialized_object.bin, true")) {         // Crea un flujo de salida de objetos a partir del flujo de salida de archivos
+	    	try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+	    		// Escribe la instancia de la clase serializable en el archivo
+	            oos.writeObject(objectToSerialize);
+	        }
+	    }
+	  	catch (IOException e) {
+	  		System.out.println ("no");
+	    }
+	}
+	
+	public static void llegirFitxerSerial() {
+		for (int i=0; i<3; i++) {
+        try (FileInputStream fis = new FileInputStream("serialized_object.bin")) {
+            // Crea un flujo de entrada de objetos a partir del flujo de entrada de archivos
+            try (ObjectInputStream ois = new ObjectInputStream(fis)) {
+                // Lee la instancia serializada del archivo y la convierte a una instancia de la clase
+                Usuaris ala = (Usuaris) ois.readObject();
+                System.out.println (ala.getAlies());
+            }
+        } catch (IOException | ClassNotFoundException e) {
+        	System.out.println ("no2");
+        }
+		}
+    }
 	
 	public static void main(String[] args) {
-		
+		altaUsuari();
+		llegirFitxerSerial();
 	}
-
 }

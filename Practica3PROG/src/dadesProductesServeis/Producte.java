@@ -1,6 +1,6 @@
 package dadesProductesServeis;
 
-public class Producte {			//Clase feta per Gerard Altadill
+public abstract class Producte {	//Clase feta per Gerard Altadill
 	protected String nom;
 	protected String desc;
 	protected String tipus;

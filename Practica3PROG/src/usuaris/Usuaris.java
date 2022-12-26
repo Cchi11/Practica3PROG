@@ -1,6 +1,8 @@
 package usuaris;
 
-public class Usuaris {   //Clase feta per Gerard Altadill
+import java.io.Serializable;
+
+public class Usuaris implements Serializable{   //Clase feta per Gerard Altadill
 	private String alies;
 	private String correu;
 	private int codiPost;
