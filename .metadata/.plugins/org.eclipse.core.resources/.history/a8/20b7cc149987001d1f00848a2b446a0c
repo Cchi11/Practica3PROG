@@ -1,6 +1,14 @@
 package aplicacio;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
+
+//import fitxers.LlistaUsuaris;
+import usuaris.Usuaris;
 
 public class Main {
 	static Scanner teclat = new Scanner(System.in);
@@ -29,23 +37,48 @@ public class Main {
 	
 	//procediment
 	public static void altaUsuari() {
-		
-		System.out.println ("Posa les dades del usuari: ");
-		System.out.println ("Nom del usuari");
+			
+		System.out.println ("Introdueix els següents camps: ");
+			
+		System.out.println ("Usuari:");
 		String nom = teclat.nextLine();
+			
 		System.out.println ("Correu del usuari: ");
 		String correu = teclat.nextLine();
+		
 		System.out.println ("Codi postal del usuari");
 		String cPost = teclat.nextLine();
-		System.out.println ("Oferta produida per l'usuari");
-		String oferProd = teclat.nextLine();
-		System.out.println ("intercanvi del usuari");
-		String inter = teclat.nextLine();
 		int codiPost = Integer.parseInt(cPost);
+		
+		Usuaris objectToSerialize = new Usuaris(nom, correu, codiPost); 
+		
+	    try (FileOutputStream fos = new FileOutputStream("serialized_object.bin, true")) {         // Crea un flujo de salida de objetos a partir del flujo de salida de archivos
+	    	try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+	    		// Escribe la instancia de la clase serializable en el archivo
+	            oos.writeObject(objectToSerialize);
+	        }
+	    }
+	  	catch (IOException e) {
+	  		System.out.println ("no");
+	    }
 	}
 	
+	public static void llegirFitxerSerial() {
+		for (int i=0; i<3; i++) {
+        try (FileInputStream fis = new FileInputStream("serialized_object.bin")) {
+            try (ObjectInputStream ois = new ObjectInputStream(fis)) {
+                Usuaris ala = (Usuaris) ois.readObject();
+                System.out.println (ala.getAlies());
+                System.out.println(ala.toString());
+            }
+        } catch (IOException | ClassNotFoundException e) {
+        	System.out.println ("no2");
+        }
+		}
+    }
+	
 	public static void main(String[] args) {
-		
+		altaUsuari();
+		llegirFitxerSerial();
 	}
-
 }

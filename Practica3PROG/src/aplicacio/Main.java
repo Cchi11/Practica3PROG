@@ -1,6 +1,9 @@
 package aplicacio;
 
+
+import java.io.EOFException;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -63,23 +66,25 @@ public class Main {
 	    }
 	}
 	
-	public static void llegirFitxerSerial() {
-		for (int i=0; i<3; i++) {
-        try (FileInputStream fis = new FileInputStream("serialized_object.bin")) {
-            // Crea un flujo de entrada de objetos a partir del flujo de entrada de archivos
-            try (ObjectInputStream ois = new ObjectInputStream(fis)) {
-                // Lee la instancia serializada del archivo y la convierte a una instancia de la clase
-                Usuaris ala = (Usuaris) ois.readObject();
-                System.out.println (ala.getAlies());
-            }
-        } catch (IOException | ClassNotFoundException e) {
-        	System.out.println ("no2");
-        }
+	public static void llegirFitxerSerial() throws IOException, ClassNotFoundException {
+				
+		ObjectInputStream Fit = new ObjectInputStream(new FileInputStream("serialized_object.bin"));
+		Usuaris instancia;
+		boolean ok = false;
+		
+		while (!ok) {
+			try { 
+				instancia = (Usuaris) Fit.readObject();
+				System.out.println(instancia.toString());
+			} catch (EOFException e) {
+				ok = true;
+			}
 		}
-    }
+		Fit.close();
+	}
 	
-	public static void main(String[] args) {
-		altaUsuari();
+	public static void main(String[] args) throws ClassNotFoundException, IOException {
+		//altaUsuari();
 		llegirFitxerSerial();
 	}
 }

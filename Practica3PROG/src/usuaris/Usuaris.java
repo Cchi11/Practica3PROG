@@ -3,6 +3,8 @@ package usuaris;
 import java.io.Serializable;
 
 public class Usuaris implements Serializable{   //Clase feta per Gerard Altadill
+	//static final long serialVersionUID = 1;
+	
 	private String alies;
 	private String correu;
 	private int codiPost;
@@ -64,6 +66,10 @@ public class Usuaris implements Serializable{   //Clase feta per Gerard Altadill
 	public int getIntercanvis () {
 		return (intercanvis);
 	}
+	
+	/*public String toString() {
+		return ("Alies: " + alies + ", Correu: " + correu + " i Codi postal: " + codiPost);
+	}*/
 	
 	public Usuaris copia() {
 		Usuaris copia = new Usuaris (alies, correu, codiPost);
