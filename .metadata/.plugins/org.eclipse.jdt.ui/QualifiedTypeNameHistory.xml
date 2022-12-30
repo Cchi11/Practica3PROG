@@ -6,4 +6,7 @@
     <fullyQualifiedTypeName name="java.io.ObjectInputStream"/>
     <fullyQualifiedTypeName name="java.io.IOException"/>
     <fullyQualifiedTypeName name="java.io.EOFException"/>
+    <fullyQualifiedTypeName name="dadesProductesServeis.Serveis"/>
+    <fullyQualifiedTypeName name="dadesProductesServeis.Bens"/>
+    <fullyQualifiedTypeName name="dadesProductesServeis.LlistaBens"/>
 </qualifiedTypeNameHistroy>

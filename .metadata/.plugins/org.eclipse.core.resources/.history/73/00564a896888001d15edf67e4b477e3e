@@ -1,7 +1,6 @@
 package dadesProductesServeis;
 
 public class Serveis extends Producte{   //Clase realitzada per Pol Regy
-	
 	private String dataFiOferiment;
 	
 	

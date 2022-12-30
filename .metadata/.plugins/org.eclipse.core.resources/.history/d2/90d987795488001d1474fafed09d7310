@@ -10,9 +10,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
-import dadesProductesServeis.Bens;
-import dadesProductesServeis.LlistaBens;
-import dadesProductesServeis.Serveis;
 //import fitxers.LlistaUsuaris;
 import usuaris.Usuaris;
 
@@ -42,104 +39,11 @@ public class Main {
 	}
 	
 	public static void opcio2 () {
-		System.out.println("\n\nLlistes del programa:");
-		System.out.println("\n\t1. Llista de productes");
-		System.out.println("\t2. Llista de peticions");
-		System.out.println("\t3. Llista de serveis");
-		System.out.println("\t4. Llista de bens");
-		System.out.println("\t5. Llista d'usuaris");
-		System.out.println("\t6. Cancel·lar");
-		System.out.print("\n\t\t\tIndica quina llista vols mostrar: \n");
-		int opcioll = Integer.parseInt(teclat.nextLine());
-		while (opcioll != 6) {
-			switch (opcioll) {
-			case 1: 
-				//llista productes
-				break;
-			case 2:
-				//llista peticions
-				break;
-			case 3:
-				//llista serveis
-				break;
-			case 4:
-				//llista bens
-				break;
-			case 5:
-				//llista usuaris
-				break;
-			}
-		}
+		
 	}
 	
-	public static void opcio5() {
-		
-		System.out.println ("Introdueix els següents camps: ");
-		
-		System.out.println ("Indica el nom del servei");
-		String nom = teclat.nextLine();
-		
-		System.out.println ("Indica la descripcio del servei");
-		String desc = teclat.nextLine();
-		
-		System.out.println ("Indica el tipus del servei");
-		String tipus = teclat.nextLine();
-		
-		System.out.println ("Indica la data d'inici del servei");
-		String dataini = teclat.nextLine();
-		
-		System.out.println ("Indica la data de finalitzacio del servei");
-		String datafi = teclat.nextLine();
-		
-		Serveis s = new Serveis(nom, desc, tipus, false, dataini, datafi);
-		
-		//FALTA AFEGIR A LA LLISTA DE SERVEIS EL NOU SERVEI
-		
-		//FALTA AFEGIR AL FITXER DE TEXT EL NOU SERVEI
-	}
-	
-	public static void opcio6() {
-		System.out.println ("Introdueix els següents camps: ");
-		
-		System.out.println ("Indica el nom del producte fisic");
-		String nom = teclat.nextLine();
-		
-		System.out.println ("Indica la descripcio del producte fisic");
-		String desc = teclat.nextLine();
-		
-		System.out.println ("Indica el tipus del producte fisic");
-		String tipus = teclat.nextLine();
-		
-		System.out.println ("Indica la data de creacio del producte fisic");
-		String datacrea = teclat.nextLine();
-		
-		System.out.println ("Indica l'amplada del producte fisic");
-		String amp = teclat.nextLine();
-		int amplada = Integer.parseInt(amp);
-		
-		System.out.println ("Indica l'alçada del producte fisic");
-		String alç = teclat.nextLine();
-		int alçada = Integer.parseInt(alç);
-		
-		System.out.println ("Indica el fons del producte fisic");
-		String fon = teclat.nextLine();
-		int fons = Integer.parseInt(fon);
-		
-		System.out.println ("Indica el pes del producte fisic");
-		String p = teclat.nextLine();
-		int pes = Integer.parseInt(p);
-		
-		System.out.println ("Indica la data d'intercanvi del producte fisic");
-		String datainterc = teclat.nextLine();
-		
-		Bens b = new Bens(nom, desc, tipus, true, datacrea, amplada, alçada, fons, pes, datainterc);
-		
-		//FALTA AFEGIR A LA LLISTA DE BENS EL NOU BE
-		
-		//FALTA AFEGIR AL FITXER DE TEXT EL NOU BE
-	}
-	
-	public static void opcio9() {
+	//procediment
+	public static void altaUsuari() {
 			
 		System.out.println ("Introdueix els següents camps: ");
 			
@@ -153,9 +57,7 @@ public class Main {
 		String cPost = teclat.nextLine();
 		int codiPost = Integer.parseInt(cPost);
 		
-		Usuaris objectToSerialize = new Usuaris(nom, correu, codiPost);
-		
-		//FALTA AFEGIR A LA LLISTA D'USUARIS EL NOU USUARI
+		Usuaris objectToSerialize = new Usuaris(nom, correu, codiPost); 
 		
 	    try (FileOutputStream fos = new FileOutputStream("serialized_object.bin, true")) {         // Crea un flujo de salida de objetos a partir del flujo de salida de archivos
 	    	try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
@@ -167,7 +69,7 @@ public class Main {
 	  		System.out.println ("no");
 	    }
 	}
-
+	
 	public static void llegirFitxerSerial() throws IOException, ClassNotFoundException {
 				
 		ObjectInputStream Fit = new ObjectInputStream(new FileInputStream("serialized_object.bin"));
@@ -186,11 +88,7 @@ public class Main {
 	}
 	
 	public static void main(String[] args) throws ClassNotFoundException, IOException {
-		LlistaBens llistabe = new LlistaBens();
-		
 		mostrarMenu();
-		//Bens a = new Bens ("sabata", "cosa que es fica al peu", "roba", true, "30-12-2022", 12, 23, 45, 2, "3-1-2023"); 
-		//prova per veure si funciona la instancia
 		int opcio = Integer.parseInt(teclat.nextLine());
 		while (opcio != 17) {
 			switch (opcio) {
@@ -244,8 +142,7 @@ public class Main {
 				break;
 			}
 		}
-		System.out.println("Has sortit de l'aplicacio, adeu!");
 		//altaUsuari();
-		//llegirFitxerSerial();*/
+		//llegirFitxerSerial();
 	}
 }
