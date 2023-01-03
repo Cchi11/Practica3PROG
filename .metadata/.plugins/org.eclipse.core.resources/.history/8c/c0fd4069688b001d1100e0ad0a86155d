@@ -3,7 +3,7 @@ package dadesProductesServeis;
 public class Serveis extends Producte{   //Clase realitzada per Pol Regy
 	
 	private String dataFiOferiment;
-	private boolean actiu;
+	private int actiu;
 	
 	
 	/** Constructor de la clase producte
@@ -13,7 +13,7 @@ public class Serveis extends Producte{   //Clase realitzada per Pol Regy
 	public Serveis (String name, String descripcio, String tip, boolean b, String dat, String data) {
 		super (name, descripcio, tip, b, dat);
 		this.dataFiOferiment=data;
-		actiu=true;
+		actiu=1;
 	}
 	
 	/** getter
@@ -24,11 +24,11 @@ public class Serveis extends Producte{   //Clase realitzada per Pol Regy
 		return (dataFiOferiment);
 	}
 	
-	public boolean getActiu() {
+	public int getActiu() {
 		return actiu;
 	}
 	
-	public void setActiu(boolean n) {
+	public void setActiu(int n) {
 		actiu=n;
 	}
 	

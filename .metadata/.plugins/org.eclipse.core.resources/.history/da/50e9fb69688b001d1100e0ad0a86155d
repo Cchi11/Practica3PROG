@@ -42,7 +42,7 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		for (int i=0; i<nElem; i++) {
 			if (llista[i].getNom()==nomServei)
 			{
-				llista[i].setActiu(false);
+				llista[i].setActiu(0);
 			}
 		}
 	}

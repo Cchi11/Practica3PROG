@@ -15,7 +15,6 @@ import dadesProductesServeis.LlistaBens;
 import dadesProductesServeis.LlistaServeis;
 import dadesProductesServeis.Serveis;
 import peticions.LlistaPeticions;
-import peticions.Peticions;
 import usuaris.LlistaUsuaris;
 //import fitxers.LlistaUsuaris;
 import usuaris.Usuaris;
@@ -71,7 +70,7 @@ public class Main {
 		System.out.print("\n\t\t\tIndica opcio:\n");
 	}
 	
-	public static void opcio2 (LlistaPeticions llistaPet, LlistaServeis llistaServ, LlistaBens llistaBe, LlistaUsuaris llistaUser) {
+	public static void opcio2 () {
 		System.out.println("\n\nLlistes del programa:");
 		System.out.println("\n\t1. Llista de productes");
 		System.out.println("\t2. Llista de peticions");
@@ -84,33 +83,25 @@ public class Main {
 		while (opcioll != 6) {
 			switch (opcioll) {
 			case 1: 
-				//NO ES FA LLISTA PRODUCTES
+				//llista productes
 				break;
 			case 2:
-				System.out.println(llistaPet);
+				//llista peticions
 				break;
 			case 3:
-				System.out.println(llistaServ);
+				//llista serveis
 				break;
 			case 4:
-				System.out.println(llistaBe);
+				//llista bens
 				break;
 			case 5:
-				System.out.println(llistaUser);
+				//llista usuaris
 				break;
 			}
 		}
 	}
 	
-	public static void opcio3 (LlistaServeis llistaServ) {
-		System.out.println (llistaServ);
-	}
-	
-	public static void opcio4 (LlistaBens llistaBe) {
-		System.out.println (llistaBe);
-	}
-	
-	public static void opcio5(LlistaServeis llistaServ) {
+	public static void opcio5() {
 		
 		System.out.println ("Introdueix els següents camps: ");
 		
@@ -131,12 +122,12 @@ public class Main {
 		
 		Serveis s = new Serveis(nom, desc, tipus, false, dataini, datafi);
 		
-		llistaServ.afegirServei(s);
+		//FALTA AFEGIR A LA LLISTA DE SERVEIS EL NOU SERVEI
 		
 		//FALTA AFEGIR AL FITXER DE TEXT EL NOU SERVEI
 	}
 	
-	public static void opcio6(LlistaBens llistaBe) {
+	public static void opcio6() {
 		System.out.println ("Introdueix els següents camps: ");
 		
 		System.out.println ("Indica el nom del producte fisic");
@@ -172,57 +163,12 @@ public class Main {
 		
 		Bens b = new Bens(nom, desc, tipus, true, datacrea, amplada, alçada, fons, pes, datainterc);
 		
-		llistaBe.afegirBe(b);
+		//FALTA AFEGIR A LA LLISTA DE BENS EL NOU BE
 		
 		//FALTA AFEGIR AL FITXER DE TEXT EL NOU BE
 	}
 	
-	public static void opcio7(LlistaPeticions llistaPet) {
-		
-		System.out.println ("Introdueix els següents camps: ");
-		
-		//la identificacio s'ha de generar automaticament
-		
-		//l'usuari que fa la peticio s'ha de ficar l'alies del usuari que te inicciada la sessio
-		
-		//l'usuari que rep la peticio s'ha de ficar en relacio amb la oferta
-		
-		System.out.println ("Indica el nom del producte que vols aconseguir");
-		String prodAcon = teclat.nextLine();
-		System.out.println ("Indica el nom del producte que ofereixes");
-		String prodOfer = teclat.nextLine();
-		
-		//Peticions p1 = new Peticions (id, userPet, userRep, prodAcon, prodOfer);
-
-	}
-	
-	public static void opcio8(Peticions p) {
-		
-		System.out.println("Vols acceptar la peticio d'intercanvi?");
-		System.out.println("1 Acceptar");
-		System.out.println("2 Refusar");
-		
-		int opcioAccept = Integer.parseInt(teclat.nextLine());
-		
-		if (opcioAccept == 1) {
-			System.out.println("Has acceptat la peticio");
-			p.setResposat(1);
-			System.out.println("Introdueix la valoracio de l'oferta");
-			int valoracioRep = Integer.parseInt(teclat.nextLine());
-			p.setValoracioUserRebPet(valoracioRep);
-		}
-		else {
-			if (opcioAccept == 2) {
-				System.out.println("Has refusat la peticio");
-				p.setResposat(2);
-			}
-			else {
-				System.out.println("ERROR, fica el numero 1 o 2");
-			}
-		}
-	}
-	
-	public static void opcio9(LlistaUsuaris llistaUser) {
+	public static void opcio9() {
 			
 		System.out.println ("Introdueix els següents camps: ");
 			
@@ -236,13 +182,13 @@ public class Main {
 		String cPost = teclat.nextLine();
 		int codiPost = Integer.parseInt(cPost);
 		
-		Usuaris u1 = new Usuaris(nom, correu, codiPost);
+		Usuaris objectToSerialize = new Usuaris(nom, correu, codiPost);
 		
-		llistaUser.donaAlta(u1);
+		
 		
 	    try (FileOutputStream fos = new FileOutputStream("serialized_object.bin, true")) {         
 	    	try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-	            oos.writeObject(u1);
+	            oos.writeObject(objectToSerialize);
 	        }
 	    }
 	  	catch (IOException e) {
@@ -250,11 +196,11 @@ public class Main {
 	    }
 	}
 	
-	public static void opcio10(LlistaServeis llistaServ) {
+	public static void opcio10() {
 		System.out.println("Indica el nom del servei que vols desactivar");
 		String nomServei = teclat.nextLine();
 		
-		llistaServ.donaBaixaServei(nomServei);
+		//llistaServ.donaBaixaServei(nomServei);
 		
 		
 	}
@@ -277,7 +223,7 @@ public class Main {
 	}
 	
 	public static void main(String[] args) throws ClassNotFoundException, IOException {
-		LlistaBens llistaBe = new LlistaBens(30);
+		LlistaBens llistabe = new LlistaBens(30);
 		LlistaServeis llistaServ = new LlistaServeis(30);
 		LlistaUsuaris llistaUser = new LlistaUsuaris(30);
 		LlistaPeticions llistaPet = new LlistaPeticions(30);
