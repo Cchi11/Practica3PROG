@@ -23,7 +23,27 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 	}
 		
 	public void afegirServei (Serveis s) {
+		
+		if (nElem>=llista.length) {
+			Serveis [] llistanova = new Serveis [nElem*2];
+			for (int i=0; i<nElem; i++)
+			{
+				llistanova[i]=llista[i];
+			}
+			llista=llistanova;
+		}
 		nElem++;
 		llista[nElem] = s;
+	}
+	
+	
+	public void donaBaixaServei (String nomServei)
+	{
+		for (int i=0; i<nElem; i++) {
+			if (llista[i].getNom()==nomServei)
+			{
+				llista[i].setActiu(0);
+			}
+		}
 	}
 }

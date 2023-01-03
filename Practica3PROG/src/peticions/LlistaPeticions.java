@@ -1,5 +1,7 @@
 package peticions;
 
+import dadesProductesServeis.Serveis;
+
 public class LlistaPeticions { //Clase realitzada per Pol Regy
 	private int nElem;
 	private Peticions[] llista;
@@ -24,6 +26,14 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 	}
 	
 	public void afegirPeticio (Peticions p) {
+		if (nElem>=llista.length) {
+			Peticions [] llistanova = new Peticions[nElem*2];
+			for (int i=0; i<nElem; i++)
+			{
+				llistanova[i]=llista[i];
+			}
+			llista=llistanova;
+		}
 		nElem++;
 		llista[nElem] = p;
 	}

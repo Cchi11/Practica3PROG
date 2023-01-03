@@ -9,4 +9,7 @@
     <fullyQualifiedTypeName name="dadesProductesServeis.Serveis"/>
     <fullyQualifiedTypeName name="dadesProductesServeis.Bens"/>
     <fullyQualifiedTypeName name="dadesProductesServeis.LlistaBens"/>
+    <fullyQualifiedTypeName name="usuaris.LlistaUsuaris"/>
+    <fullyQualifiedTypeName name="peticions.LlistaPeticions"/>
+    <fullyQualifiedTypeName name="dadesProductesServeis.LlistaServeis"/>
 </qualifiedTypeNameHistroy>

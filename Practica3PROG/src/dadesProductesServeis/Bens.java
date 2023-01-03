@@ -46,4 +46,9 @@ public class Bens extends Producte{   //Clase feta per Chenxing Chi
 		return pes;
 	}
 	
+	public Bens copia() {
+		Bens copia = new Bens (super.nom, super.desc, super.tipus, super.be, super.data, amplada, alçada, fons, pes, dataIntercanvi);
+		return copia;
+	}
+	
 }

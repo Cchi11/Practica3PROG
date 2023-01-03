@@ -12,7 +12,10 @@ import java.util.Scanner;
 
 import dadesProductesServeis.Bens;
 import dadesProductesServeis.LlistaBens;
+import dadesProductesServeis.LlistaServeis;
 import dadesProductesServeis.Serveis;
+import peticions.LlistaPeticions;
+import usuaris.LlistaUsuaris;
 //import fitxers.LlistaUsuaris;
 import usuaris.Usuaris;
 import usuaris.LlistaUsuaris;
@@ -192,6 +195,15 @@ public class Main {
 	  		System.out.println ("no");
 	    }
 	}
+	
+	public static void opcio10() {
+		System.out.println("Indica el nom del servei que vols desactivar");
+		String nomServei = teclat.nextLine();
+		
+		//llistaServ.donaBaixaServei(nomServei);
+		
+		
+	}
 
 	public static void llegirFitxerSerial() throws IOException, ClassNotFoundException {
 				
@@ -211,7 +223,10 @@ public class Main {
 	}
 	
 	public static void main(String[] args) throws ClassNotFoundException, IOException {
-		//LlistaBens llistabe = new LlistaBens();
+		LlistaBens llistabe = new LlistaBens(30);
+		LlistaServeis llistaServ = new LlistaServeis(30);
+		LlistaUsuaris llistaUser = new LlistaUsuaris(30);
+		LlistaPeticions llistaPet = new LlistaPeticions(30);
 		
 		mostrarMenu();
 		//Bens a = new Bens ("sabata", "cosa que es fica al peu", "roba", true, "30-12-2022", 12, 23, 45, 2, "3-1-2023"); 
