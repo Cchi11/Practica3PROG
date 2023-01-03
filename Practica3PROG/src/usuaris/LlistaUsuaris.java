@@ -1,5 +1,7 @@
 package usuaris;
 
+import dadesProductesServeis.Serveis;
+
 public class LlistaUsuaris {			//Clase feta per Chenxing Chi
 		private int nElem;
 		private Usuaris [] llista;
@@ -23,6 +25,14 @@ public class LlistaUsuaris {			//Clase feta per Chenxing Chi
 		}
 		
 		public void donaAlta (Usuaris a) {
+			if (nElem>=llista.length) {
+				Usuaris [] llistanova = new Usuaris [nElem*2];
+				for (int i=0; i<nElem; i++)
+				{
+					llistanova[i]=llista[i];
+				}
+				llista=llistanova;
+			}
 			llista[nElem] = a.copia();
 			nElem++;
 		}

@@ -20,5 +20,10 @@ public class LlistaProductes { //Clase feta per Gerard Altadill
 	public int getNElem() {
 		return(nElem);
 	}
+	
+	public void afegirProducte(Producte p) {
+		nElem++;
+		llista[nElem] = p;
+	}
 
 }

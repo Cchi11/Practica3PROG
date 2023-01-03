@@ -11,7 +11,7 @@ public class MainGrafic extends JFrame {
 				JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
 				null, opcions, 
 				0);
-		 if (resultat == JOptionPane.YES_OPTION) {
+		 if (resultat == JOptionPane.NO_OPTION) {
 			 String nom = JOptionPane.showInputDialog("Indica el teu codi d'usuari");
 				while (nom == null || nom.equals("")) {
 					// Missatge d'error.
@@ -22,6 +22,7 @@ public class MainGrafic extends JFrame {
 		 }
 		 else
 		 {
+			 
 		 }
 		
 		 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

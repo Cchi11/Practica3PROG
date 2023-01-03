@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.io.FileOutputStream"/>
+    <fullyQualifiedTypeName name="java.io.ObjectOutputStream"/>
+    <fullyQualifiedTypeName name="java.io.FileInputStream"/>
+    <fullyQualifiedTypeName name="java.io.ObjectInputStream"/>
+    <fullyQualifiedTypeName name="java.io.IOException"/>
+    <fullyQualifiedTypeName name="java.io.EOFException"/>
+    <fullyQualifiedTypeName name="dadesProductesServeis.Serveis"/>
+    <fullyQualifiedTypeName name="dadesProductesServeis.Bens"/>
+    <fullyQualifiedTypeName name="dadesProductesServeis.LlistaBens"/>
+    <fullyQualifiedTypeName name="usuaris.LlistaUsuaris"/>
+    <fullyQualifiedTypeName name="peticions.LlistaPeticions"/>
+    <fullyQualifiedTypeName name="dadesProductesServeis.LlistaServeis"/>
+</qualifiedTypeNameHistroy>
