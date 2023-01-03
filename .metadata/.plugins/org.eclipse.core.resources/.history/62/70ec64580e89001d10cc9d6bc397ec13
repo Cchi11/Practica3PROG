@@ -12,41 +12,12 @@ import java.util.Scanner;
 
 import dadesProductesServeis.Bens;
 import dadesProductesServeis.LlistaBens;
-import dadesProductesServeis.LlistaServeis;
 import dadesProductesServeis.Serveis;
-import peticions.LlistaPeticions;
-import usuaris.LlistaUsuaris;
 //import fitxers.LlistaUsuaris;
 import usuaris.Usuaris;
-import usuaris.LlistaUsuaris;
 
 public class Main {
 	static Scanner teclat = new Scanner(System.in);
-	
-	public static void iniciasessio(LlistaUsuaris llista) {
-		System.out.println("Benvingut/da a l'aplicacio");
-		System.out.println("\n\nTria una opcio: ");
-		System.out.println("\n\t1. Iniciar sessio");
-		System.out.println("\t2. Continuar com a convidat");
-		System.out.println("\t3. Sortir de l'aplicacio");
-		
-		int opcioini = Integer.parseInt(teclat.nextLine());
-		
-		if (opcioini == 1) {
-			System.out.println("Introdueix el teu alies");
-			String codiUsuari = teclat.nextLine();
-			llista.comprovaUsuari(codiUsuari);
-		}
-		else {
-			if (opcioini == 2) {
-				System.out.print("Has triat continuar com a convidat");
-				System.out.print("Recorda que per afegir nous intercanvis o acceptar-los, has d'iniciar sessio o be registrar-te");
-			}
-			else {
-				System.out.println("Has sortit de l'aplicacio, Adeu!");
-			}
-		}
-	}
 	
 	public static void mostrarMenu () {
 		System.out.println("\n\nOpcions del menu:");
@@ -184,7 +155,7 @@ public class Main {
 		
 		Usuaris objectToSerialize = new Usuaris(nom, correu, codiPost);
 		
-		
+		//FALTA AFEGIR A LA LLISTA D'USUARIS EL NOU USUARI
 		
 	    try (FileOutputStream fos = new FileOutputStream("serialized_object.bin, true")) {         
 	    	try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
@@ -194,15 +165,6 @@ public class Main {
 	  	catch (IOException e) {
 	  		System.out.println ("no");
 	    }
-	}
-	
-	public static void opcio10() {
-		System.out.println("Indica el nom del servei que vols desactivar");
-		String nomServei = teclat.nextLine();
-		
-		//llistaServ.donaBaixaServei(nomServei);
-		
-		
 	}
 
 	public static void llegirFitxerSerial() throws IOException, ClassNotFoundException {
@@ -223,10 +185,7 @@ public class Main {
 	}
 	
 	public static void main(String[] args) throws ClassNotFoundException, IOException {
-		LlistaBens llistabe = new LlistaBens(30);
-		LlistaServeis llistaServ = new LlistaServeis(30);
-		LlistaUsuaris llistaUser = new LlistaUsuaris(30);
-		LlistaPeticions llistaPet = new LlistaPeticions(30);
+		//LlistaBens llistabe = new LlistaBens();
 		
 		mostrarMenu();
 		//Bens a = new Bens ("sabata", "cosa que es fica al peu", "roba", true, "30-12-2022", 12, 23, 45, 2, "3-1-2023"); 
