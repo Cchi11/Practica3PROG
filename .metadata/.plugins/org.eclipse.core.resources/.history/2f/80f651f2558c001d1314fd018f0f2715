@@ -103,7 +103,7 @@ public class Main {
 	}
 	
 	public static void opcio3 (LlistaServeis llistaServ) {
-		llistaServ.mostrarLlistaServ();
+		System.out.println (llistaServ);
 	}
 	
 	public static void opcio4 (LlistaBens llistaBe) {
@@ -294,14 +294,12 @@ public class Main {
 		LlistaServeis llistaServ = new LlistaServeis(30);
 		LlistaUsuaris llistaUser = new LlistaUsuaris(30);
 		LlistaPeticions llistaPet = new LlistaPeticions(30);
-		int opcio=0;
 		
 		mostrarMenu();
 		//Bens a = new Bens ("sabata", "cosa que es fica al peu", "roba", true, "30-12-2022", 12, 23, 45, 2, "3-1-2023"); 
 		//prova per veure si funciona la instancia
-		//int opcio = Integer.parseInt(teclat.nextLine());
+		int opcio = Integer.parseInt(teclat.nextLine());
 		while (opcio != 17) {
-			opcio = Integer.parseInt(teclat.nextLine());
 			switch (opcio) {
 			case 1: 
 				//opcio1();
@@ -310,13 +308,13 @@ public class Main {
 				opcio2(llistaPet, llistaServ, llistaBe, llistaUser);
 				break;
 			case 3:
-				opcio3(llistaServ);
+				//opcio3();
 				break;
 			case 4:
-				opcio4(llistaBe);
+				//opcio4();
 				break;
 			case 5:
-				opcio5(llistaServ);
+				//opcio5();
 				break;
 			case 6:
 				//opcio6();
@@ -352,7 +350,6 @@ public class Main {
 				//opcio16();
 				break;
 			}
-			mostrarMenu();
 		}
 		System.out.println("Has sortit de l'aplicacio, adeu!");
 		//altaUsuari();

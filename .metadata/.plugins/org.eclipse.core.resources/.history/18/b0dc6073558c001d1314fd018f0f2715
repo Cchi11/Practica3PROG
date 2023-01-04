@@ -37,28 +37,5 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 		nElem++;
 		llista[nElem] = p;
 	}
-	
-	public void mostrarPetNoRespostes () {		
-		for (int i=0; i < llista.length; i++) {
-			if (llista[i].getResposat() == 0) {
-				llista[i].toString();
-			}
-		}
-	}
-	
-	public void mostrarPetAccept () {		
-		for (int i=0; i < llista.length; i++) {
-			if (llista[i].getResposat() == 1) {
-				llista[i].toString();
-			}
-		}
-	}
-	
-	public void mostrarPetRefus () {		
-		for (int i=0; i < llista.length; i++) {
-			if (llista[i].getResposat() == 2) {
-				llista[i].toString();
-			}
-		}
-	}
+
 }

@@ -103,7 +103,7 @@ public class Main {
 	}
 	
 	public static void opcio3 (LlistaServeis llistaServ) {
-		llistaServ.mostrarLlistaServ();
+		System.out.println (llistaServ);
 	}
 	
 	public static void opcio4 (LlistaBens llistaBe) {
