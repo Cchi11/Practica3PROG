@@ -61,4 +61,12 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 			}
 		}
 	}
+	
+	public void acceptarPet (int i) {
+		llista[i].setResposat(1);
+	}
+	
+	public void refusarPet (int i) {
+		llista[i].setResposat(2);
+	}
 }

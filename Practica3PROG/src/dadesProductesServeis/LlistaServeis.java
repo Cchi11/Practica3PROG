@@ -32,8 +32,8 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 			}
 			llista=llistanova;
 		}
-		nElem++;
 		llista[nElem] = s;
+		nElem++;
 	}
 	
 	
@@ -47,7 +47,7 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		}
 	}
 	
-	public void mostrarLlistaServ () {
+	public  void mostrarLlistaServ () {
 		for (int i=0; i<nElem; i++) {
 			llista[i].toString();
 		}

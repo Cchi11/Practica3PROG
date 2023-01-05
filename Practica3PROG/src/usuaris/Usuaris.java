@@ -26,6 +26,9 @@ public class Usuaris implements Serializable{   //Clase feta per Gerard Altadill
 		ofertaProd = 0;
 		intercanvis = 0;
 	}
+	public Usuaris () {
+		
+	}
 	
 	/** getter
 	 * 
