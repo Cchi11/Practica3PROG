@@ -34,8 +34,8 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 			}
 			llista=llistanova;
 		}
-		nElem++;
 		llista[nElem] = p;
+		nElem++;
 	}
 	
 	public void mostrarPetNoRespostes () {		
@@ -60,5 +60,14 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 				llista[i].toString();
 			}
 		}
+	}
+	
+	public String toString() {
+		String aux;
+		aux="Peticions => numPeticions "+nElem;
+		for (int j = 0; j < nElem; j++) {
+			aux=aux+"\n\tPeticion "+(j+1)+"\t "+llista[j];
+		}
+		return aux;
 	}
 }

@@ -23,7 +23,6 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 	}
 		
 	public void afegirServei (Serveis s) {
-		
 		if (nElem>=llista.length) {
 			Serveis [] llistanova = new Serveis [nElem*2];
 			for (int i=0; i<nElem; i++)
@@ -36,7 +35,6 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		nElem++;
 	}
 	
-	
 	public void donaBaixaServei (String nomServei)
 	{
 		for (int i=0; i<nElem; i++) {
@@ -47,9 +45,12 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		}
 	}
 	
-	public  void mostrarLlistaServ () {
-		for (int i=0; i<nElem; i++) {
-			llista[i].toString();
+	public String toString() {
+		String aux;
+		aux="Serveis => numServeis "+nElem;
+		for (int j = 0; j < nElem; j++) {
+			aux=aux+"\n\tServei "+(j+1)+"\t "+llista[j];
 		}
+		return aux;
 	}
 }

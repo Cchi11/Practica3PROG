@@ -111,10 +111,7 @@ public class Peticions {		//Clase feta per Òscar Cabré
 		this.valoracioUserRebPet = valoracioUserRebPet;
 	}
 	
-	public String toString() {
-		return ("PETICIO => idPeticio:\t"+idPeticio+"\tuserPeticio:\t"+userPeticio+"\tuserRebPet:\t"+userRebPet+"\tproducAcons:\t"+producAcons+"\tproducOfe:\t"+producOfe+"\tresposat:\t"+resposat+"\tvaloracioUserPeticio:\t"+valoracioUserPeticio+"\tvaloracioUserRebPet:\t"+valoracioUserRebPet);
-	}
-	
+
 	public Peticions copia() {
 		Peticions copia = new Peticions (idPeticio, userPeticio, userRebPet, producAcons, producOfe);
 		copia.resposat=this.resposat;
@@ -122,4 +119,9 @@ public class Peticions {		//Clase feta per Òscar Cabré
 		copia.valoracioUserRebPet=this.valoracioUserRebPet;
 		return copia;
 	}
+	
+	public String toString() {
+		return ("PETICIO => idPeticio:\t"+idPeticio+"\tuserPeticio:\t"+userPeticio+"\tuserRebPet:\t"+userRebPet+"\tproducAcons:\t"+producAcons+"\tproducOfe:\t"+producOfe+"\tresposat:\t"+resposat+"\tvaloracioUserPeticio:\t"+valoracioUserPeticio+"\tvaloracioUserRebPet:\t"+valoracioUserRebPet);
+	}
+	
 }

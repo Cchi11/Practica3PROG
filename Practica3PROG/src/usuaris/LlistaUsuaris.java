@@ -49,7 +49,7 @@ public class LlistaUsuaris {			//Clase feta per Chenxing Chi
 			return (trobat);
 		}	
 		
-		public Usuaris  trobaUsuari (String aliesUsuari) {
+		public Usuaris trobaUsuari (String aliesUsuari) {
 			
 			boolean trobat = false;
 			int i=0;
@@ -61,4 +61,14 @@ public class LlistaUsuaris {			//Clase feta per Chenxing Chi
 			Usuaris nou = llista[i].copia();
 			return nou;
 		}	
+		
+		public String toString() {
+			String aux;
+			aux="Usuaris => numUsuaris "+nElem;
+			for (int j = 0; j < nElem; j++) {
+				aux=aux+"\n\tUsuari "+(j+1)+"\t "+llista[j];
+			}
+			return aux;
+		}
+
 }

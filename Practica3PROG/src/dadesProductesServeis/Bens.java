@@ -52,4 +52,7 @@ public class Bens extends Producte{   //Clase feta per Chenxing Chi
 		return copia;
 	}
 	
+	public String toString() {
+		return ("Nom del be: " + super.nom +". Descripcio del be: " + super.desc + ". Tipus de be: " + super.tipus + ". Data d'inici del be: " + super.data + ". Amplada: " +amplada+"cm. Alçada: "+alçada+"cm. Fons: "+fons+"cm. Pes"+pes+"g.");
+	}
 }
