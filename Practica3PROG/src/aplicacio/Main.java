@@ -7,7 +7,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -124,6 +123,7 @@ public class Main {
 			}
 		}
 		return nou;
+		
 	}
 	
 	public static void mostrarMenu () {
@@ -304,7 +304,7 @@ public class Main {
 				System.out.println(llistaPet);
 				break;
 			case 2:
-				//System.out.println(llistaServ.mostrarLlistaServ());
+				System.out.ln(llistaServ.mostrarLlistaServ());
 				break;
 			case 3:
 				System.out.println(llistaBe);
@@ -321,7 +321,7 @@ public class Main {
 	}
 	
 	public static void opcio4 (LlistaBens llistaBe) {
-		System.out.println (llistaBe); //no es correcte
+		System.out.println (llistaBe);
 	}
 	
 	public static void opcio5(LlistaServeis llistaServ) {
@@ -348,17 +348,9 @@ public class Main {
 		llistaServ.afegirServei(s);
 		
 		//FALTA AFEGIR AL FITXER DE TEXT EL NOU SERVEI
-		
-		FileWriter fw = new FileWriter("dadesServeis.txt", true);
-		//continuar
-		//fw.write(s);
 	}
 	
 	public static void opcio6(LlistaBens llistaBe) {
-		
-		boolean error = false;
-		int amplada=0, alçada=0, fons=0, pes=0;
-		
 		System.out.println ("Introdueix els següents camps: ");
 		
 		System.out.println ("Indica el nom del producte fisic");
@@ -374,59 +366,20 @@ public class Main {
 		String datacrea = teclat.nextLine();
 		
 		System.out.println ("Indica l'amplada del producte fisic");
-		
-		while (!error) {
-			try {
-				String amp = teclat.nextLine();
-				amplada = Integer.parseInt(amp);
-				error = true;
-			}
-			catch (NumberFormatException e) {
-				System.out.println ("Error, a l'amplada has ficat un caracter que no es un numero!");
-			}
-		}
-		error = false;
+		String amp = teclat.nextLine();
+		int amplada = Integer.parseInt(amp);
 		
 		System.out.println ("Indica l'alçada del producte fisic");
-		
-		while (!error) {
-			try {
-				String alç = teclat.nextLine();
-				alçada = Integer.parseInt(alç);
-				error = true;
-			}
-			catch (NumberFormatException e) {
-				System.out.println ("Error, a l'alçada has ficat un caracter que no es un numero!");
-			}
-		}
-		error = false;
+		String alç = teclat.nextLine();
+		int alçada = Integer.parseInt(alç);
 		
 		System.out.println ("Indica el fons del producte fisic");
-		
-		while (!error) {
-			try {
-				String fos = teclat.nextLine();
-				fons = Integer.parseInt(fos);
-				error = true;
-			}
-			catch (NumberFormatException e) {
-				System.out.println ("Error, al fons has ficat un caracter que no es un numero!");
-			}
-		}
-		error = false;
+		String fon = teclat.nextLine();
+		int fons = Integer.parseInt(fon);
 		
 		System.out.println ("Indica el pes del producte fisic");
-		
-		while (!error) {
-			try {
-				String p = teclat.nextLine();
-				pes = Integer.parseInt(p);
-				error = true;
-			}
-			catch (NumberFormatException e) {
-				System.out.println ("Error, al pes has ficat un caracter que no es un numero!");
-			}
-		}
+		String p = teclat.nextLine();
+		int pes = Integer.parseInt(p);
 		
 		System.out.println ("Indica la data d'intercanvi del producte fisic");
 		String datainterc = teclat.nextLine();
@@ -457,55 +410,34 @@ public class Main {
 
 	}
 	
-	public static void opcio8(LlistaPeticions llistaPet, Usuaris user) {
-		
-		int opcioAccept = 0, i = 0;
-		boolean error = false;
-		
-		System.out.println("Quina peticio vols acceptar/refusar");
-		
+	public static void opcio8(Peticions p) {
 		
 		System.out.println("Vols acceptar la peticio d'intercanvi?");
 		System.out.println("1 Acceptar");
 		System.out.println("2 Refusar");
 		
-		while (!error) {
-			try {
-				opcioAccept = Integer.parseInt(teclat.nextLine());
-				if (opcioAccept != 1 || opcioAccept != 2) {
-					throw new NumeroForaRangException();
-				}
-				error= true;
-			}
-			catch (NumeroForaRangException e) {
-				System.out.println("ERROR, el numero sol pot ser 1 o 2");
-			}
-			catch (NumberFormatException e) {
-				System.out.println("ERROR, el caracter posat no es un numero");
-			}
-		}
+		int opcioAccept = Integer.parseInt(teclat.nextLine());
+		
 		if (opcioAccept == 1) {
 			System.out.println("Has acceptat la peticio");
-			
-			llistaPet.acceptarPet(i);
+			p.setResposat(1);
 			System.out.println("Introdueix la valoracio de l'oferta");
 			int valoracioRep = Integer.parseInt(teclat.nextLine());
-			//continuar
-			//p.setValoracioUserRebPet(valoracioRep);
-			//si s'accepta canviar variable de producte que son el numero de peticions
+			p.setValoracioUserRebPet(valoracioRep);
 		}
 		else {
+			if (opcioAccept == 2) {
 				System.out.println("Has refusat la peticio");
-				//continuar
-				//p.setResposat(2);
+				p.setResposat(2);
+			}
+			else {
+				System.out.println("ERROR, fica el numero 1 o 2");
+			}
 		}
 	}
 	
 	public static void opcio9(LlistaUsuaris llistaUser) {
 			
-		int codiPost = 0;
-		boolean error = false;
-		
 		System.out.println ("Introdueix els següents camps: ");
 			
 		System.out.println ("Usuari:");
@@ -515,24 +447,14 @@ public class Main {
 		String correu = teclat.nextLine();
 		
 		System.out.println ("Codi postal del usuari");
-		
-		while (!error) {
-			try {
-				String cPost = teclat.nextLine();
-				codiPost = Integer.parseInt(cPost);
-				error = true;
-			}
-			catch (NumberFormatException e) {
-				System.out.println ("Error, al codi postal has ficat un caracter que no es un numero!");
-			}
-		}
-		error = false;
+		String cPost = teclat.nextLine();
+		int codiPost = Integer.parseInt(cPost);
 		
 		Usuaris u1 = new Usuaris(nom, correu, codiPost);
 		
 		llistaUser.donaAlta(u1);
 		
-	    try (FileOutputStream fos = new FileOutputStream("serialized_object.bin", true)) {         
+	    try (FileOutputStream fos = new FileOutputStream("serialized_object.bin, true")) {         
 	    	try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 	            oos.writeObject(u1);
 	        }
@@ -566,7 +488,7 @@ public class Main {
 
 	public static void llegirFitxerSerial() throws IOException, ClassNotFoundException {
 				
-		ObjectInputStream Fit = new ObjectInputStream(new FileInputStream("serialized_object.bin", true));
+		ObjectInputStream Fit = new ObjectInputStream(new FileInputStream("serialized_object.bin"));
 		Usuaris instancia;
 		boolean ok = false;
 		
@@ -587,8 +509,11 @@ public class Main {
 		LlistaUsuaris llistaUser = new LlistaUsuaris(100);
 		LlistaPeticions llistaPet = new LlistaPeticions(100);
 		int opcio=0;
-		//Usuaris usuariActual = iniciasessio(llistaUser);
+		iniciasessio(llistaUser);
 		mostrarMenu();
+		//Bens a = new Bens ("sabata", "cosa que es fica al peu", "roba", true, "30-12-2022", 12, 23, 45, 2, "3-1-2023"); 
+		//prova per veure si funciona la instancia
+		//int opcio = Integer.parseInt(teclat.nextLine());
 		while (opcio != 17) {
 			opcio = Integer.parseInt(teclat.nextLine());
 			switch (opcio) {
@@ -608,13 +533,13 @@ public class Main {
 				opcio5(llistaServ);
 				break;
 			case 6:
-				opcio6(llistaBe);
+				//opcio6();
 				break;
 			case 7:
 				//opcio7();
 				break;
 			case 8:
-				opcio8(llistaPet);
+				//opcio8();
 				break;
 			case 9:
 				//opcio9();

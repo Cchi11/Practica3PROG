@@ -19,5 +19,4 @@
     <fullyQualifiedTypeName name="java.util.InputMismatchException"/>
     <fullyQualifiedTypeName name="Exceptions.NumeroForaRangException"/>
     <fullyQualifiedTypeName name="Exceptions.NoEsTrobaException"/>
-    <fullyQualifiedTypeName name="java.io.FileWriter"/>
 </qualifiedTypeNameHistroy>
