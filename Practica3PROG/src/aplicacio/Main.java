@@ -256,7 +256,7 @@ public class Main {
 			carregarPeticions();
 			break;
 		case 2:
-			carregarServeis();
+			llistaServ = carregarServeis();
 			break;
 		case 3:
 			carregarBens();
@@ -304,7 +304,7 @@ public class Main {
 				System.out.println(llistaPet);
 				break;
 			case 2:
-				llistaServ.mostrarLlistaServ();
+				System.out.ln(llistaServ.mostrarLlistaServ());
 				break;
 			case 3:
 				System.out.println(llistaBe);
@@ -504,10 +504,10 @@ public class Main {
 	}
 	
 	public static void main(String[] args) throws ClassNotFoundException, IOException {
-		LlistaBens llistaBe = new LlistaBens(30);
-		LlistaServeis llistaServ = new LlistaServeis(30);
-		LlistaUsuaris llistaUser = new LlistaUsuaris(30);
-		LlistaPeticions llistaPet = new LlistaPeticions(30);
+		LlistaBens llistaBe = new LlistaBens(100);
+		LlistaServeis llistaServ = new LlistaServeis(100);
+		LlistaUsuaris llistaUser = new LlistaUsuaris(100);
+		LlistaPeticions llistaPet = new LlistaPeticions(100);
 		int opcio=0;
 		iniciasessio(llistaUser);
 		mostrarMenu();

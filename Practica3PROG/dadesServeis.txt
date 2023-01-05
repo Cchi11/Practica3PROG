@@ -1,1 +1,2 @@
 Netflix;veure videos;streaming;false;12/08/2022;12/08/2023
+Youtube Premium;veure videos;streaming;false;12/08/2022;12/08/2023

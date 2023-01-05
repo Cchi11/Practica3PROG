@@ -18,17 +18,23 @@ public class MainGrafic extends JFrame {
 					JOptionPane.showMessageDialog(null, "Cal un codi", "ERROR", JOptionPane.ERROR_MESSAGE);
 					nom = JOptionPane.showInputDialog("Indica el teu codi d'usuari");
 				}
-			
 		 }
 		 else
 		 {
-			 
+			 if (resultat == JOptionPane.YES_OPTION) {
+				 
+			 }
 		 }
 		
 		 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		 setSize(500, 500);
 		 setVisible(true);
+		 
+		 
 	}
+	 public void preguntarDades() {
+		   
+		  }
 
 	public static void main(String[] args) {
 		new MainGrafic();

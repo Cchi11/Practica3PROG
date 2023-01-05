@@ -39,6 +39,6 @@ public class Serveis extends Producte{   //Clase realitzada per Pol Regy
 	}
 	
 	public String toString() {
-		return ("Nom del servei: " + super.nom +". Descripcio del servei: " + super.desc + ". Tipus de servei: " + super.tipus + ". Es un be? " + super.be + ". Data d'inici del servei: " + super.data + ". Data de finalitzacio del sevei: " + dataFiOferiment);
+		return ("Nom del servei: " + super.nom +". Descripcio del servei: " + super.desc + ". Tipus de servei: " + super.tipus + ". Data d'inici del servei: " + super.data + ". Data de finalitzacio del sevei: " + dataFiOferiment);
 	}
 }
