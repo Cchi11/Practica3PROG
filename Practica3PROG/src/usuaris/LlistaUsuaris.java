@@ -48,4 +48,17 @@ public class LlistaUsuaris {			//Clase feta per Chenxing Chi
 			}
 			return (trobat);
 		}	
+		
+		public Usuaris  trobaUsuari (String aliesUsuari) {
+			
+			boolean trobat = false;
+			int i=0;
+			for (i=0; !trobat && i <= llista.length; i++) {
+				if (llista[i].getAlies() == aliesUsuari) {
+					trobat = true;
+				}
+			}
+			Usuaris nou = llista[i].copia();
+			return nou;
+		}	
 }

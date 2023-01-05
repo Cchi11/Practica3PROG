@@ -13,7 +13,7 @@ public abstract class Producte {	//Clase feta per Gerard Altadill
 	 * @param name conte el nom del producte
 	 * @param descripcio conte la descripcio del producte
 	 * @param tip conte el tipus del producte
-	 * @param b conte el be del producte
+	 * @param b indica si es un be o servei
 	 * @param dat conte la data de creacio del producte
 	 */
 	public Producte (String name, String descripcio, String tip, boolean b, String dat) {

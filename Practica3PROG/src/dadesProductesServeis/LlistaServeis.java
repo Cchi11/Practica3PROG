@@ -42,8 +42,14 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		for (int i=0; i<nElem; i++) {
 			if (llista[i].getNom()==nomServei)
 			{
-				llista[i].setActiu(0);
+				llista[i].setActiu(false);
 			}
+		}
+	}
+	
+	public void mostrarLlistaServ () {
+		for (int i=0; i<nElem; i++) {
+			llista[i].toString();
 		}
 	}
 }
