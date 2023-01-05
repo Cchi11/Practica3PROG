@@ -1,0 +1,1 @@
+pelota;pelota para jugar;pasatiempo;true;12/08/2022;20;20;20;1
