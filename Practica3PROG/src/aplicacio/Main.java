@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
+import java.util.Random;
 
 import Exceptions.NoEsTrobaException;
 import Exceptions.NumeroForaRangException;
@@ -312,6 +313,10 @@ public class Main {
 	}
 	
 	public static LlistaBens opcio6(Usuaris alies, LlistaBens llistaBe) {
+
+		boolean error = false;
+		int amplada = 0, alçada = 0, fons = 0, pes = 0;
+		
 		System.out.println ("Introdueix els següents camps: ");
 		
 		System.out.println ("Indica el nom del producte fisic");
@@ -327,20 +332,55 @@ public class Main {
 		String datacrea = teclat.nextLine();
 		
 		System.out.println ("Indica l'amplada del producte fisic");
-		String amp = teclat.nextLine();
-		int amplada = Integer.parseInt(amp);
+		
+		while (!error) {
+			try {
+				amplada = Integer.parseInt(teclat.nextLine());
+				error = true;
+			}
+			catch (NumberFormatException e) {
+				System.out.println("ERROR, has ficat un caracter que no es un numero!!");
+			}
+		}
+		error = false;
 		
 		System.out.println ("Indica l'alçada del producte fisic");
-		String alç = teclat.nextLine();
-		int alçada = Integer.parseInt(alç);
+		
+		while (!error) {
+			try {
+				alçada = Integer.parseInt(teclat.nextLine());
+				error = true;
+			}
+			catch (NumberFormatException e) {
+				System.out.println("ERROR, has ficat un caracter que no es un numero!!");
+			}
+		}
+		error = false;
 		
 		System.out.println ("Indica el fons del producte fisic");
-		String fon = teclat.nextLine();
-		int fons = Integer.parseInt(fon);
+		
+		while (!error) {
+			try {
+				fons = Integer.parseInt(teclat.nextLine());
+				error = true;
+			}
+			catch (NumberFormatException e) {
+				System.out.println("ERROR, has ficat un caracter que no es un numero!!");
+			}
+		}
+		error = false;
 		
 		System.out.println ("Indica el pes del producte fisic");
-		String p = teclat.nextLine();
-		int pes = Integer.parseInt(p);
+		
+		while (!error) {
+			try {
+				pes = Integer.parseInt(teclat.nextLine());
+				error = true;
+			}
+			catch (NumberFormatException e) {
+				System.out.println("ERROR, has ficat un caracter que no es un numero!!");
+			}
+		}
 		
 		Bens b = new Bens(alies.getAlies(), nom, desc, tipus, true, datacrea, amplada, alçada, fons, pes);
 		
@@ -352,66 +392,84 @@ public class Main {
 	
 	public static LlistaPeticions opcio7(LlistaPeticions llistaPet) {
 		
-        System.out.println ("Introdueix els següents camps: ");
 
-        //la identificacio s'ha de generar automaticament
-
-        //l'usuari que fa la peticio s'ha de ficar l'alies del usuari que te inicciada la sessio
-
-        //l'usuari que rep la peticio s'ha de ficar en relacio amb la oferta
-
-        //PROVA NO DEFINITIVA
-        System.out.println ("id");
-        String id = teclat.nextLine();
-        System.out.println ("userPet");
-        String userPet = teclat.nextLine();
-        System.out.println ("userRep");
-        String userRep = teclat.nextLine();
-        //FI DE LA PROVA
-
-        System.out.println ("Indica el nom del producte que vols aconseguir");
-        String prodAcon = teclat.nextLine();
-        System.out.println ("Indica el nom del producte que ofereixes");
-        String prodOfer = teclat.nextLine();
-
-        Peticions p1 = new Peticions (id, userPet, userRep, prodAcon, prodOfer);
-
-        llistaPet.afegirPeticio(p1);
-        
-        escriureInstanciaPeticio(p1);
+System.out.println ("Introdueix els següents camps: ");
+		
+		//la identificacio s'ha de generar automaticament
+		
+		//l'usuari que fa la peticio s'ha de ficar l'alies del usuari que te inicciada la sessio
+		
+		//l'usuari que rep la peticio s'ha de ficar en relacio amb la oferta
+		
+		//PROVA NO DEFINITIVA
+		System.out.println ("id");
+		String id = teclat.nextLine();
+		//Random rnd = new Random();
+		//String id = rnd.nextInt(99999 - 10000 + 1) + 10000;
+		//String str = String.valueOf(id);
+		System.out.println ("userPet");
+		String userPet = teclat.nextLine();
+		System.out.println ("userRep");
+		String userRep = teclat.nextLine();
+		//FI DE LA PROVA
+		
+		System.out.println ("Indica el nom del producte que vols aconseguir");
+		String prodAcon = teclat.nextLine();
+		System.out.println ("Indica el nom del producte que ofereixes");
+		String prodOfer = teclat.nextLine();
+		
+		Peticions p1 = new Peticions (id, userPet, userRep, prodAcon, prodOfer);
+		
+		llistaPet.afegirPeticio(p1);
         
         return llistaPet;
     }
 
+
 	
-	public static void opcio8(Peticions p) {
+	public static void opcio8(LlistaPeticions llistaPet) {
+		
+		int opcioAccept = 0, i = 0;
+		boolean error = false;
 		
 		System.out.println("Vols acceptar la peticio d'intercanvi?");
 		System.out.println("1 Acceptar");
 		System.out.println("2 Refusar");
 		
-		int opcioAccept = Integer.parseInt(teclat.nextLine());
+		while (!error) {
+			try {
+				opcioAccept = Integer.parseInt(teclat.nextLine());
+				if (opcioAccept < 1 || opcioAccept > 2) {
+					throw new NumeroForaRangException ();
+				}
+				error = true;
+			}
+			catch (NumberFormatException e) {
+				System.out.println("ERROR, has ficat un caracter que no es un numero!!");
+			}
+			catch (NumeroForaRangException e) {
+				System.out.println("ERROR, has introduit un numbero que no es ni 1 ni 2!");
+			}
+		}
 		
 		if (opcioAccept == 1) {
 			System.out.println("Has acceptat la peticio");
-			p.setResposat(1);
+			llistaPet.acceptarPet(i);
 			System.out.println("Introdueix la valoracio de l'oferta");
 			int valoracioRep = Integer.parseInt(teclat.nextLine());
-			p.setValoracioUserRebPet(valoracioRep);
+			//p.setValoracioUserRebPet(valoracioRep);
 		}
 		else {
-			if (opcioAccept == 2) {
-				System.out.println("Has refusat la peticio");
-				p.setResposat(2);
-			}
-			else {
-				System.out.println("ERROR, fica el numero 1 o 2");
-			}
+			System.out.println("Has refusat la peticio");
+			llistaPet.refusarPet(i);	
 		}
 	}
 	
 	public static void opcio9(LlistaUsuaris llistaUser) {
 			
+		boolean error = false;
+		int codiPost = 0;
+		
 		System.out.println ("Introdueix els següents camps: ");
 			
 		System.out.println ("Usuari:");
@@ -420,22 +478,32 @@ public class Main {
 		System.out.println ("Correu del usuari: ");
 		String correu = teclat.nextLine();
 		
-		System.out.println ("Codi postal del usuari");
-		String cPost = teclat.nextLine();
-		int codiPost = Integer.parseInt(cPost);
+		System.out.println ("Codi postal del usuari:");
+
+		while (!error) {
+			try {
+				codiPost = Integer.parseInt(teclat.nextLine());
+				error = true;
+			}
+			catch (NumberFormatException e) {
+				System.out.println("ERROR, has ficat un caracter que no es un numero!!");
+			}
+		}
 		
 		Usuaris u1 = new Usuaris(nom, correu, codiPost);
 		
 		llistaUser.donaAlta(u1);
 		
-	    try (FileOutputStream fos = new FileOutputStream("serialized_object.bin", true)) {         
+		//Falta Afegir i crear fitxer serialitzat
+		
+	    /*try (FileOutputStream fos = new FileOutputStream("serialized_object.bin", true)) {         
 	    	try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 	            oos.writeObject(u1);
 	        }
 	    }
 	  	catch (IOException e) {
 	  		System.out.println ("no");
-	    }
+	    }*/
 	}
 	
 	public static void opcio10(Usuaris usuariactual, LlistaServeis llistaBens) {
@@ -552,13 +620,12 @@ public class Main {
 		LlistaPeticions llistaPet = new LlistaPeticions(100);
 		int opcio=0;
 		//llistaUser= carregarUsuaris();
-		Usuaris usuariActual = iniciasessio(llistaUser);
-		llistaUser.donaAlta(usuariActual);
-		mostrarMenu();
+		//Usuaris usuariActual = iniciasessio(llistaUser);
+		//llistaUser.donaAlta(usuariActual);
 		
-		//Bens a = new Bens ("sabata", "cosa que es fica al peu", "roba", true, "30-12-2022", 12, 23, 45, 2, "3-1-2023"); 
-		//prova per veure si funciona la instancia
-		//int opcio = Integer.parseInt(teclat.nextLine());
+		Usuaris usuariActual = null;
+		
+		mostrarMenu();
 		while (opcio != 17) {
 			opcio = Integer.parseInt(teclat.nextLine());
 			switch (opcio) {
@@ -586,10 +653,10 @@ public class Main {
 				llistaPet = opcio7(llistaPet);
 				break;
 			case 8:
-				//opcio8();
+				opcio8(llistaPet);
 				break;
 			case 9:
-				//opcio9();
+				opcio9(llistaUser);
 				break;
 			case 10:
 				//opcio10();
