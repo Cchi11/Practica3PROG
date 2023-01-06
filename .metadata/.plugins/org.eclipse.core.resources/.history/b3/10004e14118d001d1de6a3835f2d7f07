@@ -156,6 +156,7 @@ public class Main {
 		
 		String result;
 		
+		
 		Scanner f = new Scanner(new File("dadesServeis.txt"));
 		
 		while (f.hasNextLine()) {
@@ -165,8 +166,8 @@ public class Main {
 			Serveis s = new Serveis (dadesLinea[0], dadesLinea[1], dadesLinea[2], be, dadesLinea[4], dadesLinea[5]);
 			llista.afegirServei(s);
 		}
-		
 		f.close();
+		
 		return llista;
 	}
 	
@@ -303,7 +304,7 @@ public class Main {
 				System.out.println(llistaPet);
 				break;
 			case 2:
-				//System.out.ln(llistaServ.mostrarLlistaServ());
+				llistaServ.mostrarLlistaServ();
 				break;
 			case 3:
 				System.out.println(llistaBe);
@@ -323,7 +324,7 @@ public class Main {
 		System.out.println (llistaBe);
 	}
 	
-	public static void opcio5(Usuaris actual, LlistaServeis llistaServ) {
+	public static void opcio5(LlistaServeis llistaServ) {
 		
 		System.out.println ("Introdueix els següents camps: ");
 		
@@ -342,7 +343,7 @@ public class Main {
 		System.out.println ("Indica la data de finalitzacio del servei");
 		String datafi = teclat.nextLine();
 		
-		Serveis s = new Serveis(actual.getAlies(), nom, desc, tipus, false, dataini, datafi);
+		Serveis s = new Serveis(nom, desc, tipus, false, dataini, datafi);
 		
 		llistaServ.afegirServei(s);
 		
@@ -453,7 +454,7 @@ public class Main {
 		
 		llistaUser.donaAlta(u1);
 		
-	    try (FileOutputStream fos = new FileOutputStream("serialized_object.bin", true)) {         
+	    try (FileOutputStream fos = new FileOutputStream("serialized_object.bin, true")) {         
 	    	try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 	            oos.writeObject(u1);
 	        }
@@ -463,25 +464,11 @@ public class Main {
 	    }
 	}
 	
-	public static void opcio10(Usuaris usuariactual, LlistaServeis llistaBens) {
-		
-		
-	}
-		
-	/**
-	 * Dona de baixa un servei del usuari
-	 * @param usuariactual  Usuari actual
-	 * @param llistaServ	llistadeServeis
-	 */
-	public static void opcio11(Usuaris usuariactual, LlistaServeis llistaServ) {
+	public static void opcio10(LlistaServeis llistaServ) {
 		System.out.println("Indica el nom del servei que vols desactivar");
 		String nomServei = teclat.nextLine();
-
-			if (!llistaServ.donaBaixaServei(usuariactual, nomServei)) {
-				System.out.println("No s'ha trobat el servei per donar de baixa");
-			}
-			else
-				System.out.println("S'ha donat de baixa correctament el servei");
+		
+		llistaServ.donaBaixaServei(nomServei);	
 	}
 	
 	public static void opcio12(LlistaPeticions llistaPet) {
@@ -517,14 +504,13 @@ public class Main {
 	}
 	
 	public static void main(String[] args) throws ClassNotFoundException, IOException {
-		LlistaBens llistaBe = new LlistaBens(100);
-		LlistaServeis llistaServ = new LlistaServeis(100);
-		LlistaUsuaris llistaUser = new LlistaUsuaris(100);
-		LlistaPeticions llistaPet = new LlistaPeticions(100);
+		LlistaBens llistaBe = new LlistaBens(30);
+		LlistaServeis llistaServ = new LlistaServeis(30);
+		LlistaUsuaris llistaUser = new LlistaUsuaris(30);
+		LlistaPeticions llistaPet = new LlistaPeticions(30);
 		int opcio=0;
-		Usuaris usuariActual = iniciasessio(llistaUser);
+		iniciasessio(llistaUser);
 		mostrarMenu();
-		
 		//Bens a = new Bens ("sabata", "cosa que es fica al peu", "roba", true, "30-12-2022", 12, 23, 45, 2, "3-1-2023"); 
 		//prova per veure si funciona la instancia
 		//int opcio = Integer.parseInt(teclat.nextLine());

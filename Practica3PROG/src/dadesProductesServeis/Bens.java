@@ -20,8 +20,8 @@ public class Bens extends Producte{   //Clase feta per Chenxing Chi
 	 * @param pes	pes del bé
 	 * @param data	data d'intercanvi
 	 */
-	public Bens (String name, String descripcio, String tip, boolean b, String dat, int amplada, int alçada, int fons, int pes) {
-		super (name, descripcio, tip, b, dat);
+	public Bens (String alies, String name, String descripcio, String tip, boolean b, String dat, int amplada, int alçada, int fons, int pes) {
+		super (alies, name, descripcio, tip, b, dat);
 		this.amplada=amplada;
 		this.alçada=alçada;
 		this.fons=fons;
@@ -47,7 +47,7 @@ public class Bens extends Producte{   //Clase feta per Chenxing Chi
 	}
 	
 	public Bens copia() {
-		Bens copia = new Bens (super.nom, super.desc, super.tipus, super.be, super.data, amplada, alçada, fons, pes);
+		Bens copia = new Bens (super.usuari, super.nom, super.desc, super.tipus, super.be, super.data, amplada, alçada, fons, pes);
 		copia.dataIntercanvi=this.dataIntercanvi;
 		return copia;
 	}

@@ -1,5 +1,7 @@
 package dadesProductesServeis;
 
+import usuaris.Usuaris;
+
 public class LlistaBens {  //Clase feta per Chenxing Chi
 	private int nElem;
 	private Bens [] llista;
@@ -24,7 +26,17 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 	}
 	
 	public void afegirBe (Bens b) {
+		
+		if (nElem>=llista.length) {
+			Bens [] llistanova = new Bens [nElem*2];
+			for (int i=0; i<nElem; i++)
+			{
+				llistanova[i]=llista[i];
+			}
+			llista=llistanova;
+		}
+		llista[nElem] = b.copia();
 		nElem++;
-		llista[nElem]= b;
 	}
+	
 }

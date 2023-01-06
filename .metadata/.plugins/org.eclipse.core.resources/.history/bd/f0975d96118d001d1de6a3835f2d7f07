@@ -1,7 +1,5 @@
 package dadesProductesServeis;
 
-import usuaris.Usuaris;
-
 public class LlistaServeis {   //Clase feta per Chenxing Chi
 	private int nElem;
 	private Serveis[] llista;
@@ -34,26 +32,22 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 			}
 			llista=llistanova;
 		}
-		llista[nElem] = s;
 		nElem++;
+		llista[nElem] = s;
 	}
 	
 	
-	public boolean donaBaixaServei (Usuaris usuari, String nomServei)
+	public void donaBaixaServei (String nomServei)
 	{
-		boolean trobat=false;
 		for (int i=0; i<nElem; i++) {
-			if (llista[i].getNom()==nomServei && llista[i].getUsuari().equals(usuari.getAlies()))
+			if (llista[i].getNom()==nomServei)
 			{
 				llista[i].setActiu(false);
-				trobat=true;
-			}		
-				
+			}
 		}
-		return trobat;
 	}
 	
-	public  void mostrarLlistaServ () {
+	public void mostrarLlistaServ () {
 		for (int i=0; i<nElem; i++) {
 			llista[i].toString();
 		}

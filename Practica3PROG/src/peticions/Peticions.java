@@ -13,6 +13,7 @@ public class Peticions {		//Clase feta per Òscar Cabré
 	 * @param ofeProduc 	Nom del producte que ofereixes
 	 */
 	public Peticions (String peticioId, String petUser, String rebUser, String aconsProduc, String ofeProduc) {
+		
 		idPeticio = peticioId;
 		userPeticio = petUser;
 		userRebPet = rebUser; 
