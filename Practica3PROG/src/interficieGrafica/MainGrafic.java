@@ -168,17 +168,9 @@ public class MainGrafic extends JFrame {
 		    BotoAcceptarActionListener accioBoto = new BotoAcceptarActionListener (alies, correu, cPost);
 		    acceptar.addActionListener(accioBoto);
 		    botons.add(acceptar);
-
 		    registrat.add(botons, BorderLayout.SOUTH);
 		    
-		    acceptar.addActionListener( new ActionListener() {
-		           public void actionPerformed(ActionEvent e) {
-		        	   JButton b = (JButton) e.getSource();
-		        	   
-		        	   boolean ok = true;
-		               setVisible(false);
-		           }
-		        });
+		   
 		    
 		      
 			registrat.setVisible(true);
@@ -268,7 +260,7 @@ public class MainGrafic extends JFrame {
 			 else
 			 {
 				 if (resultat == JOptionPane.YES_OPTION) {
-					 preguntarDades();
+					 usuari= preguntarDades();
 					 
 				 }
 				 else
