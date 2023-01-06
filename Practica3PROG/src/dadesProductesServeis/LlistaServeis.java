@@ -1,5 +1,7 @@
 package dadesProductesServeis;
 
+import java.security.Identity;
+
 import usuaris.Usuaris;
 
 public class LlistaServeis {   //Clase feta per Chenxing Chi
@@ -37,6 +39,15 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		nElem++;
 	}
 	
+	public LlistaServeis llistaServeisActiu() {
+		LlistaServeis actius = new LlistaServeis(100);
+		for(int i = 0; i < this.nElem; i++) {
+			if (llista[i].getActiu()) {
+				actius.afegirServei(llista[i]);
+			}
+		}
+		return actius;
+	}
 
 	
 	public boolean donaBaixaServei (Usuaris usuari, String nomServei) {

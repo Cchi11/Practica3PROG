@@ -1,10 +1,13 @@
 package aplicacio;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -145,15 +148,8 @@ public class Main {
 		System.out.println("\t17. Sortir de l’aplicacio");
 		System.out.print("\n\t\t\tIndica opcio:\n");
 	}
-	
-	
-	public static LlistaServeis carregarServeis () throws FileNotFoundException {
 
-		
-		String [] dadesLinea = new String[7];
-		
-		String result;
-		
+	public static LlistaServeis carregarServeis () throws FileNotFoundException, IOException {
 		Scanner f = new Scanner(new File("dadesServeis.txt"));
 		LlistaServeis llista = new LlistaServeis(100);
 		String [] lSplited  = new String[7];;
@@ -171,8 +167,7 @@ public class Main {
 		return llista;
 	}
 	
-	
-	public static LlistaBens carregarBens () throws FileNotFoundException {
+	public static LlistaBens carregarBens () throws FileNotFoundException, IOException {
 		Scanner f = new Scanner(new File("dadesBens.txt"));
 		LlistaBens llista = new LlistaBens(100);
 		String [] lSplited  = new String[10];;
@@ -183,19 +178,18 @@ public class Main {
 			cat=f.nextLine();
 			lSplited = cat.split(";");
 			Boolean b = Boolean.parseBoolean(lSplited[3]);
-			numInt[0] = Integer.parseInt(lSplited[5]);
-			numInt[1] = Integer.parseInt(lSplited[6]);
-			numInt[2] = Integer.parseInt(lSplited[7]);
-			numInt[3] = Integer.parseInt(lSplited[8]);
+			numInt[0] = Integer.parseInt(lSplited[6]);
+			numInt[1] = Integer.parseInt(lSplited[7]);
+			numInt[2] = Integer.parseInt(lSplited[8]);
+			numInt[3] = Integer.parseInt(lSplited[9]);
 			Bens bens = new Bens(lSplited[0], lSplited[1], lSplited[2], lSplited[3], b, lSplited[5], numInt[0], numInt[1], numInt[2], numInt[3]);
 			llista.afegirBe(bens);
 		}
 		f.close();
-		
 		return llista;
 	}
 	
-	public static LlistaPeticions carregarPeticions () throws FileNotFoundException {
+	public static LlistaPeticions carregarPeticions () throws FileNotFoundException, IOException {
 		Scanner f = new Scanner(new File("dadesPeticions.txt"));
 		LlistaPeticions llista = new LlistaPeticions(100);
 		String [] lSplited  = new String[5];;
@@ -212,79 +206,83 @@ public class Main {
 		return llista;
 	}
 	
-	public static LlistaPeticions opcio1Pet () throws FileNotFoundException {
+	public static LlistaPeticions opcio1Pet () throws FileNotFoundException, IOException {
 		return carregarPeticions();
 	}
-	public static LlistaServeis opcio1Serv () throws FileNotFoundException {
+	
+	public static LlistaServeis opcio1Serv () throws FileNotFoundException, IOException {
 		return carregarServeis();
 	}
-	public static LlistaBens opcio1Be () throws FileNotFoundException {
+	
+	public static LlistaBens opcio1Be () throws FileNotFoundException, IOException {
 		return carregarBens();
 	}
-		
 	
 	public static void opcio2 (LlistaPeticions llistaPet, LlistaServeis llistaServ, LlistaBens llistaBe, LlistaUsuaris llistaUser) {
-		System.out.println("\n\nLlistes del programa:");
-		System.out.println("\t1. Llista de peticions");
-		System.out.println("\t2. Llista de serveis");
-		System.out.println("\t3. Llista de bens");
-		System.out.println("\t4. Llista d'usuaris");
-		System.out.println("\t5. Cancel·lar");
-		System.out.print("\n\t\t\tIndica quina llista vols mostrar: \n");
 		int opcioll=0;
-		boolean error = false;
-		while (!error)
-		{
-			try
+		while (opcioll != 6) {
+			System.out.println("\n\nLlistes del programa:");
+			System.out.println("\t1. Mostra totes le llistes");
+			System.out.println("\t2. Llista de peticions");
+			System.out.println("\t3. Llista de serveis");
+			System.out.println("\t4. Llista de bens");
+			System.out.println("\t5. Llista d'usuaris");
+			System.out.println("\t6. Sortir");
+			System.out.print("\n\t\t\tIndica quina llista vols mostrar: \n");
+			boolean error = false;
+			while (!error)
 			{
-				String llegirnum = teclat.nextLine();
-				opcioll = Integer.parseInt(llegirnum);
-				if (opcioll<1 || opcioll>5)
+				try
 				{
-					throw new NumeroForaRangException();
+					String llegirnum = teclat.nextLine();
+					opcioll = Integer.parseInt(llegirnum);
+					if (opcioll<1 || opcioll>6)
+					{
+						throw new NumeroForaRangException();
+					}
+					error=true;
 				}
-				error=true;
+				catch (NumberFormatException e) {
+					System.out.println("Indica un numero! No un altre caracter!");
+					error=false;
+				}
+				catch (NumeroForaRangException e) {
+					System.out.println("Introdueix una opció valida dintre del rang!!");
+					error=false;
+				}
 			}
-			catch (NumberFormatException e) {
-				System.out.println("Indica un numero! No un altre caracter!");
-				error=false;
-			}
-			catch (NumeroForaRangException e) {
-				System.out.println("Introdueix una opció valida dintre del rang!!");
-				error=false;
+				switch (opcioll) {
+				case 1: 
+					System.out.println(llistaPet.toString());
+					System.out.println(llistaServ.toString());
+					System.out.println(llistaBe.toString());
+					System.out.println(llistaUser.toString());
+					break;
+				case 2:
+					System.out.println(llistaPet.toString());
+					break;
+				case 3:
+					System.out.println(llistaServ.toString());
+					break;
+				case 4:
+					System.out.println(llistaBe.toString());
+					break;
+				case 5:
+					System.out.println(llistaUser.toString());
+					break;
 			}
 		}
-			switch (opcioll) {
-			case 1: 
-				System.out.println(llistaPet);
-				break;
-			case 2:
-				//System.out.ln(llistaServ.mostrarLlistaServ());
-				break;
-			case 3:
-				System.out.println(llistaBe);
-				break;
-			case 4:
-				System.out.println(llistaUser);
-				break;
-				
-		}
-
-		System.out.println(llistaServ.toString());
-		System.out.println(llistaBe.toString());
-		System.out.println(llistaPet.toString());
-		System.out.println(llistaUser.toString());
 	}
 	
 	public static void opcio3 (LlistaServeis llistaServ) {
-		//TODO
+		System.out.println(llistaServ.llistaServeisActiu().toString());
 	}
 	
 	public static void opcio4 (LlistaBens llistaBe) {
-		//TODO
+		System.out.println(llistaBe.llistaBensNoIntercanvia().toString());
 	}
 	
-	public static void opcio5(Usuaris actual, LlistaServeis llistaServ) {
+	public static LlistaServeis opcio5(Usuaris actual, LlistaServeis llistaServ) {
 		
 		System.out.println ("Introdueix els següents camps: ");
 		
@@ -307,10 +305,13 @@ public class Main {
 		
 		llistaServ.afegirServei(s);
 		
+		escriureInstanciaServeis(s);
+		
+		return llistaServ;
 		//FALTA AFEGIR AL FITXER DE TEXT EL NOU SERVEI
 	}
 	
-	public static void opcio6(Usuaris alies, LlistaBens llistaBe) {
+	public static LlistaBens opcio6(Usuaris alies, LlistaBens llistaBe) {
 		System.out.println ("Introdueix els següents camps: ");
 		
 		System.out.println ("Indica el nom del producte fisic");
@@ -345,27 +346,43 @@ public class Main {
 		
 		llistaBe.afegirBe(b);
 		
-		//FALTA AFEGIR AL FITXER DE TEXT EL NOU BE
+		escriureInstanciaBens(b);
+		return(llistaBe);
 	}
 	
-	public static void opcio7(LlistaPeticions llistaPet) {
+	public static LlistaPeticions opcio7(LlistaPeticions llistaPet) {
 		
-		System.out.println ("Introdueix els següents camps: ");
-		
-		//la identificacio s'ha de generar automaticament
-		
-		//l'usuari que fa la peticio s'ha de ficar l'alies del usuari que te inicciada la sessio
-		
-		//l'usuari que rep la peticio s'ha de ficar en relacio amb la oferta
-		
-		System.out.println ("Indica el nom del producte que vols aconseguir");
-		String prodAcon = teclat.nextLine();
-		System.out.println ("Indica el nom del producte que ofereixes");
-		String prodOfer = teclat.nextLine();
-		
-		//Peticions p1 = new Peticions (id, userPet, userRep, prodAcon, prodOfer);
+        System.out.println ("Introdueix els següents camps: ");
 
-	}
+        //la identificacio s'ha de generar automaticament
+
+        //l'usuari que fa la peticio s'ha de ficar l'alies del usuari que te inicciada la sessio
+
+        //l'usuari que rep la peticio s'ha de ficar en relacio amb la oferta
+
+        //PROVA NO DEFINITIVA
+        System.out.println ("id");
+        String id = teclat.nextLine();
+        System.out.println ("userPet");
+        String userPet = teclat.nextLine();
+        System.out.println ("userRep");
+        String userRep = teclat.nextLine();
+        //FI DE LA PROVA
+
+        System.out.println ("Indica el nom del producte que vols aconseguir");
+        String prodAcon = teclat.nextLine();
+        System.out.println ("Indica el nom del producte que ofereixes");
+        String prodOfer = teclat.nextLine();
+
+        Peticions p1 = new Peticions (id, userPet, userRep, prodAcon, prodOfer);
+
+        llistaPet.afegirPeticio(p1);
+        
+        escriureInstanciaPeticio(p1);
+        
+        return llistaPet;
+    }
+
 	
 	public static void opcio8(Peticions p) {
 		
@@ -474,6 +491,60 @@ public class Main {
 		Fit.close();
 	}
 	
+	public static void escriureInstanciaBens(Bens b) {
+		try {
+			BufferedWriter w=new BufferedWriter(new FileWriter("dadesBens.txt", true));
+			String frase = "";
+			frase = b.getUsuari()+";"+b.getNom()+";"+b.getDesc()+";"+b.getTipus()+";true;"+b.getData()+";"+b.getAmplada()+";"+b.getAmplada()+";"+b.getAlçada()+";"+b.getFons()+";"+b.getPes();
+			//System.out.println(frase);
+			w.newLine();
+			w.write(frase);
+			w.close();
+		}
+		catch(FileNotFoundException e) {
+			System.out.println("L'arxiu d'entrada no existeix");
+		}
+		catch(IOException e) {
+			System.out.println("S'ha produit un error en els arxius");
+		}
+	}
+	
+	public static void escriureInstanciaServeis(Serveis s) {
+		try {
+			BufferedWriter w=new BufferedWriter(new FileWriter("dadesServeis.txt", true));//Anar al final del document 
+			String frase = "";
+			frase = s.getUsuari()+";"+s.getNom()+";"+s.getDesc()+";"+s.getTipus()+";false;"+s.getData()+";"+s.getDataFiOferiment();
+			//System.out.println(frase);
+			w.newLine();
+			w.write(frase);
+			w.close();
+		}
+		catch(FileNotFoundException e) {
+			System.out.println("L'arxiu d'entrada no existeix");
+		}
+		catch(IOException e) {
+			System.out.println("S'ha produit un error en els arxius");
+		}
+	}
+	
+	public static void escriureInstanciaPeticio(Peticions p) {
+		try {
+			BufferedWriter w=new BufferedWriter(new FileWriter("dadesPeticions.txt", true));//Anar al final del document 
+			String frase = "";
+			frase = p.getIdPeticio()+";"+p.getUserPeticio()+";"+p.getUserRebPet()+";"+p.getProducAcons()+";"+p.getProducOfe();
+			//System.out.println(frase);
+			w.newLine();
+			w.write(frase);
+			w.close();
+		}
+		catch(FileNotFoundException e) {
+			System.out.println("L'arxiu d'entrada no existeix");
+		}
+		catch(IOException e) {
+			System.out.println("S'ha produit un error en els arxius");
+		}
+	}
+	
 	public static void main(String[] args) throws ClassNotFoundException, IOException {
 		LlistaBens llistaBe = new LlistaBens(100);
 		LlistaServeis llistaServ = new LlistaServeis(100);
@@ -506,13 +577,13 @@ public class Main {
 				opcio4(llistaBe);
 				break;
 			case 5:
-				opcio5(usuariActual, llistaServ);
+				llistaServ = opcio5(usuariActual, llistaServ);
 				break;
 			case 6:
-				//opcio6();
+				llistaBe = opcio6(usuariActual, llistaBe);
 				break;
 			case 7:
-				//opcio7();
+				llistaPet = opcio7(llistaPet);
 				break;
 			case 8:
 				//opcio8();
