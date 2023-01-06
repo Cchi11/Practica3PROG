@@ -39,6 +39,18 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		nElem++;
 	}
 	
+	public boolean comprovaServei (String nomServ) {
+		
+		boolean trobat = false;
+		
+		for (int i=0; !trobat && i <= llista.length; i++) {
+			if (llista[i].getNom() == nomServ) {
+				trobat = true;
+			}
+		}
+		return (trobat);
+	}	
+	
 	public LlistaServeis llistaServeisActiu() {
 		LlistaServeis actius = new LlistaServeis(100);
 		for(int i = 0; i < this.nElem; i++) {

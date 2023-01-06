@@ -38,6 +38,18 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 		nElem++;
 	}
 	
+	public boolean comprovaBe (String nomProd) {
+		
+		boolean trobat = false;
+		
+		for (int i=0; !trobat && i <= llista.length; i++) {
+			if (llista[i].getNom() == nomProd) {
+				trobat = true;
+			}
+		}
+		return (trobat);
+	}	
+	
 	public LlistaBens llistaBensNoIntercanvia() {
 		LlistaBens noInter = new LlistaBens(100);
 		for(int i = 0; i < this.nElem; i++) {
