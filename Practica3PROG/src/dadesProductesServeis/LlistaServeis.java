@@ -1,7 +1,4 @@
 package dadesProductesServeis;
-
-import java.security.Identity;
-
 import usuaris.Usuaris;
 
 public class LlistaServeis {   //Clase feta per Chenxing Chi
@@ -38,6 +35,18 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		llista[nElem] = s.copia();
 		nElem++;
 	}
+	
+	public boolean comprovaServei (String nomServ) {
+		
+		boolean trobat = false;
+		
+		for (int i=0; !trobat && i <= llista.length; i++) {
+			if (llista[i].getNom() == nomServ) {
+				trobat = true;
+			}
+		}
+		return (trobat);
+	}	
 	
 	public LlistaServeis llistaServeisActiu() {
 		LlistaServeis actius = new LlistaServeis(100);

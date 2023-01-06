@@ -1,6 +1,6 @@
 package peticions;
 
-import dadesProductesServeis.Serveis;
+
 
 public class LlistaPeticions { //Clase realitzada per Pol Regy
 	private int nElem;

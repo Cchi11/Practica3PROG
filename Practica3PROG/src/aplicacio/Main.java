@@ -390,33 +390,92 @@ public class Main {
 		return(llistaBe);
 	}
 	
-	public static LlistaPeticions opcio7(LlistaPeticions llistaPet) {
+	public static LlistaPeticions opcio7(Usuaris u, LlistaPeticions llistaPet, LlistaUsuaris llistaUser, LlistaBens llistaBe, LlistaServeis llistaServ) {
 		
-
-System.out.println ("Introdueix els següents camps: ");
+		String userRep = null, prodAcon = null, prodOfer = null;
+		boolean error = false;
 		
-		//la identificacio s'ha de generar automaticament
+		System.out.println ("Introdueix els següents camps: ");
 		
-		//l'usuari que fa la peticio s'ha de ficar l'alies del usuari que te inicciada la sessio
+		Random rnd = new Random();
+		int str = rnd.nextInt(99999 - 10000 + 1) + 10000;	
+		String id = String.valueOf(str);		
 		
-		//l'usuari que rep la peticio s'ha de ficar en relacio amb la oferta
+		String userPet = u.getAlies();
 		
-		//PROVA NO DEFINITIVA
-		System.out.println ("id");
-		String id = teclat.nextLine();
-		//Random rnd = new Random();
-		//String id = rnd.nextInt(99999 - 10000 + 1) + 10000;
-		//String str = String.valueOf(id);
-		System.out.println ("userPet");
-		String userPet = teclat.nextLine();
-		System.out.println ("userRep");
-		String userRep = teclat.nextLine();
-		//FI DE LA PROVA
+		System.out.println ("A quin usuari vols oferir la peticio? (Indica l'alies del usuari)");
+		
+		while (!error) {
+			try {
+				userRep = teclat.nextLine();
+				if (llistaUser.comprovaUsuari(userRep)) {
+					error = true;
+				}
+				else {
+					throw new NoEsTrobaException();
+				}
+			}
+			catch (NullPointerException e) {
+				System.out.println ("No s'ha trobat l'usuari");
+			}
+			catch (NoEsTrobaException e) {
+				System.out.println ("No s'ha trobat l'usuari. Introdueix un usuari registrat");
+			}
+		}
+		error = false;
 		
 		System.out.println ("Indica el nom del producte que vols aconseguir");
-		String prodAcon = teclat.nextLine();
+		prodAcon = teclat.nextLine();
+		
+		while (!error) {
+			try {
+				prodAcon = teclat.nextLine();
+				if (llistaBe.comprovaBe(prodAcon)) {
+					error = true;
+				}
+				else {
+					if (llistaServ.comprovaServei(prodAcon)) {
+						error = true;
+					}
+					else {
+						throw new NoEsTrobaException();
+					}
+				}
+			}
+			catch (NullPointerException e) {
+				System.out.println ("No s'ha trobat el producte");
+			}
+			catch (NoEsTrobaException e) {
+				System.out.println ("No s'ha trobat el producte. Introduieix un producte registrat a l'aplicatiu");
+			}
+		}
+		error = false;
+		
 		System.out.println ("Indica el nom del producte que ofereixes");
-		String prodOfer = teclat.nextLine();
+		prodOfer = teclat.nextLine();
+		
+		while (!error) {
+			try {
+				prodOfer = teclat.nextLine();
+				if (llistaBe.comprovaBe(prodOfer)) {
+					error = true;
+				}
+				else {
+					if (llistaServ.comprovaServei(prodOfer)) {
+						error = true;
+					}
+					else {
+						throw new NoEsTrobaException();
+					}
+				}
+			}
+			catch (NullPointerException e) {
+				System.out.println ("No s'ha trobat el producte");
+			}
+			catch (NoEsTrobaException e) {
+				System.out.println ("No s'ha trobat el producte. Introduieix un producte registrat a l'aplicatiu");
+			}
+		}
 		
 		Peticions p1 = new Peticions (id, userPet, userRep, prodAcon, prodOfer);
 		
@@ -424,13 +483,13 @@ System.out.println ("Introdueix els següents camps: ");
         
         return llistaPet;
     }
-
-
 	
 	public static void opcio8(LlistaPeticions llistaPet) {
 		
 		int opcioAccept = 0, i = 0;
 		boolean error = false;
+		
+		System.out.println ("");
 		
 		System.out.println("Vols acceptar la peticio d'intercanvi?");
 		System.out.println("1 Acceptar");
@@ -650,7 +709,7 @@ System.out.println ("Introdueix els següents camps: ");
 				llistaBe = opcio6(usuariActual, llistaBe);
 				break;
 			case 7:
-				llistaPet = opcio7(llistaPet);
+				llistaPet = opcio7(usuariActual, llistaPet, llistaUser, llistaBe, llistaServ);
 				break;
 			case 8:
 				opcio8(llistaPet);
