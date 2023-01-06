@@ -38,6 +38,15 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 		nElem++;
 	}
 	
+	public LlistaBens llistaBensNoIntercanvia() {
+		LlistaBens noInter = new LlistaBens(100);
+		for(int i = 0; i < this.nElem; i++) {
+			if (llista[i].getDataIntercanvi() == "0") {
+				noInter.afegirBe(llista[i]);
+			}
+		}
+		return noInter;
+	}
 	
 	public String toString() {
 		String aux;

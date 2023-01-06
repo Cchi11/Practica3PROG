@@ -16,7 +16,6 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 		llista = new Peticions [n];
 	}
 	
-	
 	 /** getter
 	  * 
 	  * @return el nombre d'elements de la llista
@@ -61,7 +60,6 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 			}
 		}
 	}
-	
 
 	public void acceptarPet (int i) {
 		llista[i].setResposat(1);
@@ -78,5 +76,6 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 			aux=aux+"\n\tPeticion "+(j+1)+"\t "+llista[j];
 		}
 		return aux;
+	}
 }
-}
+
