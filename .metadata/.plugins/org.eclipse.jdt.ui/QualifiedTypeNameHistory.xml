@@ -9,7 +9,6 @@
     <fullyQualifiedTypeName name="dadesProductesServeis.Serveis"/>
     <fullyQualifiedTypeName name="dadesProductesServeis.Bens"/>
     <fullyQualifiedTypeName name="dadesProductesServeis.LlistaBens"/>
-    <fullyQualifiedTypeName name="usuaris.LlistaUsuaris"/>
     <fullyQualifiedTypeName name="peticions.LlistaPeticions"/>
     <fullyQualifiedTypeName name="dadesProductesServeis.LlistaServeis"/>
     <fullyQualifiedTypeName name="peticions.Peticions"/>
@@ -18,10 +17,21 @@
     <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="java.util.InputMismatchException"/>
     <fullyQualifiedTypeName name="Exceptions.NumeroForaRangException"/>
-    <fullyQualifiedTypeName name="Exceptions.NoEsTrobaException"/>
     <fullyQualifiedTypeName name="java.awt.Dimension"/>
     <fullyQualifiedTypeName name="java.awt.Color"/>
     <fullyQualifiedTypeName name="java.awt.GridLayout"/>
     <fullyQualifiedTypeName name="java.awt.BorderLayout"/>
+    <fullyQualifiedTypeName name="javax.swing.JFrame"/>
+    <fullyQualifiedTypeName name="Exceptions.NoEsTrobaException"/>
+    <fullyQualifiedTypeName name="usuaris.LlistaUsuaris"/>
+    <fullyQualifiedTypeName name="java.awt.Insets"/>
+    <fullyQualifiedTypeName name="java.awt.GridBagLayout"/>
+    <fullyQualifiedTypeName name="java.awt.GridBagConstraints"/>
+    <fullyQualifiedTypeName name="java.awt.Font"/>
+    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+    <fullyQualifiedTypeName name="java.awt.FlowLayout"/>
+    <fullyQualifiedTypeName name="java.awt.Container"/>
+    <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
+    <fullyQualifiedTypeName name="javax.swing.JTextField"/>
     <fullyQualifiedTypeName name="usuaris.Usuaris"/>
 </qualifiedTypeNameHistroy>
