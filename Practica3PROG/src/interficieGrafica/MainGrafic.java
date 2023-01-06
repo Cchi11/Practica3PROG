@@ -44,6 +44,7 @@ public class MainGrafic extends JFrame {
 			}
 		 buttons[0].setText("Buscar ofertes d'intercanvi actives");
 		 buttons[1].setText("Afegir una petició d’intercanvi d’alguna de les ofertes actives");
+		 buttons[1].addActionListener(null);
 		 buttons[2].setText("Consultar els intercanvis que ha fet l’usuari");
 		 buttons[3].setText("Canviar el codi d’usuari que està utilitzant l’aplicació");
 		 

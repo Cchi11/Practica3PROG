@@ -26,7 +26,6 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 	}
 	
 	public void afegirBe (Bens b) {
-		
 		if (nElem>=llista.length) {
 			Bens [] llistanova = new Bens [nElem*2];
 			for (int i=0; i<nElem; i++)
@@ -37,6 +36,17 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 		}
 		llista[nElem] = b.copia();
 		nElem++;
+	}
+	
+	
+	public String toString() {
+		String aux;
+		aux="Bens => numBens "+nElem;
+		for (int j = 0; j < nElem; j++) {
+			aux=aux+"\n\tBe "+(j+1)+"\t "+llista[j];
+		}
+		return aux;
+
 	}
 	
 }

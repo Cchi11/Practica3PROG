@@ -25,7 +25,6 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 	}
 		
 	public void afegirServei (Serveis s) {
-		
 		if (nElem>=llista.length) {
 			Serveis [] llistanova = new Serveis [nElem*2];
 			for (int i=0; i<nElem; i++)
@@ -34,13 +33,13 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 			}
 			llista=llistanova;
 		}
-		llista[nElem] = s;
+		llista[nElem] = s.copia();
 		nElem++;
 	}
 	
+
 	
-	public boolean donaBaixaServei (Usuaris usuari, String nomServei)
-	{
+	public boolean donaBaixaServei (Usuaris usuari, String nomServei) {
 		boolean trobat=false;
 		for (int i=0; i<nElem; i++) {
 			if (llista[i].getNom()==nomServei && llista[i].getUsuari().equals(usuari.getAlies()))
@@ -53,9 +52,12 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		return trobat;
 	}
 	
-	public  void mostrarLlistaServ () {
-		for (int i=0; i<nElem; i++) {
-			llista[i].toString();
+	public String toString() {
+		String aux;
+		aux="Serveis => numServeis "+nElem;
+		for (int j = 0; j < nElem; j++) {
+			aux=aux+"\n\tServei "+(j+1)+"\t "+llista[j];
 		}
+		return aux;
 	}
 }

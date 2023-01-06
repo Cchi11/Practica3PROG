@@ -26,6 +26,7 @@ public class Usuaris implements Serializable{   //Clase feta per Gerard Altadill
 		ofertaProd = 0;
 		intercanvis = 0;
 	}
+	
 	public Usuaris () {
 		
 	}
@@ -79,6 +80,9 @@ public class Usuaris implements Serializable{   //Clase feta per Gerard Altadill
 		copia.intercanvis=this.intercanvis;
 		copia.ofertaProd=this.ofertaProd;
 		return copia;
-		
+	}
+	
+	public String toString() {
+		return ("Usuari => alies:\t"+alies+"\tcorreu:\t"+correu+"\tcodiPost:\t"+codiPost+"\tintercanvis:\t"+intercanvis+"\tofertaProd:\t"+ofertaProd);
 	}
 }

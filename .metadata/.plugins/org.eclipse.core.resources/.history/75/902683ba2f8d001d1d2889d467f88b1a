@@ -1,4 +1,6 @@
 package aplicacio;
+
+
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,7 +35,7 @@ public class Main {
 		System.out.println("\n\t1. Iniciar sessio");
 		System.out.println("\t2. Registra't si no tens compte");
 		System.out.println("\t3. Sortir de l'aplicacio");
-		int opcioini = 0;
+		int opcioini=0;
 		boolean error = false;
 		while (!error)
 		{
@@ -121,7 +123,6 @@ public class Main {
 			}
 		}
 		return nou;
-		
 	}
 	
 	public static void mostrarMenu () {
@@ -148,80 +149,123 @@ public class Main {
 	
 	
 	public static LlistaServeis carregarServeis () throws FileNotFoundException {
-
 		
-		String [] dadesLinea = new String[7];
+		String [] dadesLinea = new String[6];
+		LlistaServeis llista = new LlistaServeis(100);
 		
 		String result;
 		
+		
 		Scanner f = new Scanner(new File("dadesServeis.txt"));
-		LlistaServeis llista = new LlistaServeis(100);
-		String [] lSplited  = new String[7];;
-		String cat;
 		
 		while (f.hasNextLine()) {
-			cat=f.nextLine();
-			lSplited = cat.split(";");
-			Boolean b = Boolean.parseBoolean(lSplited[4]);
-			Serveis serveis = new Serveis(lSplited[0], lSplited[1], lSplited[2], lSplited[3], b, lSplited[5], lSplited[6]);
-			llista.afegirServei(serveis);
+			result=f.nextLine();
+			dadesLinea = result.split(";");			
+			boolean be = Boolean.parseBoolean(dadesLinea[3]); 
+			Serveis s = new Serveis (dadesLinea[0], dadesLinea[1], dadesLinea[2], be, dadesLinea[4], dadesLinea[5]);
+			llista.afegirServei(s);
 		}
-		
 		f.close();
+		
 		return llista;
 	}
 	
 	
 	public static LlistaBens carregarBens () throws FileNotFoundException {
-		Scanner f = new Scanner(new File("dadesBens.txt"));
-		LlistaBens llista = new LlistaBens(100);
-		String [] lSplited  = new String[10];;
-		int [] numInt = new int[4]; 
-		String cat;
-		
-		while (f.hasNextLine()) {
-			cat=f.nextLine();
-			lSplited = cat.split(";");
-			Boolean b = Boolean.parseBoolean(lSplited[3]);
-			numInt[0] = Integer.parseInt(lSplited[5]);
-			numInt[1] = Integer.parseInt(lSplited[6]);
-			numInt[2] = Integer.parseInt(lSplited[7]);
-			numInt[3] = Integer.parseInt(lSplited[8]);
-			Bens bens = new Bens(lSplited[0], lSplited[1], lSplited[2], lSplited[3], b, lSplited[5], numInt[0], numInt[1], numInt[2], numInt[3]);
-			llista.afegirBe(bens);
+			
+			String [] dadesLinea = new String[9];
+			LlistaBens llista = new LlistaBens(100);
+			String result;
+			int[] dadesNum = new int[4];
+			
+			Scanner f = new Scanner(new File("dadesBens.txt"));
+
+			while (f.hasNextLine()) {
+				result=f.nextLine();
+				dadesLinea = result.split(";");
+				boolean be = Boolean.parseBoolean(dadesLinea[3]); 
+				
+				int k=0;
+				for (int j=5; j<dadesLinea.length; j++) {
+					dadesNum[k] =Integer.parseInt(dadesLinea[j]);
+					k++;
+				}
+				k=0;
+				Bens b = new Bens (dadesLinea[0], dadesLinea[1], dadesLinea[2], be, dadesLinea[4], dadesNum[0], dadesNum[1], dadesNum[2], dadesNum[3]);
+				llista.afegirBe(b);;
+			}
+			f.close();
+			
+			return llista;
 		}
-		f.close();
-		
-		return llista;
-	}
 	
 	public static LlistaPeticions carregarPeticions () throws FileNotFoundException {
-		Scanner f = new Scanner(new File("dadesPeticions.txt"));
+		
+		String [] dadesLinea = new String[5];
 		LlistaPeticions llista = new LlistaPeticions(100);
-		String [] lSplited  = new String[5];;
-		String cat;
+		String result;
+		Scanner f = new Scanner(new File("dadesPeticions.txt"));
 		
 		while (f.hasNextLine()) {
-			cat=f.nextLine();
-			lSplited = cat.split(";");
-			Peticions peticions = new Peticions(lSplited[0], lSplited[1], lSplited[2], lSplited[3], lSplited[4]);
-			llista.afegirPeticio(peticions);
+			result=f.nextLine();
+			dadesLinea = result.split(";");
+			Peticions p = new Peticions (dadesLinea[0], dadesLinea[1], dadesLinea[2], dadesLinea[3], dadesLinea[4]);
+			llista.afegirPeticio(p);
 		}
+		
 		f.close();
 		
 		return llista;
 	}
 	
-	public static LlistaPeticions opcio1Pet () throws FileNotFoundException {
-		return carregarPeticions();
-	}
-	public static LlistaServeis opcio1Serv () throws FileNotFoundException {
-		return carregarServeis();
-	}
-	public static LlistaBens opcio1Be () throws FileNotFoundException {
-		return carregarBens();
-	}
+	public static void opcio1 (LlistaPeticions llistaPet, LlistaServeis llistaServ, LlistaBens llistaBe, LlistaUsuaris llistaUser) throws FileNotFoundException {
 		
+		System.out.println("Indica quina classe de dades vols carregar");
+		System.out.println("\t1. Peticions");
+		System.out.println("\t2. Serveis");
+		System.out.println("\t3. Bens");
+		System.out.println("\t4. Usuaris");
+		
+		int opcioll=0;
+		boolean error = false;
+		while (!error)
+		{
+			try
+			{
+				String llegirnum = teclat.nextLine();
+				opcioll = Integer.parseInt(llegirnum);
+				if (opcioll<1 || opcioll>4)
+				{
+					throw new NumeroForaRangException();
+				}
+				error=true;
+			}
+			catch (NumberFormatException e) {
+				System.out.println("Indica un numero! No un altre caracter!");
+				error=false;
+			}
+			catch (NumeroForaRangException e) {
+				System.out.println("Introdueix una opció valida dintre del rang!!");
+				error=false;
+			}
+		}
+		
+		switch (opcioll) {
+		case 1: 
+			carregarPeticions();
+			break;
+		case 2:
+			llistaServ = carregarServeis();
+			break;
+		case 3:
+			carregarBens();
+			break;
+		case 4:
+			
+			break;
+		}
+		
+	}
 	
 	public static void opcio2 (LlistaPeticions llistaPet, LlistaServeis llistaServ, LlistaBens llistaBe, LlistaUsuaris llistaUser) {
 		System.out.println("\n\nLlistes del programa:");
@@ -259,7 +303,7 @@ public class Main {
 				System.out.println(llistaPet);
 				break;
 			case 2:
-				//System.out.ln(llistaServ.mostrarLlistaServ());
+				//System.out.println(llistaServ.mostrarLlistaServ());
 				break;
 			case 3:
 				System.out.println(llistaBe);
@@ -269,22 +313,17 @@ public class Main {
 				break;
 				
 		}
-
-		System.out.println(llistaServ.toString());
-		System.out.println(llistaBe.toString());
-		System.out.println(llistaPet.toString());
-		System.out.println(llistaUser.toString());
 	}
 	
 	public static void opcio3 (LlistaServeis llistaServ) {
-		//TODO
+		llistaServ.mostrarLlistaServ();
 	}
 	
 	public static void opcio4 (LlistaBens llistaBe) {
-		//TODO
+		System.out.println (llistaBe); //no es correcte
 	}
 	
-	public static void opcio5(Usuaris actual, LlistaServeis llistaServ) {
+	public static void opcio5(LlistaServeis llistaServ) {
 		
 		System.out.println ("Introdueix els següents camps: ");
 		
@@ -303,14 +342,18 @@ public class Main {
 		System.out.println ("Indica la data de finalitzacio del servei");
 		String datafi = teclat.nextLine();
 		
-		Serveis s = new Serveis(actual.getAlies(), nom, desc, tipus, false, dataini, datafi);
+		Serveis s = new Serveis(nom, desc, tipus, false, dataini, datafi);
 		
 		llistaServ.afegirServei(s);
 		
 		//FALTA AFEGIR AL FITXER DE TEXT EL NOU SERVEI
 	}
 	
-	public static void opcio6(Usuaris alies, LlistaBens llistaBe) {
+	public static void opcio6(LlistaBens llistaBe) {
+		
+		boolean error = false;
+		int amplada=0, alçada=0, fons=0, pes=0;
+		
 		System.out.println ("Introdueix els següents camps: ");
 		
 		System.out.println ("Indica el nom del producte fisic");
@@ -326,22 +369,60 @@ public class Main {
 		String datacrea = teclat.nextLine();
 		
 		System.out.println ("Indica l'amplada del producte fisic");
-		String amp = teclat.nextLine();
-		int amplada = Integer.parseInt(amp);
+		
+		while (!error)
+		try {
+			String amp = teclat.nextLine();
+			amplada = Integer.parseInt(amp);
+			error = true;
+		}
+		catch (NumberFormatException e) {
+			System.out.println ("Error, a l'amplada has ficat un caracter que no es un numero!");
+		}
+		error = false;
 		
 		System.out.println ("Indica l'alçada del producte fisic");
-		String alç = teclat.nextLine();
-		int alçada = Integer.parseInt(alç);
+		
+		while (!error)
+		try {
+			String alç = teclat.nextLine();
+			alçada = Integer.parseInt(alç);
+			error = true;
+		}
+		catch (NumberFormatException e) {
+			System.out.println ("Error, a l'alçada has ficat un caracter que no es un numero!");
+		}
+		error = false;
 		
 		System.out.println ("Indica el fons del producte fisic");
-		String fon = teclat.nextLine();
-		int fons = Integer.parseInt(fon);
+		
+		while (!error)
+		try {
+			String fos = teclat.nextLine();
+			fons = Integer.parseInt(fos);
+			error = true;
+		}
+		catch (NumberFormatException e) {
+			System.out.println ("Error, al fons has ficat un caracter que no es un numero!");
+		}
+		error = false;
 		
 		System.out.println ("Indica el pes del producte fisic");
-		String p = teclat.nextLine();
-		int pes = Integer.parseInt(p);
 		
-		Bens b = new Bens(alies.getAlies(), nom, desc, tipus, true, datacrea, amplada, alçada, fons, pes);
+		while (!error)
+		try {
+			String p = teclat.nextLine();
+			pes = Integer.parseInt(p);
+			error = true;
+		}
+		catch (NumberFormatException e) {
+			System.out.println ("Error, al pes has ficat un caracter que no es un numero!");
+		}
+		
+		System.out.println ("Indica la data d'intercanvi del producte fisic");
+		String datainterc = teclat.nextLine();
+		
+		Bens b = new Bens(nom, desc, tipus, true, datacrea, amplada, alçada, fons, pes);
 		
 		llistaBe.afegirBe(b);
 		
@@ -411,7 +492,7 @@ public class Main {
 		
 		llistaUser.donaAlta(u1);
 		
-	    try (FileOutputStream fos = new FileOutputStream("serialized_object.bin", true)) {         
+	    try (FileOutputStream fos = new FileOutputStream("serialized_object.bin, true")) {         
 	    	try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 	            oos.writeObject(u1);
 	        }
@@ -421,25 +502,11 @@ public class Main {
 	    }
 	}
 	
-	public static void opcio10(Usuaris usuariactual, LlistaServeis llistaBens) {
-		
-		
-	}
-		
-	/**
-	 * Dona de baixa un servei del usuari
-	 * @param usuariactual  Usuari actual
-	 * @param llistaServ	llistadeServeis
-	 */
-	public static void opcio11(Usuaris usuariactual, LlistaServeis llistaServ) {
+	public static void opcio10(LlistaServeis llistaServ) {
 		System.out.println("Indica el nom del servei que vols desactivar");
 		String nomServei = teclat.nextLine();
-
-			if (!llistaServ.donaBaixaServei(usuariactual, nomServei)) {
-				System.out.println("No s'ha trobat el servei per donar de baixa");
-			}
-			else
-				System.out.println("S'ha donat de baixa correctament el servei");
+		
+		llistaServ.donaBaixaServei(nomServei);	
 	}
 	
 	public static void opcio12(LlistaPeticions llistaPet) {
@@ -480,21 +547,13 @@ public class Main {
 		LlistaUsuaris llistaUser = new LlistaUsuaris(100);
 		LlistaPeticions llistaPet = new LlistaPeticions(100);
 		int opcio=0;
-		//llistaUser= carregarUsuaris();
-		Usuaris usuariActual = iniciasessio(llistaUser);
-		llistaUser.donaAlta(usuariActual);
+		//iniciasessio(llistaUser);
 		mostrarMenu();
-		
-		//Bens a = new Bens ("sabata", "cosa que es fica al peu", "roba", true, "30-12-2022", 12, 23, 45, 2, "3-1-2023"); 
-		//prova per veure si funciona la instancia
-		//int opcio = Integer.parseInt(teclat.nextLine());
 		while (opcio != 17) {
 			opcio = Integer.parseInt(teclat.nextLine());
 			switch (opcio) {
 			case 1: 
-				llistaPet = opcio1Pet();
-				llistaServ = opcio1Serv();
-				llistaBe = opcio1Be();
+				opcio1(llistaPet, llistaServ, llistaBe, llistaUser);
 				break;
 			case 2:
 				opcio2(llistaPet, llistaServ, llistaBe, llistaUser);
@@ -506,10 +565,10 @@ public class Main {
 				opcio4(llistaBe);
 				break;
 			case 5:
-				opcio5(usuariActual, llistaServ);
+				opcio5(llistaServ);
 				break;
 			case 6:
-				//opcio6();
+				opcio6(llistaBe);
 				break;
 			case 7:
 				//opcio7();
