@@ -62,7 +62,7 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 	public boolean donaBaixaServei (Usuaris usuari, String nomServei) {
 		boolean trobat=false;
 		for (int i=0; i<nElem; i++) {
-			if (llista[i].getNom()==nomServei && llista[i].getUsuari().equals(usuari.getAlies()))
+			if (llista[i].getNom().equals(nomServei) && llista[i].getUsuari().equals(usuari.getAlies()))
 			{
 				llista[i].setActiu(false);
 				trobat=true;

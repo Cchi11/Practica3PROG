@@ -14,7 +14,6 @@ import java.awt.Insets;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicArrowButton;
 
 import Exceptions.NoEsTrobaException;
 
@@ -66,10 +65,9 @@ public class MainGrafic extends JFrame {
 		setSize(1000, 500);
 		setVisible(true);
 		 
-		 
 	}
 	public Usuaris preguntarDades() {
-		 	
+	 	
 		JFrame registrat = new JFrame ();
 	    registrat.pack();
 	    registrat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -118,8 +116,7 @@ public class MainGrafic extends JFrame {
 		return new Usuaris();
 	 }
 	 
-	 private Usuaris IniciaSessio (LlistaUsuaris llistaUser) {
-		 
+	 private Usuaris IniciaSessio (LlistaUsuaris llistaUser) { 
 		String [] opcions = {"Registra't", "Ja tinc un compte"};
 		boolean error = false;
 			
@@ -203,18 +200,6 @@ public class MainGrafic extends JFrame {
 		}
 		return usuari;
 	 }
-	
-	private void finestraPrincipal () {
-		 
-	}
-		 
-		
-	public static void main(String[] args) {
-		LlistaUsuaris llistaUser = new LlistaUsuaris(100);
-			
-		new MainGrafic(llistaUser);
-	
-	}
-	
 }
+
 		

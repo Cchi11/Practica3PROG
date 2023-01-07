@@ -151,43 +151,44 @@ public class Main {
 	}
 
 	public static LlistaServeis carregarServeis () throws FileNotFoundException, IOException {
-		Scanner f = new Scanner(new File("dadesServeis.txt"));
-		LlistaServeis llista = new LlistaServeis(100);
-		String [] lSplited  = new String[7];;
+		Scanner f = new Scanner(new File("dadesServeis.txt")); 	
+		LlistaServeis llista = new LlistaServeis(100);			
+		String [] lSplited  = new String[7];;				
 		String cat;
 		
-		while (f.hasNextLine()) {
-			cat=f.nextLine();
-			lSplited = cat.split(";");
-			Boolean b = Boolean.parseBoolean(lSplited[4]);
+		while (f.hasNextLine()) {								
+			cat=f.nextLine();									
+			lSplited = cat.split(";");							
+			Boolean b = Boolean.parseBoolean(lSplited[4]);		
+			// Crem la instancia
 			Serveis serveis = new Serveis(lSplited[0], lSplited[1], lSplited[2], lSplited[3], b, lSplited[5], lSplited[6]);
-			llista.afegirServei(serveis);
+			llista.afegirServei(serveis);						
 		}
 		
-		f.close();
-		return llista;
+		f.close();												
+		return llista;											
 	}
 	
 	public static LlistaBens carregarBens () throws FileNotFoundException, IOException {
-		Scanner f = new Scanner(new File("dadesBens.txt"));
-		LlistaBens llista = new LlistaBens(100);
-		String [] lSplited  = new String[10];;
+		Scanner f = new Scanner(new File("dadesBens.txt"));		
+		LlistaBens llista = new LlistaBens(100);				
+		String [] lSplited  = new String[10];;			
 		int [] numInt = new int[4]; 
 		String cat;
 		
-		while (f.hasNextLine()) {
-			cat=f.nextLine();
-			lSplited = cat.split(";");
-			Boolean b = Boolean.parseBoolean(lSplited[3]);
-			numInt[0] = Integer.parseInt(lSplited[6]);
-			numInt[1] = Integer.parseInt(lSplited[7]);
-			numInt[2] = Integer.parseInt(lSplited[8]);
-			numInt[3] = Integer.parseInt(lSplited[9]);
+		while (f.hasNextLine()) {								
+			cat=f.nextLine();									
+			lSplited = cat.split(";");							
+			Boolean b = Boolean.parseBoolean(lSplited[3]);		
+			numInt[0] = Integer.parseInt(lSplited[6]);				
+			numInt[1] = Integer.parseInt(lSplited[7]);				
+			numInt[2] = Integer.parseInt(lSplited[8]);				
+			numInt[3] = Integer.parseInt(lSplited[9]);			
 			Bens bens = new Bens(lSplited[0], lSplited[1], lSplited[2], lSplited[3], b, lSplited[5], numInt[0], numInt[1], numInt[2], numInt[3]);
-			llista.afegirBe(bens);
+			llista.afegirBe(bens);								
 		}
-		f.close();
-		return llista;
+		f.close();												
+		return llista;											
 	}
 	
 	public static LlistaPeticions carregarPeticions () throws FileNotFoundException, IOException {
@@ -430,7 +431,7 @@ public class Main {
 		while (!error) {
 			try {
 				prodAcon = teclat.nextLine();
-				if (llistaBe.comprovaBe(prodAcon)) {
+				if (llistaBe.comprovaBe(u, prodAcon)) {
 					error = true;
 				}
 				else {
@@ -457,7 +458,7 @@ public class Main {
 		while (!error) {
 			try {
 				prodOfer = teclat.nextLine();
-				if (llistaBe.comprovaBe(prodOfer)) {
+				if (llistaBe.comprovaBe(u, prodOfer)) {
 					error = true;
 				}
 				else {
@@ -481,6 +482,8 @@ public class Main {
 		
 		llistaPet.afegirPeticio(p1);
         
+		escriureInstanciaPeticio(p1);
+		
         return llistaPet;
     }
 	
@@ -565,9 +568,17 @@ public class Main {
 	    }*/
 	}
 	
-	public static void opcio10(Usuaris usuariactual, LlistaServeis llistaBens) {
+	public static void opcio10(Usuaris usuariactual, LlistaBens llistaBens) {
 		
+		System.out.println("Indica quin bé vols eliminar de la llista");
+		String nom = teclat.nextLine();
 		
+		if (!llistaBens.comprovaBe(usuariactual, nom)){
+			System.out.println("No s'ha pogut trobat el bé que volies eliminar");
+		}
+		else {
+			llistaBens.eliminaBe(usuariactual, nom);
+		}
 	}
 		
 	/**
@@ -587,8 +598,8 @@ public class Main {
 	}
 	
 	public static void opcio12(LlistaPeticions llistaPet) {
-		
-		llistaPet.mostrarPetNoRespostes();
+
+		System.out.println(llistaPet.mostrarPetNoRespostes().toString());
 	}
 	
 	public static void opcio13(LlistaPeticions llistaPet) {
