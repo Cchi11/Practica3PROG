@@ -42,7 +42,7 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 		
 		boolean trobat = false;
 		
-		for (int i=0; !trobat && i < nElem; i++) {
+		for (int i=0; !trobat && i <= nElem; i++) {
 			if ((llista[i].getNom().equals(nomProd)) && (usuari.equals(llista[i].getUsuari()))) {
 				trobat = true;
 			}
@@ -106,7 +106,7 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 		String aux;
 		aux="Bens => numBens "+nElem;
 		for (int j = 0; j < nElem; j++) {
-			aux=aux+"\n\tBe "+(j+1)+"\t "+llista[j];
+			aux=aux+"\n\n\tBe "+(j+1)+"\t "+llista[j];
 		}
 		return aux;
 

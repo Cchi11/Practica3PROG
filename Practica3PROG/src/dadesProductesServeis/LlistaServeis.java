@@ -102,7 +102,7 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		String aux;
 		aux="Serveis => numServeis "+nElem;
 		for (int j = 0; j < nElem; j++) {
-			aux=aux+"\n\tServei "+(j+1)+"\t "+llista[j];
+			aux=aux+"\n\n\tServei "+(j+1)+"\t "+llista[j];
 		}
 		return aux;
 	}

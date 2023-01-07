@@ -122,7 +122,7 @@ public class Peticions {		//Clase feta per Òscar Cabré
 	}
 	
 	public String toString() {
-		return ("PETICIO => idPeticio:\t"+idPeticio+"\tuserPeticio:\t"+userPeticio+"\tuserRebPet:\t"+userRebPet+"\tproducAcons:\t"+producAcons+"\tproducOfe:\t"+producOfe+"\tresposat:\t"+resposat+"\tvaloracioUserPeticio:\t"+valoracioUserPeticio+"\tvaloracioUserRebPet:\t"+valoracioUserRebPet);
+		return ("PETICIO => idPeticio: "+idPeticio+"\tuserPeticio: "+userPeticio+"\tuserRebPet: "+userRebPet+"\t\n\t producAcons: "+producAcons+"\tproducOfe: "+producOfe+"\tresposat: "+resposat+"\tvaloracioUserPeticio: "+valoracioUserPeticio+"\tvaloracioUserRebPet: "+valoracioUserRebPet);
 	}
 	
 }

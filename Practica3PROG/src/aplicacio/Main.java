@@ -396,11 +396,11 @@ public class Main {
 		
 		String userRep = null, prodAcon = null, prodOfer = null;
 		boolean error = false;
+		Usuaris usuariCopia = new Usuaris();
 		
 		System.out.println ("Introdueix els següents camps: ");
 		
-		Random rnd = new Random();
-		int id = rnd.nextInt(99999 - 10000 + 1) + 10000;	
+		int id = llistaPet.idSeguentPeticio();
 		
 		String userPet = u.getAlies();
 		
@@ -410,6 +410,7 @@ public class Main {
 			try {
 				userRep = teclat.nextLine();
 				if (llistaUser.comprovaUsuari(userRep)) {
+					usuariCopia = llistaUser.trobaUsuari(userRep);
 					error = true;
 				}
 				else {
@@ -426,16 +427,15 @@ public class Main {
 		error = false;
 		
 		System.out.println ("Indica el nom del producte que vols aconseguir");
-		prodAcon = teclat.nextLine();
 		
 		while (!error) {
 			try {
 				prodAcon = teclat.nextLine();
-				if (llistaBe.comprovaBe(u.getAlies(), prodAcon)) {
+				if (llistaBe.comprovaBe(userRep, prodAcon)) {
 					error = true;
 				}
 				else {
-					if (llistaServ.comprovaServei(userPet, prodAcon)) {
+					if (llistaServ.comprovaServei(userRep, prodAcon)) {
 						error = true;
 					}
 					else {
@@ -453,7 +453,6 @@ public class Main {
 		error = false;
 		
 		System.out.println ("Indica el nom del producte que ofereixes");
-		prodOfer = teclat.nextLine();
 		
 		while (!error) {
 			try {
@@ -462,6 +461,7 @@ public class Main {
 					error = true;
 				}
 				else {
+
 					if (llistaServ.comprovaServei(userPet, prodOfer)) {
 						error = true;
 					}
@@ -478,6 +478,9 @@ public class Main {
 			}
 		}
 		
+		System.out.println("La peticio s'ha creat correctament amb codi " + id);
+		u.setOfertaProd((u.getOfertaProd())+1);
+		
 		Peticions p1 = new Peticions (id, userPet, userRep, prodAcon, prodOfer);
 		
 		llistaPet.afegirPeticio(p1);
@@ -487,21 +490,56 @@ public class Main {
         return llistaPet;
     }
 	
-	public static void opcio8(LlistaPeticions llistaPet) {
-		
-		int opcioAccept = 0, i = 0;
+	public static void opcio8(Usuaris u, LlistaPeticions llistaPet, LlistaUsuaris llistaUser) {
+			
+		int opcioAccept = 0, opcioAccept2 = 0, i = 0;
 		boolean error = false;
+		LlistaPeticions llistaPetNova = new LlistaPeticions(100);
+		int valoracioRep = 0;
+
+		try {
+			for (i = 0; i < llistaPet.getNElem(); i++) {
+				if (llistaPet.comprovarUsuariRepPet(i).equals(u.getAlies())) {
+					Peticions peticioAgafa = llistaPet.agafarPeticio(i);
+					llistaPetNova.afegirPeticio(peticioAgafa);
+				}
+		}
+		}
+		catch (NullPointerException e){
+			System.out.println("No tens peticions per acceptar/refusar");
+		}
 		
-		System.out.println ("");
+		System.out.println ("Aquestes son les peticions que has d'acceptar");
+			
+		System.out.println(llistaPetNova.mostrarPetNoRespostes().toString());
+			
+		System.out.println ("Selecciona quina peticio vols acceptar/refusar");
 		
+		while(!error) {	
+			try {
+				opcioAccept = Integer.parseInt(teclat.nextLine());
+				if (opcioAccept < 1 || opcioAccept > llistaPetNova.getNElem()) {
+					throw new NumeroForaRangException();
+				}
+				error = true;
+			}
+			catch (NumberFormatException e) {
+				System.out.println("ERROR, has ficat un caracter que no es un numero!!");
+			}
+			catch (NumeroForaRangException e) {
+				System.out.println("ERROR, has ficat un numero fora del rang indicat");
+			}
+		}
+		error = false;
+			
 		System.out.println("Vols acceptar la peticio d'intercanvi?");
 		System.out.println("1 Acceptar");
 		System.out.println("2 Refusar");
 		
 		while (!error) {
 			try {
-				opcioAccept = Integer.parseInt(teclat.nextLine());
-				if (opcioAccept < 1 || opcioAccept > 2) {
+				opcioAccept2 = Integer.parseInt(teclat.nextLine());
+				if (opcioAccept2 < 1 || opcioAccept2 > 2) {
 					throw new NumeroForaRangException ();
 				}
 				error = true;
@@ -514,16 +552,37 @@ public class Main {
 			}
 		}
 		
-		if (opcioAccept == 1) {
+		if (opcioAccept2 == 1) {
 			System.out.println("Has acceptat la peticio");
-			llistaPet.acceptarPet(i);
+			Peticions peticioAgafa = llistaPetNova.agafarPeticio(opcioAccept-1);
+			llistaPet.acceptarPet(llistaPet.comprovarPosicio(peticioAgafa));
+			llistaPetNova.acceptarPet(opcioAccept-1);
 			System.out.println("Introdueix la valoracio de l'oferta");
-			int valoracioRep = Integer.parseInt(teclat.nextLine());
+			
 			//p.setValoracioUserRebPet(valoracioRep);
+			
+			error = false;
+			while (!error) {
+				try {
+					valoracioRep = Integer.parseInt(teclat.nextLine());
+					error = true;
+				}
+				catch (NumberFormatException e) {
+					System.out.println("ERROR, has ficat un caracter que no es un numero!!");
+				}
+			}
+			
+			llistaPet.posarValoracioPet(llistaPet.comprovarPosicio(peticioAgafa), valoracioRep);
+			u.setIntercanvis((u.getIntercanvis())+1);
+			
+			/*Usuaris usuariAssignarIntercanvi = llistaUser.trobaUsuari(peticioAgafa.getUserPeticio());
+			usuariAssignarIntercanvi.setIntercanvis((usuariAssignarIntercanvi.getIntercanvis())+1);*/
 		}
 		else {
 			System.out.println("Has refusat la peticio");
-			llistaPet.refusarPet(i);	
+			Peticions peticioAgafa = llistaPetNova.agafarPeticio(opcioAccept-1);
+			llistaPet.refusarPet(llistaPet.comprovarPosicio(peticioAgafa));
+			llistaPetNova.refusarPet(opcioAccept-1);
 		}
 	}
 	
@@ -570,14 +629,21 @@ public class Main {
 	
 	public static void opcio10(Usuaris usuariactual, LlistaBens llistaBens) {
 		
-		System.out.println("Indica quin bé vols eliminar de la llista");
+		System.out.println("Indica quin be vols eliminar de la llista");
 		String nom = teclat.nextLine();
 		
-		if (!llistaBens.comprovaBe(usuariactual.getAlies(), nom)){
-			System.out.println("No s'ha pogut trobat el bé que volies eliminar");
+		try {
+			if (!llistaBens.comprovaBe(usuariactual.getAlies(), nom)){
+				System.out.println("No s'ha pogut trobat el be que volies eliminar");
+			}
+			else {
+				llistaBens.eliminaBe(usuariactual, nom);
+				System.out.println("S'ha eliminat el be correctament");
+				System.out.println (llistaBens.toString());
+			}
 		}
-		else {
-			llistaBens.eliminaBe(usuariactual, nom);
+		catch (NullPointerException e) {
+			System.out.println("No hi ha cap producte que es digui " + nom);
 		}
 	}
 		
@@ -692,9 +758,7 @@ public class Main {
 		//llistaUser = carregarUsuaris();
 		Usuaris usuariActual = iniciasessio(llistaUser);
 		//llistaUser.donaAlta(usuariActual);
-		
-		//Usuaris usuariActual = null;
-		
+
 		mostrarMenu();
 		while (opcio != 17) {
 			opcio = Integer.parseInt(teclat.nextLine());
@@ -723,13 +787,13 @@ public class Main {
 				llistaPet = opcio7(usuariActual, llistaPet, llistaUser, llistaBe, llistaServ);
 				break;
 			case 8:
-				opcio8(llistaPet);
+				opcio8(usuariActual, llistaPet, llistaUser);
 				break;
 			case 9:
 				opcio9(llistaUser);
 				break;
 			case 10:
-				//opcio10();
+				opcio10(usuariActual, llistaBe);
 				break;
 			case 11:
 				//opcio11();

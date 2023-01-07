@@ -45,8 +45,9 @@ public class MainGrafic extends JFrame {
 			buttons[i].setBackground(Color.WHITE);
 		}
 		buttons[0].setText("Buscar ofertes d'intercanvi actives");
-		Opcio2ActionListener opcio2 = new Opcio2ActionListener(llistaPeti);
+		Opcio2ActionListener opcio2 = new Opcio2ActionListener(llistaBe, llistaServis);
 		buttons[0].addActionListener(opcio2);
+		
 		buttons[1].setText("Afegir una peticio d'intercanvi d'alguna de les ofertes actives");
 		Opcio3ActionListener opcio3 = new Opcio3ActionListener(this, usuari, llistaBe, llistaServis, llistaPeti);
 		buttons[1].addActionListener(opcio3);
@@ -54,6 +55,7 @@ public class MainGrafic extends JFrame {
 		buttons[2].setText("Consultar els intercanvis que ha fet l'usuari");
 		
 		buttons[3].setText("Canviar el codi d'usuari que esta  utilitzant l'aplicacio");
+
 		Opcio5ActionListener opcio5 = new Opcio5ActionListener(llistaUser, usuari);
 		buttons[3].addActionListener(opcio5);
 	

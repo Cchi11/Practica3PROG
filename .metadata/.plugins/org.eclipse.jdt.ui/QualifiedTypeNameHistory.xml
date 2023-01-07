@@ -8,9 +8,6 @@
     <fullyQualifiedTypeName name="java.io.EOFException"/>
     <fullyQualifiedTypeName name="dadesProductesServeis.Serveis"/>
     <fullyQualifiedTypeName name="dadesProductesServeis.Bens"/>
-    <fullyQualifiedTypeName name="dadesProductesServeis.LlistaBens"/>
-    <fullyQualifiedTypeName name="peticions.LlistaPeticions"/>
-    <fullyQualifiedTypeName name="dadesProductesServeis.LlistaServeis"/>
     <fullyQualifiedTypeName name="peticions.Peticions"/>
     <fullyQualifiedTypeName name="java.io.File"/>
     <fullyQualifiedTypeName name="java.io.FileReader"/>
@@ -20,7 +17,6 @@
     <fullyQualifiedTypeName name="java.awt.Dimension"/>
     <fullyQualifiedTypeName name="java.awt.Color"/>
     <fullyQualifiedTypeName name="java.awt.GridLayout"/>
-    <fullyQualifiedTypeName name="java.awt.BorderLayout"/>
     <fullyQualifiedTypeName name="Exceptions.NoEsTrobaException"/>
     <fullyQualifiedTypeName name="java.awt.Insets"/>
     <fullyQualifiedTypeName name="java.awt.GridBagLayout"/>
@@ -32,7 +28,13 @@
     <fullyQualifiedTypeName name="javax.swing.JTextField"/>
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
-    <fullyQualifiedTypeName name="javax.swing.JButton"/>
     <fullyQualifiedTypeName name="usuaris.LlistaUsuaris"/>
     <fullyQualifiedTypeName name="usuaris.Usuaris"/>
+    <fullyQualifiedTypeName name="javax.swing.JButton"/>
+    <fullyQualifiedTypeName name="javax.swing.JLabel"/>
+    <fullyQualifiedTypeName name="java.awt.BorderLayout"/>
+    <fullyQualifiedTypeName name="peticions.LlistaPeticions"/>
+    <fullyQualifiedTypeName name="javax.swing.JTextArea"/>
+    <fullyQualifiedTypeName name="dadesProductesServeis.LlistaServeis"/>
+    <fullyQualifiedTypeName name="dadesProductesServeis.LlistaBens"/>
 </qualifiedTypeNameHistroy>
