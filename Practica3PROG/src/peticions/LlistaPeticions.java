@@ -37,12 +37,14 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 		nElem++;
 	}
 	
-	public void mostrarPetNoRespostes () {		
+	public LlistaPeticions mostrarPetNoRespostes () {	
+		LlistaPeticions llistaPet = new LlistaPeticions (100);
 		for (int i=0; i < llista.length; i++) {
 			if (llista[i].getResposat() == 0) {
-				llista[i].toString();
+				llistaPet.afegirPeticio(llista[i]);
 			}
 		}
+		return llistaPet;
 	}
 	
 	public void mostrarPetAccept () {		

@@ -1,5 +1,6 @@
 package dadesProductesServeis;
 
+import usuaris.Usuaris;
 
 public class LlistaBens {  //Clase feta per Chenxing Chi
 	private int nElem;
@@ -37,19 +38,36 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 		nElem++;
 	}
 	
-	public boolean comprovaBe (String nomProd) {
+	public boolean comprovaBe (Usuaris usuari, String nomProd) {
 		
 		boolean trobat = false;
 		
 		for (int i=0; !trobat && i <= llista.length; i++) {
-			if (llista[i].getNom() == nomProd) {
+			if ((llista[i].getNom().equals(nomProd)) && (usuari.getAlies().equals(llista[i].getUsuari()))) {
 				trobat = true;
 			}
 		}
 		return (trobat);
 	}	
 	
-	public LlistaBens llistaBensNoIntercanvia() {
+	public void eliminaBe (Usuaris usuari, String nomProd) {
+		int i=0;
+			while (i<nElem) {
+				if ((llista[i].getNom().equals(nomProd)) && (usuari.getAlies().equals(llista[i].getUsuari()))) {
+					
+					for (int j=i; j<nElem-1; j++)
+					{
+						llista[j]=llista[j+1];
+					}
+					nElem--;
+				}
+				else {
+					i++;
+				}
+			}
+	}
+	
+	public LlistaBens llistaBensNoIntercanvia(Usuaris usuari) {
 		LlistaBens noInter = new LlistaBens(100);
 		for(int i = 0; i < this.nElem; i++) {
 			if (llista[i].getDataIntercanvi() == "0") {

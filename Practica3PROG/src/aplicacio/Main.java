@@ -565,9 +565,17 @@ public class Main {
 	    }*/
 	}
 	
-	public static void opcio10(Usuaris usuariactual, LlistaServeis llistaBens) {
+	public static void opcio10(Usuaris usuariactual, LlistaBens llistaBens) {
 		
+		System.out.println("Indica quin bé vols eliminar de la llista");
+		String nom = teclat.nextLine();
 		
+		if (!llistaBens.comprovaBe(usuariactual, nom)){
+			System.out.println("No s'ha pogut trobat el bé que volies eliminar");
+		}
+		else {
+			llistaBens.eliminaBe(usuariactual, nom);
+		}
 	}
 		
 	/**
@@ -587,8 +595,8 @@ public class Main {
 	}
 	
 	public static void opcio12(LlistaPeticions llistaPet) {
-		
-		llistaPet.mostrarPetNoRespostes();
+
+		System.out.println(llistaPet.mostrarPetNoRespostes().toString());
 	}
 	
 	public static void opcio13(LlistaPeticions llistaPet) {
