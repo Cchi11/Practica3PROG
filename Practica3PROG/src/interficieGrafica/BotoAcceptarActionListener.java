@@ -22,7 +22,7 @@ public class BotoAcceptarActionListener implements ActionListener {
 	private boolean registrat;
 	private JFrame ventana;
 	
-	public BotoAcceptarActionListener (JFrame ventana, LlistaUsuaris llistaUser, JFrame registrarse, JTextField usuari, JTextField correu, JTextField cPost) {
+	public BotoAcceptarActionListener (JFrame ventana, LlistaUsuaris llistaUser, JFrame registrarse, JTextField usuari, JTextField correu, JTextField cPost, Usuaris u) {
 		this.ventana=ventana;
 		this.llistaUser=llistaUser;
 		this.registrar=registrarse;
@@ -30,6 +30,8 @@ public class BotoAcceptarActionListener implements ActionListener {
 		this.correu=correu;
 		this.cPost=cPost;
 		registrat=false;
+		this.nouUsuari = u;
+		
 	}
 	@Override
 	
@@ -39,7 +41,6 @@ public class BotoAcceptarActionListener implements ActionListener {
 		try {
 			if (usuari.getText().equals("") || correu.getText().equals("")|| cPost.getText().equals("") ||
 					usuari.getText().equals(null) || correu.getText().equals(null) || cPost.getText().equals(null)) {
-	
 					JOptionPane.showMessageDialog(null, "Introdueix dades, no les deixis en blanc!", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 			else

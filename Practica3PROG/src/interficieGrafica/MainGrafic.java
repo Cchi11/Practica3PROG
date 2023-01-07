@@ -16,6 +16,9 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import Exceptions.NoEsTrobaException;
+import dadesProductesServeis.LlistaBens;
+import dadesProductesServeis.LlistaServeis;
+import peticions.LlistaPeticions;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,7 +30,7 @@ import usuaris.Usuaris;
 public class MainGrafic extends JFrame {
 	private Usuaris usuari;
 
-	public MainGrafic(LlistaUsuaris llistaUser) {
+	public MainGrafic(LlistaUsuaris llistaUser, LlistaBens llistaBe, LlistaServeis llistaServis, LlistaPeticions llistaPeti) {
 		setVisible(false);
 		usuari = IniciaSessio(llistaUser);
 		//setVisible(true);
@@ -42,27 +45,24 @@ public class MainGrafic extends JFrame {
 			buttons[i].setBackground(Color.WHITE);
 		}
 		buttons[0].setText("Buscar ofertes d'intercanvi actives");
-		buttons[1].setText("Afegir una peticiÃ³ dâ€™intercanvi dâ€™alguna de les ofertes actives");
-		Opcio2ActionListener opcio2 = new Opcio2ActionListener();
-		buttons[1].addActionListener(opcio2);
-<<<<<<< HEAD
-		buttons[2].setText("Consultar els intercanvis que ha fet l'usuari");
-		Opcio2ActionListener opcio3 = new Opcio2ActionListener();
+		Opcio2ActionListener opcio2 = new Opcio2ActionListener(llistaPeti);
+		buttons[0].addActionListener(opcio2);
+		buttons[1].setText("Afegir una peticio d'intercanvi d'alguna de les ofertes actives");
+		Opcio3ActionListener opcio3 = new Opcio3ActionListener(this, usuari, llistaBe, llistaServis, llistaPeti);
 		buttons[1].addActionListener(opcio3);
-		buttons[3].setText("Canviar el codi d'usuari que esta  utilitzant lâ€™aplicaciÃ³");
-=======
-		buttons[2].setText("Consultar els intercanvis que ha fet l’usuari");
-		buttons[3].setText("Canviar el codi d’usuari que està utilitzant l’aplicació");
+		
+		buttons[2].setText("Consultar els intercanvis que ha fet l'usuari");
+		
+		buttons[3].setText("Canviar el codi d'usuari que esta  utilitzant l'aplicacio");
 		Opcio5ActionListener opcio5 = new Opcio5ActionListener(llistaUser, usuari);
 		buttons[3].addActionListener(opcio5);
->>>>>>> 5b2824c435ed4b24b0ca1a21428b603bba98b78f
 	
 		JTextField titol = new JTextField();
 		titol.setText("Indica quina opciÃ³ vols");
 		titol.setEditable(false);
 		 
 		for (int i = 0; i < buttons.length; i++) {
-			Font buttonFont = new Font("Arial", Font.PLAIN, 16);
+			Font buttonFont = new Font("Roboto", Font.PLAIN, 16);
 			buttons[i].setFont(buttonFont);
 			panellBotons.add(buttons[i]);
 		}
@@ -78,71 +78,6 @@ public class MainGrafic extends JFrame {
 	}
 
 	 
-<<<<<<< HEAD
-	 private Usuaris IniciaSessio (LlistaUsuaris llistaUser) { 
-		String [] opcions = {"Registra't", "Ja tinc un compte"};
-		boolean error = false;
-			
-		int resultat = JOptionPane.showOptionDialog(null, 
-					   "Benvingut! Registra't o ja tens compte", "Plataforma d'intercanvi", 
-					   JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
-					   null, opcions, 
-					   0);
-			
-		 if (resultat == JOptionPane.NO_OPTION) {
-			boolean sortir=false;
-			int intents=0;
-			while (!error && !sortir){
-				String nom = JOptionPane.showInputDialog("Indica el teu codi d'usuari");
-				while (nom == null || nom.equals("")) {
-					// Missatge d'error.
-					JOptionPane.showMessageDialog(null, "Cal un codi", "ERROR", JOptionPane.ERROR_MESSAGE);
-					nom = JOptionPane.showInputDialog("Indica el teu codi d'usuari");
-				}				
-				try
-				{
-					if (llistaUser.comprovaUsuari(nom)) {
-						error=true;
-						usuari = llistaUser.trobaUsuari(nom).copia();
-					}
-					else{
-						throw new NoEsTrobaException ();
-					}
-							
-						
-				}
-				catch (NullPointerException e) {
-					JOptionPane.showMessageDialog(null, "No s'ha pogut trobar el teu usuari", "ERROR", JOptionPane.ERROR_MESSAGE);
-						
-					if (intents==2)
-					{
-						String [] opcions1 = {"Si", "No"};
-						int resultat1 = JOptionPane.showOptionDialog(null, 
-										"Vols Sortir?", "", 
-										JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
-										null, opcions1, 
-										0);
-						if (resultat1==JOptionPane.YES_OPTION)
-						{
-							sortir=true;
-							setVisible(false);
-						}
-					}
-					intents++;
-				}
-				catch (NoEsTrobaException e) {
-					JOptionPane.showMessageDialog(null, "No s'ha pogut trobar el teu usuari", "ERROR", JOptionPane.ERROR_MESSAGE);
-						
-					if (intents==2)
-					{
-						String [] opcions1 = {"Si", "No"};
-						int resultat1 = JOptionPane.showOptionDialog(null, 
-										"Vols Sortir?", "", 
-										JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
-										null, opcions1, 
-										0);
-						if (resultat1==JOptionPane.YES_OPTION)
-=======
 	 private Usuaris IniciaSessio (LlistaUsuaris llistaUser) {
 		 
 			String [] opcions = {"Registra't", "Ja tinc un compte"};
@@ -212,36 +147,37 @@ public class MainGrafic extends JFrame {
 					
 					}
 					else
->>>>>>> 5b2824c435ed4b24b0ca1a21428b603bba98b78f
 						{
-							sortir=true;
-							setVisible(false);
+							String [] opcions1 = {"Si", "No"};
+							int resultat1 = JOptionPane.showOptionDialog(null, 
+											"Vols Sortir?", "", 
+											JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
+											null, opcions1, 
+											0);
+							if (resultat1==JOptionPane.YES_OPTION)
+							{
+								sortir=true;
+								setVisible(false);
+							}
+							else
+								intents=0;
 						}
-<<<<<<< HEAD
-						else
-							intents=0;
-					}
-					intents++;
-				}
-			}
-		}
-		else{
-			
-			if (resultat == JOptionPane.YES_OPTION) {
-				Registrarse finestraRegistrar = new Registrarse(this, llistaUser);
-=======
 						
 					intents++;
 				}
 			}
 			 
 			else{
->>>>>>> 5b2824c435ed4b24b0ca1a21428b603bba98b78f
 				
+				if (resultat == JOptionPane.YES_OPTION) {
+					Registrarse finestraRegistrar = new Registrarse(this, llistaUser);
+
+				}
 			}
 
-		}
-		return usuari;
-	 }
+			return usuari;
+		 }
+
 }
+	
 		

@@ -65,6 +65,10 @@ public class LlistaUsuaris {			//Clase feta per Chenxing Chi
 			return nou;
 		}	
 		
+		public Usuaris ultimUsuari () {
+            return llista[nElem--];
+        }
+		
 		public String toString() {
 			String aux;
 			aux="Usuaris => numUsuaris "+nElem;

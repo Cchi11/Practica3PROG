@@ -15,8 +15,7 @@ import usuaris.LlistaUsuaris;
 import usuaris.Usuaris;
 
 public class MainPrincipal {
-
-<<<<<<< HEAD
+	
 	public static LlistaServeis carregarServeis () throws FileNotFoundException, IOException {
 		Scanner f = new Scanner(new File("dadesServeis.txt"));
 		LlistaServeis llista = new LlistaServeis(100);
@@ -66,7 +65,8 @@ public class MainPrincipal {
 		while (f.hasNextLine()) {
 			cat=f.nextLine();
 			lSplited = cat.split(";");
-			Peticions peticions = new Peticions(lSplited[0], lSplited[1], lSplited[2], lSplited[3], lSplited[4]);
+			int numInt = Integer.parseInt(lSplited[0]);
+			Peticions peticions = new Peticions(numInt, lSplited[1], lSplited[2], lSplited[3], lSplited[4]);
 			llista.afegirPeticio(peticions);
 		}
 		f.close();
@@ -91,23 +91,19 @@ public class MainPrincipal {
 		LlistaBens llistaBe = new LlistaBens(100);
 		LlistaServeis llistaServ = new LlistaServeis(100);
 		LlistaPeticions llistaPet = new LlistaPeticions(100);
-		int opcio = 0;
 		//llistaUser = carregarUsuaris();
 		//Usuaris usuariActual = iniciasessio(llistaUser);
 		//llistaUser.donaAlta(usuariActual);
 		llistaPet = opcio1Pet();
 		llistaServ = opcio1Serv();
 		llistaBe = opcio1Be();
-=======
-	public static void main(String[] args) {
-		LlistaUsuaris llistaUser = new LlistaUsuaris(100);
+
 		Usuaris usuari1 = new Usuaris ("chen", "ioqjeoi", 2365);
 		llistaUser.donaAlta(usuari1);
->>>>>>> 5b2824c435ed4b24b0ca1a21428b603bba98b78f
-		
-		MainGrafic finestra = new MainGrafic(llistaUser);
-		
 
+		
+		MainGrafic finestra = new MainGrafic(llistaUser, llistaBe, llistaServ, llistaPet);
+		
 	}
 
 }

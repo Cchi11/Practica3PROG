@@ -36,17 +36,42 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		nElem++;
 	}
 	
-	public boolean comprovaServei (String nomServ) {
+	public boolean comprovaServei (String usuari, String nomServ) {
+
+        boolean trobat = false;
+
+        for (int i=0; !trobat && i < nElem; i++) {
+            if ((llista[i].getNom().equals(nomServ)) && (usuari.equals(llista[i].getUsuari()))) {
+                trobat = true;
+            }
+        }
+        return (trobat);
+    }
+	
+	public boolean comprovaServeiSenseUsuari (String usuari, String nomServ) {
+
+        boolean trobat = false;
+
+        for (int i=0; !trobat && i < nElem; i++) {
+            if ((llista[i].getNom().equals(nomServ)) && !(usuari.equals(llista[i].getUsuari()))) {
+                trobat = true;
+            }
+        }
+        return (trobat);
+    }
+	
+	public String comprovaServeiSenseUsuariStr (String usuari, String nomProd) {
 		
 		boolean trobat = false;
-		
-		for (int i=0; !trobat && i <= llista.length; i++) {
-			if (llista[i].getNom() == nomServ) {
+		String us = null;
+		for (int i=0; !trobat && i < nElem; i++) {
+			if ((llista[i].getNom().equals(nomProd)) && !(usuari.equals(llista[i].getUsuari()))) {
 				trobat = true;
+				us = llista[i].getUsuari();
 			}
 		}
-		return (trobat);
-	}	
+		return us;
+	}
 	
 	public LlistaServeis llistaServeisActiu() {
 		LlistaServeis actius = new LlistaServeis(100);
@@ -71,6 +96,7 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		}
 		return trobat;
 	}
+	
 	
 	public String toString() {
 		String aux;

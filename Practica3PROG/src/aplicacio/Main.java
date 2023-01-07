@@ -200,7 +200,8 @@ public class Main {
 		while (f.hasNextLine()) {
 			cat=f.nextLine();
 			lSplited = cat.split(";");
-			Peticions peticions = new Peticions(lSplited[0], lSplited[1], lSplited[2], lSplited[3], lSplited[4]);
+			int numInt = Integer.parseInt(lSplited[0]);
+			Peticions peticions = new Peticions(numInt, lSplited[1], lSplited[2], lSplited[3], lSplited[4]);
 			llista.afegirPeticio(peticions);
 		}
 		f.close();
@@ -399,8 +400,7 @@ public class Main {
 		System.out.println ("Introdueix els següents camps: ");
 		
 		Random rnd = new Random();
-		int str = rnd.nextInt(99999 - 10000 + 1) + 10000;	
-		String id = String.valueOf(str);		
+		int id = rnd.nextInt(99999 - 10000 + 1) + 10000;	
 		
 		String userPet = u.getAlies();
 		
@@ -431,11 +431,11 @@ public class Main {
 		while (!error) {
 			try {
 				prodAcon = teclat.nextLine();
-				if (llistaBe.comprovaBe(u, prodAcon)) {
+				if (llistaBe.comprovaBe(u.getAlies(), prodAcon)) {
 					error = true;
 				}
 				else {
-					if (llistaServ.comprovaServei(prodAcon)) {
+					if (llistaServ.comprovaServei(userPet, prodAcon)) {
 						error = true;
 					}
 					else {
@@ -458,11 +458,11 @@ public class Main {
 		while (!error) {
 			try {
 				prodOfer = teclat.nextLine();
-				if (llistaBe.comprovaBe(u, prodOfer)) {
+				if (llistaBe.comprovaBe(u.getAlies(), prodOfer)) {
 					error = true;
 				}
 				else {
-					if (llistaServ.comprovaServei(prodOfer)) {
+					if (llistaServ.comprovaServei(userPet, prodOfer)) {
 						error = true;
 					}
 					else {
@@ -573,7 +573,7 @@ public class Main {
 		System.out.println("Indica quin bé vols eliminar de la llista");
 		String nom = teclat.nextLine();
 		
-		if (!llistaBens.comprovaBe(usuariactual, nom)){
+		if (!llistaBens.comprovaBe(usuariactual.getAlies(), nom)){
 			System.out.println("No s'ha pogut trobat el bé que volies eliminar");
 		}
 		else {
@@ -690,10 +690,10 @@ public class Main {
 		LlistaPeticions llistaPet = new LlistaPeticions(100);
 		int opcio=0;
 		//llistaUser = carregarUsuaris();
-		//Usuaris usuariActual = iniciasessio(llistaUser);
+		Usuaris usuariActual = iniciasessio(llistaUser);
 		//llistaUser.donaAlta(usuariActual);
 		
-		Usuaris usuariActual = null;
+		//Usuaris usuariActual = null;
 		
 		mostrarMenu();
 		while (opcio != 17) {

@@ -69,6 +69,12 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 		llista[i].setResposat(2);
 	}
 	
+	public int idSeguentPeticio() {
+		int ultimaId;
+		ultimaId = nElem+1;
+		return ultimaId;
+	}
+	
 	public String toString() {
 		String aux;
 		aux="Peticions => numPeticions "+nElem;
