@@ -12,9 +12,11 @@ import dadesProductesServeis.Serveis;
 import peticions.LlistaPeticions;
 import peticions.Peticions;
 import usuaris.LlistaUsuaris;
+import usuaris.Usuaris;
 
 public class MainPrincipal {
 
+<<<<<<< HEAD
 	public static LlistaServeis carregarServeis () throws FileNotFoundException, IOException {
 		Scanner f = new Scanner(new File("dadesServeis.txt"));
 		LlistaServeis llista = new LlistaServeis(100);
@@ -96,6 +98,12 @@ public class MainPrincipal {
 		llistaPet = opcio1Pet();
 		llistaServ = opcio1Serv();
 		llistaBe = opcio1Be();
+=======
+	public static void main(String[] args) {
+		LlistaUsuaris llistaUser = new LlistaUsuaris(100);
+		Usuaris usuari1 = new Usuaris ("chen", "ioqjeoi", 2365);
+		llistaUser.donaAlta(usuari1);
+>>>>>>> 5b2824c435ed4b24b0ca1a21428b603bba98b78f
 		
 		MainGrafic finestra = new MainGrafic(llistaUser);
 		

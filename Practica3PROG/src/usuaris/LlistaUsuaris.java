@@ -40,12 +40,14 @@ public class LlistaUsuaris {			//Clase feta per Chenxing Chi
 		public boolean comprovaUsuari (String aliesUsuari) {
 			
 			boolean trobat = false;
+			int i =0;
 			
-			for (int i=0; !trobat && i <= llista.length; i++) {
-				if (llista[i].getAlies() == aliesUsuari) {
+			for ( i=0; !trobat && i <= llista.length; i++) {
+				if (llista[i].getAlies().equals(aliesUsuari)) {
 					trobat = true;
 				}
 			}
+			i--;
 			return (trobat);
 		}	
 		
@@ -54,11 +56,12 @@ public class LlistaUsuaris {			//Clase feta per Chenxing Chi
 			boolean trobat = false;
 			int i=0;
 			for (i=0; !trobat && i <= llista.length; i++) {
-				if (llista[i].getAlies() == aliesUsuari) {
+				if (llista[i].getAlies().equals(aliesUsuari)) {
 					trobat = true;
 				}
 			}
-			Usuaris nou = llista[i].copia();
+			i--;
+			Usuaris nou = llista[i];
 			return nou;
 		}	
 		
