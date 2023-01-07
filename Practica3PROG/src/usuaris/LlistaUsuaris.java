@@ -55,7 +55,7 @@ public class LlistaUsuaris {			//Clase feta per Chenxing Chi
 			
 			boolean trobat = false;
 			int i=0;
-			for (i=0; !trobat && i <= llista.length; i++) {
+			for (i=0; !trobat && i <= nElem; i++) {
 				if (llista[i].getAlies().equals(aliesUsuari)) {
 					trobat = true;
 				}

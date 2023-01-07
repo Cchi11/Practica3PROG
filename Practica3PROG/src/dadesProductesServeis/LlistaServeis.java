@@ -36,12 +36,12 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		nElem++;
 	}
 	
-	public boolean comprovaServei (String nomServ) {
+	public boolean comprovaServei (String usuari, String nomServ) {
 		
 		boolean trobat = false;
 		
-		for (int i=0; !trobat && i <= llista.length; i++) {
-			if (llista[i].getNom() == nomServ) {
+		for (int i=0; !trobat && i <= nElem; i++) {
+			if ((llista[i].getNom().equals(nomServ)) && (usuari.equals(llista[i].getUsuari()))) {
 				trobat = true;
 			}
 		}
@@ -76,7 +76,7 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		String aux;
 		aux="Serveis => numServeis "+nElem;
 		for (int j = 0; j < nElem; j++) {
-			aux=aux+"\n\tServei "+(j+1)+"\t "+llista[j];
+			aux=aux+"\n\n\tServei "+(j+1)+"\t "+llista[j];
 		}
 		return aux;
 	}

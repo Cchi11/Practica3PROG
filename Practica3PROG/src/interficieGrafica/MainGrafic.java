@@ -16,6 +16,9 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import Exceptions.NoEsTrobaException;
+import dadesProductesServeis.LlistaBens;
+import dadesProductesServeis.LlistaServeis;
+import peticions.LlistaPeticions;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,7 +30,7 @@ import usuaris.Usuaris;
 public class MainGrafic extends JFrame {
 	private Usuaris usuari;
 
-	public MainGrafic(LlistaUsuaris llistaUser) {
+	public MainGrafic(LlistaUsuaris llistaUser, LlistaBens llistaBe, LlistaServeis llistaServis, LlistaPeticions llistaPeti) {
 		setVisible(false);
 		usuari = IniciaSessio(llistaUser);
 		//setVisible(true);
@@ -43,8 +46,8 @@ public class MainGrafic extends JFrame {
 		}
 		buttons[0].setText("Buscar ofertes d'intercanvi actives");
 		buttons[1].setText("Afegir una petició d’intercanvi d’alguna de les ofertes actives");
-		Opcio2ActionListener opcio2 = new Opcio2ActionListener();
-		buttons[1].addActionListener(opcio2);
+		Opcio2ActionListener opcio2 = new Opcio2ActionListener(llistaBe, llistaServis);
+		buttons[0].addActionListener(opcio2);
 		buttons[2].setText("Consultar els intercanvis que ha fet l’usuari");
 		buttons[3].setText("Canviar el codi d’usuari que està utilitzant l’aplicació");
 		Opcio5ActionListener opcio5 = new Opcio5ActionListener(llistaUser, usuari);

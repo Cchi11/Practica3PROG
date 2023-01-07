@@ -1,23 +1,30 @@
 package interficieGrafica;
 
 import java.awt.event.ActionEvent;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+import dadesProductesServeis.LlistaBens;
+import dadesProductesServeis.LlistaServeis;
+import peticions.LlistaPeticions;
+
 import java.awt.event.ActionListener;
 
-import usuaris.LlistaUsuaris;
-
 public class Opcio2ActionListener implements ActionListener {
-
-	//private LlistaUsuaris llistaUser;
-	/*
-	public Opcio2ActionListener(LlistaUsuaris llistaUser) {
-		this.llistaUser=llistaUser;
-		
-	}*/
-	@Override
+	
+	private LlistaBens llistaBe;
+	private LlistaServeis llistaServ;
+	
+	public Opcio2ActionListener (LlistaBens llistaBe, LlistaServeis llistaServ) {
+		this.llistaBe = llistaBe;
+		this.llistaServ = llistaServ;
+	}
 	
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		//System.out.println(llistaUser.toString());
+		
+		JButton b = (JButton) e.getSource();
+		Opcio2Finestra o2 = new Opcio2Finestra(llistaBe, llistaServ);
 	}
 
 }
