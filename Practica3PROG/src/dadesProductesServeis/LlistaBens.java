@@ -67,7 +67,7 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 			}
 	}
 	
-	public LlistaBens llistaBensNoIntercanvia(Usuaris usuari) {
+	public LlistaBens llistaBensNoIntercanvia() {
 		LlistaBens noInter = new LlistaBens(100);
 		for(int i = 0; i < this.nElem; i++) {
 			if (llista[i].getDataIntercanvi() == "0") {

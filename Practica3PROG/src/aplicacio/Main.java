@@ -430,7 +430,7 @@ public class Main {
 		while (!error) {
 			try {
 				prodAcon = teclat.nextLine();
-				if (llistaBe.comprovaBe(prodAcon)) {
+				if (llistaBe.comprovaBe(u, prodAcon)) {
 					error = true;
 				}
 				else {
@@ -457,7 +457,7 @@ public class Main {
 		while (!error) {
 			try {
 				prodOfer = teclat.nextLine();
-				if (llistaBe.comprovaBe(prodOfer)) {
+				if (llistaBe.comprovaBe(u, prodOfer)) {
 					error = true;
 				}
 				else {

@@ -6,12 +6,14 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="mainGrafic"/>
+		<item key="selection" value="this"/>
 		<list key="findhistory">
+			<item value="registrat"/>
 			<item value="LoginGUI"/>
 			<item value="v"/>
 		</list>
 		<list key="replacehistory">
+			<item value="this"/>
 			<item value="mainGrafic"/>
 		</list>
 	</section>

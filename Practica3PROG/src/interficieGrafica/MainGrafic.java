@@ -28,8 +28,9 @@ public class MainGrafic extends JFrame {
 	private Usuaris usuari;
 
 	public MainGrafic(LlistaUsuaris llistaUser) {
-
+		setVisible(false);
 		usuari = IniciaSessio(llistaUser);
+		//setVisible(true);
 		JPanel panellBotons = new JPanel();
 		 panellBotons.setLayout(new GridLayout(2, 2));
 		 
@@ -63,58 +64,10 @@ public class MainGrafic extends JFrame {
 		pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1000, 500);
-		setVisible(true);
+		//setVisible(true);
 		 
 	}
-	public Usuaris preguntarDades() {
-	 	
-		JFrame registrat = new JFrame ();
-	    registrat.pack();
-	    registrat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    registrat.setSize(200,200);
-	    registrat.setVisible(true);
-	    
-	    JPanel panell = new JPanel(new GridLayout(3,2));
-	    
-	    JLabel titolAlies = new JLabel ("Usuari:");
-	    titolAlies.setBounds(10, 20, 80, 25); 
-	    panell.add(titolAlies);
-	    
-	    JTextField alies = new JTextField();
-	    alies.setBounds(100,20,165,25);
-	    panell.add(alies);
-	    
-	    JLabel titolCorreu = new JLabel ("Correu:");
-	    titolCorreu.setBounds(10,50,80,25);
-	    panell.add(titolCorreu);
-	    
-	    JTextField correu = new JTextField();
-	    correu.setBounds(100, 50, 165, 25);
-	    panell.add(correu);
-	    
-	    JLabel titolPostal = new JLabel ("Codi Postal:");
-	    titolPostal.setBounds(10, 50, 80, 25);
-	    panell.add(titolPostal);
-	    
-	    JTextField cPost = new JTextField();
-	    cPost.setBounds(100, 50, 165, 25);
-	    panell.add (cPost);
-	    
-	   		    
-	    JButton acceptar = new JButton("Acceptar");
-	    acceptar.setBounds(10, 80, 80, 25);
-	    panell.add(acceptar);
-	    
-	    registrat.add(panell, BorderLayout.CENTER);
-	    JPanel botons = new JPanel(new FlowLayout());
-	    BotoAcceptarActionListener accioBoto = new BotoAcceptarActionListener (alies, correu, cPost);
-	    acceptar.addActionListener(accioBoto);
-	    botons.add(acceptar);
-	    registrat.add(botons, BorderLayout.SOUTH);
-		registrat.setVisible(true);
-		
-		return new Usuaris();
-	 }
+
 	 
 	 private Usuaris IniciaSessio (LlistaUsuaris llistaUser) {
 		 
@@ -192,13 +145,14 @@ public class MainGrafic extends JFrame {
 				}
 			}
 			else{
+				
 				if (resultat == JOptionPane.YES_OPTION) {
-					usuari= preguntarDades();
+					Registrarse finestraRegistrar = new Registrarse(this, llistaUser);
+					
 				}
-				else{
-						 
-				}
+
 			}
+			 
 			return usuari;
 		 }
 
