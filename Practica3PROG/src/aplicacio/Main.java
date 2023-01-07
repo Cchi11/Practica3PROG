@@ -678,7 +678,7 @@ public class Main {
 		LlistaUsuaris llistaUser = new LlistaUsuaris(100);
 		LlistaPeticions llistaPet = new LlistaPeticions(100);
 		int opcio=0;
-		//llistaUser= carregarUsuaris();
+		//llistaUser = carregarUsuaris();
 		//Usuaris usuariActual = iniciasessio(llistaUser);
 		//llistaUser.donaAlta(usuariActual);
 		

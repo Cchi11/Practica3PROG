@@ -1,7 +1,5 @@
 package peticions;
 
-
-
 public class LlistaPeticions { //Clase realitzada per Pol Regy
 	private int nElem;
 	private Peticions[] llista;
