@@ -530,9 +530,28 @@ public class Main {
 		int codiPost = 0;
 		
 		System.out.println ("Introdueix els següents camps: ");
+		String nom = new String();
+		while (!error)
+		{
+			try {
+		
+			System.out.println ("Usuari:");
+			nom = teclat.nextLine();
+			if (llistaUser.comprovaUsuari(nom)) {
+				throw new NoEsTrobaException();
+			}
+			else
+			{
+				error=true;
+			}
+			}
+			catch (NoEsTrobaException e) {
+				System.out.println("Aquest Alies ja existeix!");
+			}
 			
-		System.out.println ("Usuari:");
-		String nom = teclat.nextLine();
+		}
+		
+		error=false;
 			
 		System.out.println ("Correu del usuari: ");
 		String correu = teclat.nextLine();
@@ -691,7 +710,8 @@ public class Main {
 		//llistaUser.donaAlta(usuariActual);
 		
 		Usuaris usuariActual = null;
-		
+		Usuaris usuari1 = new Usuaris ("chen", "odqo", 646);
+		//llistaUser.donaAlta(usuari1);
 		mostrarMenu();
 		while (opcio != 17) {
 			opcio = Integer.parseInt(teclat.nextLine());
