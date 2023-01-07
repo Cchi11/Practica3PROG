@@ -1,7 +1,5 @@
 package peticions;
 
-
-
 public class LlistaPeticions { //Clase realitzada per Pol Regy
 	private int nElem;
 	private Peticions[] llista;
@@ -37,15 +35,29 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 		nElem++;
 	}
 	
+	public Peticions agafarPeticio (int i) {
+		return (llista[i]);
+	}
+	
 	public LlistaPeticions mostrarPetNoRespostes () {	
 		LlistaPeticions llistaPet = new LlistaPeticions (100);
-		for (int i=0; i < llista.length; i++) {
+		for (int i=0; i < nElem; i++) {
 			if (llista[i].getResposat() == 0) {
 				llistaPet.afegirPeticio(llista[i]);
 			}
 		}
 		return llistaPet;
 	}
+	
+	/*public LlistaPeticions BuscarOfertesActives () {
+		LlistaPeticions llistaNova = new LlistaPeticions (100);
+		for (int i = 0; i < nElem ; i++) {
+			//if (llista[i].get)
+			llistaNova.afegirPeticio(llista[i]);
+		}
+		return llistaNova;
+	}*/
+	
 	
 	public void mostrarPetAccept () {		
 		for (int i=0; i < llista.length; i++) {
@@ -69,6 +81,34 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 	
 	public void refusarPet (int i) {
 		llista[i].setResposat(2);
+	}
+	
+
+	public int idSeguentPeticio() {
+		int ultimaId;
+		ultimaId = nElem+1;
+		return ultimaId;
+	}
+	
+	public void posarValoracioPet (int i, int v) {
+		llista[i].setValoracioUserRebPet(v);
+	}
+	
+	public String comprovarUsuariRepPet (int i) {
+		return (llista[i].getUserRebPet());
+	}
+	
+	public int comprovarPosicio (Peticions p) {
+		int i = 0;
+		boolean trobat = false;
+		
+		for(i = 0; i < nElem && !trobat; i++) {
+			if (llista[i].getIdPeticio() == p.getIdPeticio()) {
+				trobat = true;
+			}
+		}
+		i--;
+		return i;
 	}
 	
 	public String toString() {

@@ -2,8 +2,8 @@ package peticions;
 
 
 public class Peticions {		//Clase feta per Òscar Cabré
-	private String idPeticio, userPeticio, userRebPet, producAcons, producOfe;
-	private int resposat, valoracioUserPeticio, valoracioUserRebPet;
+	private String userPeticio, userRebPet, producAcons, producOfe;
+	private int resposat, valoracioUserPeticio, valoracioUserRebPet, idPeticio;
 	/**
 	 * Constructor
 	 * @param peticioId		ID de la petició
@@ -12,7 +12,7 @@ public class Peticions {		//Clase feta per Òscar Cabré
 	 * @param aconsProduc 	Nom del producte que vols aconseguir
 	 * @param ofeProduc 	Nom del producte que ofereixes
 	 */
-	public Peticions (String peticioId, String petUser, String rebUser, String aconsProduc, String ofeProduc) {
+	public Peticions (int peticioId, String petUser, String rebUser, String aconsProduc, String ofeProduc) {
 		
 		idPeticio = peticioId;
 		userPeticio = petUser;
@@ -28,7 +28,7 @@ public class Peticions {		//Clase feta per Òscar Cabré
  	 * getter
 	 * @return	ID de la petició
 	 */
-	public String getIdPeticio () {
+	public int getIdPeticio () {
 		return (idPeticio);
 	}
 	
@@ -114,7 +114,7 @@ public class Peticions {		//Clase feta per Òscar Cabré
 	
 
 	public Peticions copia() {
-		Peticions copia = new Peticions (idPeticio, userPeticio, userRebPet, producAcons, producOfe);
+		Peticions copia = new Peticions(idPeticio, userPeticio, userRebPet, producAcons, producOfe);
 		copia.resposat=this.resposat;
 		copia.valoracioUserPeticio=this.valoracioUserPeticio;
 		copia.valoracioUserRebPet=this.valoracioUserRebPet;
@@ -122,7 +122,7 @@ public class Peticions {		//Clase feta per Òscar Cabré
 	}
 	
 	public String toString() {
-		return ("PETICIO => idPeticio:\t"+idPeticio+"\tuserPeticio:\t"+userPeticio+"\tuserRebPet:\t"+userRebPet+"\tproducAcons:\t"+producAcons+"\tproducOfe:\t"+producOfe+"\tresposat:\t"+resposat+"\tvaloracioUserPeticio:\t"+valoracioUserPeticio+"\tvaloracioUserRebPet:\t"+valoracioUserRebPet);
+		return ("PETICIO => idPeticio: "+idPeticio+"\tuserPeticio: "+userPeticio+"\tuserRebPet: "+userRebPet+"\t\n\t producAcons: "+producAcons+"\tproducOfe: "+producOfe+"\tresposat: "+resposat+"\tvaloracioUserPeticio: "+valoracioUserPeticio+"\tvaloracioUserRebPet: "+valoracioUserRebPet);
 	}
 	
 }

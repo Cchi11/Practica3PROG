@@ -30,19 +30,16 @@ public class BotoAcceptarActionListener implements ActionListener {
 		this.correu=correu;
 		this.cPost=cPost;
 		registrat=false;
+		
 	}
 	@Override
 	
 	
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		JButton b = (JButton) e.getSource();
-		
 		try {
-			
 			if (usuari.getText().equals("") || correu.getText().equals("")|| cPost.getText().equals("") ||
 					usuari.getText().equals(null) || correu.getText().equals(null) || cPost.getText().equals(null)) {
-	
 					JOptionPane.showMessageDialog(null, "Introdueix dades, no les deixis en blanc!", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 			else

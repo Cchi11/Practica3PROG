@@ -16,6 +16,9 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import Exceptions.NoEsTrobaException;
+import dadesProductesServeis.LlistaBens;
+import dadesProductesServeis.LlistaServeis;
+import peticions.LlistaPeticions;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,11 +34,14 @@ public class MainGrafic extends JFrame {
 	//creem un Usuari global que sera el usuari que te iniciada la sessio
 	public static Usuaris usuari;
 
+
 	 /**
 	  * Constructor de la finestra principal
 	  * @param llistaUser LlistaUsuaris com a parametre
 	  */
-	public MainGrafic(LlistaUsuaris llistaUser) {
+
+	public MainGrafic(LlistaUsuaris llistaUser, LlistaBens llistaBe, LlistaServeis llistaServis, LlistaPeticions llistaPeti) {
+
 		setVisible(false);
 		//Primer cridem la funcio aquesta per tenir clara qui te la sessio iniciada
 		usuari = IniciaSessio(llistaUser);
@@ -55,23 +61,27 @@ public class MainGrafic extends JFrame {
 		}
 		//Posem text per a cada boto opcio i a cada boto li asignem el seu corresponent ActioListener
 		buttons[0].setText("Buscar ofertes d'intercanvi actives");
-		buttons[1].setText("Afegir una petició d’intercanvi d’alguna de les ofertes actives");
-		Opcio2ActionListener opcio2 = new Opcio2ActionListener(llistaUser);
+		Opcio2ActionListener opcio2 = new Opcio2ActionListener(llistaBe, llistaServis);
 		buttons[0].addActionListener(opcio2);
-		buttons[2].setText("Consultar els intercanvis que ha fet l’usuari");
-		Opcio3ActionListener opcio3 = new Opcio3ActionListener();
-		buttons[2].addActionListener(opcio3);
-		buttons[3].setText("Canviar el codi d’usuari que està utilitzant l’aplicació");
+		
+		buttons[1].setText("Afegir una peticio d'intercanvi d'alguna de les ofertes actives");
+		Opcio3ActionListener opcio3 = new Opcio3ActionListener(this, usuari, llistaBe, llistaServis, llistaPeti);
+		buttons[1].addActionListener(opcio3);
+		
+		buttons[2].setText("Consultar els intercanvis que ha fet l'usuari");
+		
+		buttons[3].setText("Canviar el codi d'usuari que esta  utilitzant l'aplicacio");
+
 		Opcio5ActionListener opcio5 = new Opcio5ActionListener(llistaUser, usuari);
 		buttons[3].addActionListener(opcio5);
 		//El text del titol
-		JTextField titol = new JTextField();
-		titol.setText("Indica quina opció vols");
-		titol.setEditable(false);
+		JLabel titol = new JLabel();
+		titol.setText("Indica quina opcio vols");
+
 		
 		 //configurem cada boto amb la seva font y l'afegim al panell 
 		for (int i = 0; i < buttons.length; i++) {
-			Font buttonFont = new Font("Arial", Font.PLAIN, 16);
+			Font buttonFont = new Font("Roboto", Font.PLAIN, 16);
 			buttons[i].setFont(buttonFont);
 			panellBotons.add(buttons[i]);
 		}
@@ -179,13 +189,15 @@ public class MainGrafic extends JFrame {
 			else{
 				
 				if (resultat == JOptionPane.YES_OPTION) {
-					Registrarse finestraRegistrar = new Registrarse(this, llistaUser);				
+
+					Registrarse finestraRegistrar = new Registrarse(this, llistaUser);
 				}
-				
+
 			}
-			 
+
 			return usuari;
 		 }
 
 }
 	
+		

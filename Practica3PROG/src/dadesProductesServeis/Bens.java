@@ -58,6 +58,6 @@ public class Bens extends Producte{   //Clase feta per Chenxing Chi
 	}
 	
 	public String toString() {
-		return ("Alies: "+super.usuari+". Nom del be: " + super.nom +". Descripcio del be: " + super.desc + ". Tipus de be: " + super.tipus + ". Data d'inici del be: " + super.data + ". Amplada: " +amplada+"cm. Alçada: "+alçada+"cm. Fons: "+fons+"cm. Pes"+pes+"g. Data intercanvi: "+dataIntercanvi+".");
+		return ("Alies: "+super.usuari+".\tNom del be: " + super.nom +".\tDescripcio del be: " + super.desc + ".\t\t  Tipus de be: " + super.tipus + ".\tData d'inici del be: " + super.data + ".\t\n\t\tAmplada: " +amplada+"cm.\t Alçada: "+alçada+"cm.\t Fons: "+fons+"cm.\t Pes"+pes+"g.\t Data intercanvi: "+dataIntercanvi+".");
 	}
 }

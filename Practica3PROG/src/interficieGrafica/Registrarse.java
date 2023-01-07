@@ -71,8 +71,9 @@ public class Registrarse extends JFrame {
 	    this.add(panell, BorderLayout.CENTER);
 	    JPanel botons = new JPanel(new FlowLayout());
 	    
-
 	    BotoAcceptarActionListener accioBoto = new BotoAcceptarActionListener (ventana, llistaUser, this, alies, correu, cPost);
+
+
 	    
 	    acceptar.addActionListener(accioBoto);
 	    
