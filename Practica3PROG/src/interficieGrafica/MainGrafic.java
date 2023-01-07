@@ -47,6 +47,8 @@ public class MainGrafic extends JFrame {
 		buttons[1].addActionListener(opcio2);
 		buttons[2].setText("Consultar els intercanvis que ha fet l’usuari");
 		buttons[3].setText("Canviar el codi d’usuari que està utilitzant l’aplicació");
+		Opcio5ActionListener opcio5 = new Opcio5ActionListener(llistaUser, usuari);
+		buttons[3].addActionListener(opcio5);
 	
 		JTextField titol = new JTextField();
 		titol.setText("Indica quina opció vols");
@@ -79,52 +81,65 @@ public class MainGrafic extends JFrame {
 						   JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
 						   null, opcions, 
 						   0);
-				
+			
+			
 			 if (resultat == JOptionPane.NO_OPTION) {
 				boolean sortir=false;
 				int intents=0;
+				
 				while (!error && !sortir){
-					String nom = JOptionPane.showInputDialog("Indica el teu codi d'usuari");
-					while (nom == null || nom.equals("")) {
-						// Missatge d'error.
-						JOptionPane.showMessageDialog(null, "Cal un codi", "ERROR", JOptionPane.ERROR_MESSAGE);
-						nom = JOptionPane.showInputDialog("Indica el teu codi d'usuari");
-					}				
-					try
+					
+					if (intents!=2)
 					{
-						if (llistaUser.comprovaUsuari(nom)) {
-							error=true;
-							usuari = llistaUser.trobaUsuari(nom).copia();
-						}
-						else{
-							throw new NoEsTrobaException ();
-						}
-								
-							
-					}
-					catch (NullPointerException e) {
-						JOptionPane.showMessageDialog(null, "No s'ha pogut trobar el teu usuari", "ERROR", JOptionPane.ERROR_MESSAGE);
-							
-						if (intents==2)
-						{
-							String [] opcions1 = {"Si", "No"};
-							int resultat1 = JOptionPane.showOptionDialog(null, 
-											"Vols Sortir?", "", 
-											JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
-											null, opcions1, 
-											0);
-							if (resultat1==JOptionPane.YES_OPTION)
+						String nom = JOptionPane.showInputDialog("Indica el teu codi d'usuari");
+						if (nom == null || nom.equals("")) {
+							/*if (nom == JOptionPane.CANCEL_OPTION)
 							{
-								sortir=true;
-								setVisible(false);
+								break;
 							}
+							*/
+							// Missatge d'error.
+							JOptionPane.showMessageDialog(null, "Cal un codi", "ERROR", JOptionPane.ERROR_MESSAGE);
+							nom = JOptionPane.showInputDialog("Indica el teu codi d'usuari");
+						}				
+						try
+						{
+							if (llistaUser.comprovaUsuari(nom)) {
+								error=true;
+								usuari = llistaUser.trobaUsuari(nom).copia();
+								setVisible(true);
+							}
+							else{
+								throw new NoEsTrobaException ();
+							}
+									
+								
 						}
-						intents++;
+						catch (NullPointerException e) {
+							JOptionPane.showMessageDialog(null, "No s'ha pogut trobar el teu usuari", "ERROR", JOptionPane.ERROR_MESSAGE);
+								
+							if (intents==2)
+							{
+								String [] opcions1 = {"Si", "No"};
+								int resultat1 = JOptionPane.showOptionDialog(null, 
+												"Vols Sortir?", "", 
+												JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
+												null, opcions1, 
+												0);
+								if (resultat1==JOptionPane.YES_OPTION)
+								{
+									sortir=true;
+									setVisible(false);
+								}
+							}
+							intents++;
+						}
+						catch (NoEsTrobaException e) {
+							JOptionPane.showMessageDialog(null, "No s'ha pogut trobar el teu usuari", "ERROR", JOptionPane.ERROR_MESSAGE);
+						}
+					
 					}
-					catch (NoEsTrobaException e) {
-						JOptionPane.showMessageDialog(null, "No s'ha pogut trobar el teu usuari", "ERROR", JOptionPane.ERROR_MESSAGE);
-							
-						if (intents==2)
+					else
 						{
 							String [] opcions1 = {"Si", "No"};
 							int resultat1 = JOptionPane.showOptionDialog(null, 
@@ -140,10 +155,11 @@ public class MainGrafic extends JFrame {
 							else
 								intents=0;
 						}
-						intents++;
-					}
+						
+					intents++;
 				}
 			}
+			 
 			else{
 				
 				if (resultat == JOptionPane.YES_OPTION) {
