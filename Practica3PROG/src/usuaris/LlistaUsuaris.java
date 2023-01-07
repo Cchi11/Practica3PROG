@@ -33,7 +33,7 @@ public class LlistaUsuaris {			//Clase feta per Chenxing Chi
 				}
 				llista=llistanova;
 			}
-			llista[nElem] = a.copia();
+			llista[nElem] = a;
 			nElem++;
 		}
 		
