@@ -64,11 +64,12 @@ public class Main {
 				//si no hi ha excpecio error = true continua amb el codi
 				
 			}
+			//Controlem que no passi l'error de convertir un caracter a int
 			catch (NumberFormatException e) {
 				//Si no fica un nombre enter
 				System.out.println("Indica un numero! No un altre caracter!");
 				error=false;
-			}
+			} 
 			catch (NumeroForaRangException e) {
 				//si fica un numero fora del rang indicat
 				System.out.println("Introdueix una opció valida dintre del rang!!");
@@ -100,7 +101,7 @@ public class Main {
 					System.out.println("No s'ha pogut trobar aquest usuari. Intenta un altre cop:");
 					//si l'usuari no introdueix res
 					error=false;
-				}
+				} //No troba usuari a la llista
 				catch (NoEsTrobaException e) {
 					System.out.println("No s'ha pogut trobat aquest usuari. Intenta un altre cop");
 					//si l'usuari introdueix un usuari no registrat
@@ -137,6 +138,7 @@ public class Main {
 						codiP = Integer.parseInt(codiPostal);
 						error=true;
 					}
+					//Controlem que no passi l'error de convertir un caracter a int
 					catch (NumberFormatException e)
 					{
 						System.out.println("Indica un codi postal correcte! Torna a intentar:");
