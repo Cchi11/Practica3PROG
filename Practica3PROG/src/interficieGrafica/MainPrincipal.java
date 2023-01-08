@@ -16,6 +16,7 @@ import usuaris.Usuaris;
 
 public class MainPrincipal {
 	
+
 	public static LlistaServeis carregarServeis () throws FileNotFoundException, IOException {
 		Scanner f = new Scanner(new File("dadesServeis.txt"));
 		LlistaServeis llista = new LlistaServeis(100);
@@ -65,7 +66,8 @@ public class MainPrincipal {
 		while (f.hasNextLine()) {
 			cat=f.nextLine();
 			lSplited = cat.split(";");
-			Peticions peticions = new Peticions(lSplited[0], lSplited[1], lSplited[2], lSplited[3], lSplited[4]);
+			int numInt = Integer.parseInt(lSplited[0]);
+			Peticions peticions = new Peticions(numInt, lSplited[1], lSplited[2], lSplited[3], lSplited[4]);
 			llista.afegirPeticio(peticions);
 		}
 		f.close();
@@ -97,10 +99,10 @@ public class MainPrincipal {
 		llistaServ = opcio1Serv();
 		llistaBe = opcio1Be();
 
+
 		Usuaris usuari1 = new Usuaris ("chen", "ioqjeoi", 2365);
 		llistaUser.donaAlta(usuari1);
 
-		
 		MainGrafic finestra = new MainGrafic(llistaUser, llistaBe, llistaServ, llistaPet);
 		
 	}

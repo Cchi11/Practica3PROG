@@ -2,8 +2,8 @@ package peticions;
 
 
 public class Peticions {		//Clase feta per Òscar Cabré
-	private String idPeticio, userPeticio, userRebPet, producAcons, producOfe;
-	private int resposat, valoracioUserPeticio, valoracioUserRebPet;
+	private String userPeticio, userRebPet, producAcons, producOfe;
+	private int resposat, valoracioUserPeticio, valoracioUserRebPet, idPeticio;
 	/**
 	 * Constructor
 	 * @param peticioId		ID de la petició
@@ -12,7 +12,7 @@ public class Peticions {		//Clase feta per Òscar Cabré
 	 * @param aconsProduc 	Nom del producte que vols aconseguir
 	 * @param ofeProduc 	Nom del producte que ofereixes
 	 */
-	public Peticions (String peticioId, String petUser, String rebUser, String aconsProduc, String ofeProduc) {
+	public Peticions (int peticioId, String petUser, String rebUser, String aconsProduc, String ofeProduc) {
 		
 		idPeticio = peticioId;
 		userPeticio = petUser;
@@ -28,7 +28,7 @@ public class Peticions {		//Clase feta per Òscar Cabré
  	 * getter
 	 * @return	ID de la petició
 	 */
-	public String getIdPeticio () {
+	public int getIdPeticio () {
 		return (idPeticio);
 	}
 	
@@ -114,7 +114,7 @@ public class Peticions {		//Clase feta per Òscar Cabré
 	
 
 	public Peticions copia() {
-		Peticions copia = new Peticions (idPeticio, userPeticio, userRebPet, producAcons, producOfe);
+		Peticions copia = new Peticions(idPeticio, userPeticio, userRebPet, producAcons, producOfe);
 		copia.resposat=this.resposat;
 		copia.valoracioUserPeticio=this.valoracioUserPeticio;
 		copia.valoracioUserRebPet=this.valoracioUserRebPet;

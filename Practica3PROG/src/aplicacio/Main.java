@@ -30,13 +30,19 @@ import usuaris.LlistaUsuaris;
 public class Main {
 	static Scanner teclat = new Scanner(System.in);
 	
+	/* Procediment per inicia sessio o registrar-se a l'aplicatiu
+	 * 
+	 * @param llista, la llista d'usuaris
+	 * @return el usuari que ha iniciat sessio o be el que s'acaba de registrar
+	 */
 	public static Usuaris iniciasessio(LlistaUsuaris llista) {
 		Usuaris nou = new Usuaris();
-		System.out.println("Benvingut/da a l'aplicacio");
+		//Creem instancia d'usuari
+		System.out.println("Benvingut/da a l'aplicacio");    
 		System.out.println("\n\nTria una opcio: ");
 		System.out.println("\n\t1. Iniciar sessio");
 		System.out.println("\t2. Registra't si no tens compte");
-		System.out.println("\t3. Sortir de l'aplicacio");
+		//mostrem menu d'opcions
 		int opcioini = 0;
 		boolean error = false;
 		while (!error)
@@ -45,18 +51,22 @@ public class Main {
 			{
 				String llegirnum = teclat.nextLine();
 				opcioini = Integer.parseInt(llegirnum);
-				if (opcioini<1 || opcioini>3)
+				if (opcioini<1 || opcioini>2)
 				{
 					throw new NumeroForaRangException();
+					//excepcio creada per detectar numeros fora del rang indicat al menu d'opcions
 				}
 				error=true;
+				//si no hi ha excpecio error = true continua amb el codi
 				
 			}
 			catch (NumberFormatException e) {
+				//Si no fica un nombre enter
 				System.out.println("Indica un numero! No un altre caracter!");
 				error=false;
 			}
 			catch (NumeroForaRangException e) {
+				//si fica un numero fora del rang indicat
 				System.out.println("Introdueix una opció valida dintre del rang!!");
 				error=false;
 			}
@@ -64,6 +74,7 @@ public class Main {
 		error =false;
 		
 		if (opcioini == 1) {
+			//Si l'usuari vol iniciar sessio 
 			System.out.println("Introdueix el teu alies");
 			while (!error) {
 				try {
@@ -71,19 +82,23 @@ public class Main {
 						if(llista.comprovaUsuari(codiUsuari)) 
 						{
 							nou=llista.trobaUsuari(codiUsuari);
+							//comprovem que l'usuari que inicia sessio existeix i esta registrat
 						}
 						else
 						{
 							throw new NoEsTrobaException("No s'ha pogut trobat aquest usuari. Intenta un altre cop");
+							//Creem una excepcio per si hi ha un objecte que no es troba a les llistes
 						}
 					error=true;
 				}
 				catch (NullPointerException e) {
 					System.out.println("No s'ha pogut trobar aquest usuari. Intenta un altre cop:");
+					//si l'usuari no introdueix res
 					error=false;
 				}
 				catch (NoEsTrobaException e) {
 					System.out.println("No s'ha pogut trobat aquest usuari. Intenta un altre cop");
+					//si l'usuari introdueix un usuari no registrat
 					error=false;
 					
 				}
@@ -91,44 +106,47 @@ public class Main {
 			
 		}
 		else {
-			if (opcioini == 2) {
-				String usuari;
-				System.out.print("Indica el teu alies:");
-				usuari = teclat.nextLine();
-
-				System.out.println("Indica el teu correu electronic:");
-				String correu = teclat.nextLine();
-				System.out.println("Indica el teu codi postal");
-				error =false;
-				int codiP=0;
-				while (!error)
-				{
-					try {
-						String codiPostal = teclat.nextLine();
-						codiP = Integer.parseInt(codiPostal);
-						error=true;
-					}
-					catch (NumberFormatException e)
-					{
-						System.out.println("Indica un codi postal correcte! Torna a intentar:");
-						error=false;
-					}
+			//opcio per registrar un usuari
+			String usuari;
+			System.out.print("Indica el teu alies:");
+			usuari = teclat.nextLine();
+			//es demana el nom d'usuari
+			System.out.println("Indica el teu correu electronic:");
+			String correu = teclat.nextLine();
+			//es demana el correu de l'usuari
+			System.out.println("Indica el teu codi postal");
+			//es demana el codi postal i controlarem que siguin numeros enters
+			error =false;
+			int codiP=0;
+			while (!error)
+			{
+				try {
+					String codiPostal = teclat.nextLine();
+					codiP = Integer.parseInt(codiPostal);
+					error=true;
 				}
-				
-				Usuaris newUsuari = new Usuaris (usuari, correu, codiP);
-				nou=newUsuari;
-				llista.donaAlta(nou);
-				
-			}
-			else {
-				System.out.println("Has sortit de l'aplicacio, Adeu!");
-			}
+				catch (NumberFormatException e)
+				{
+					System.out.println("Indica un codi postal correcte! Torna a intentar:");
+					//si l'usuari introduix un numero no enter en el codi postal
+					error=false;
+				}
+			}			
+			Usuaris newUsuari = new Usuaris (usuari, correu, codiP);
+			//es crea la instancia usuari amb les dades que s'han introduit per teclat
+			nou=newUsuari;
+			llista.donaAlta(nou);		
+			//es crida la funcio donaAlta per afegir-lo a la llista d'usuaris
 		}
 		return nou;
-		
+		//retornem l'usuari recent registrat
 	}
 	
+	/*Procediment per imprimir per pantall un ventall d'opcions per fer a l'aplicatiu
+	 * 
+	 */
 	public static void mostrarMenu () {
+		//mostrem menu d'opcions per pantalla
 		System.out.println("\n\nOpcions del menu:");
 		System.out.println("\n\t1. Carregar les dades dels fitxers");
 		System.out.println("\t2. Llistar les dades de qualsevol llista que tingueu definida");
@@ -151,43 +169,44 @@ public class Main {
 	}
 
 	public static LlistaServeis carregarServeis () throws FileNotFoundException, IOException {
-		Scanner f = new Scanner(new File("dadesServeis.txt"));
-		LlistaServeis llista = new LlistaServeis(100);
-		String [] lSplited  = new String[7];;
+		Scanner f = new Scanner(new File("dadesServeis.txt")); 	
+		LlistaServeis llista = new LlistaServeis(100);			
+		String [] lSplited  = new String[7];;				
 		String cat;
 		
-		while (f.hasNextLine()) {
-			cat=f.nextLine();
-			lSplited = cat.split(";");
-			Boolean b = Boolean.parseBoolean(lSplited[4]);
+		while (f.hasNextLine()) {								
+			cat=f.nextLine();									
+			lSplited = cat.split(";");							
+			Boolean b = Boolean.parseBoolean(lSplited[4]);		
+			// Crem la instancia
 			Serveis serveis = new Serveis(lSplited[0], lSplited[1], lSplited[2], lSplited[3], b, lSplited[5], lSplited[6]);
-			llista.afegirServei(serveis);
+			llista.afegirServei(serveis);						
 		}
 		
-		f.close();
-		return llista;
+		f.close();												
+		return llista;											
 	}
 	
 	public static LlistaBens carregarBens () throws FileNotFoundException, IOException {
-		Scanner f = new Scanner(new File("dadesBens.txt"));
-		LlistaBens llista = new LlistaBens(100);
-		String [] lSplited  = new String[10];;
+		Scanner f = new Scanner(new File("dadesBens.txt"));		
+		LlistaBens llista = new LlistaBens(100);				
+		String [] lSplited  = new String[10];;			
 		int [] numInt = new int[4]; 
 		String cat;
 		
-		while (f.hasNextLine()) {
-			cat=f.nextLine();
-			lSplited = cat.split(";");
-			Boolean b = Boolean.parseBoolean(lSplited[3]);
-			numInt[0] = Integer.parseInt(lSplited[6]);
-			numInt[1] = Integer.parseInt(lSplited[7]);
-			numInt[2] = Integer.parseInt(lSplited[8]);
-			numInt[3] = Integer.parseInt(lSplited[9]);
+		while (f.hasNextLine()) {								
+			cat=f.nextLine();									
+			lSplited = cat.split(";");							
+			Boolean b = Boolean.parseBoolean(lSplited[3]);		
+			numInt[0] = Integer.parseInt(lSplited[6]);				
+			numInt[1] = Integer.parseInt(lSplited[7]);				
+			numInt[2] = Integer.parseInt(lSplited[8]);				
+			numInt[3] = Integer.parseInt(lSplited[9]);			
 			Bens bens = new Bens(lSplited[0], lSplited[1], lSplited[2], lSplited[3], b, lSplited[5], numInt[0], numInt[1], numInt[2], numInt[3]);
-			llista.afegirBe(bens);
+			llista.afegirBe(bens);								
 		}
-		f.close();
-		return llista;
+		f.close();												
+		return llista;											
 	}
 	
 	public static LlistaPeticions carregarPeticions () throws FileNotFoundException, IOException {
@@ -199,7 +218,8 @@ public class Main {
 		while (f.hasNextLine()) {
 			cat=f.nextLine();
 			lSplited = cat.split(";");
-			Peticions peticions = new Peticions(lSplited[0], lSplited[1], lSplited[2], lSplited[3], lSplited[4]);
+			int numInt = Integer.parseInt(lSplited[0]);
+			Peticions peticions = new Peticions(numInt, lSplited[1], lSplited[2], lSplited[3], lSplited[4]);
 			llista.afegirPeticio(peticions);
 		}
 		f.close();
@@ -283,41 +303,62 @@ public class Main {
 		System.out.println(llistaBe.llistaBensNoIntercanvia().toString());
 	}
 	
+	/* Procediment que conte la opcio 5 per afegir un nou servei
+	 * 
+	 * @param actual, es l'usuari que te actualment la sessio iniciada
+	 * @param llistaServ, la llista de serveis per afegir el nou servei
+	 * @return la llista de serveis on hem afegit la nova instancia
+	 */
 	public static LlistaServeis opcio5(Usuaris actual, LlistaServeis llistaServ) {
 		
 		System.out.println ("Introdueix els següents camps: ");
+		//es demanen els parametres per teclat
 		
 		System.out.println ("Indica el nom del servei");
 		String nom = teclat.nextLine();
+		//l'usuari introdueix el nom del servei
 		
 		System.out.println ("Indica la descripcio del servei");
 		String desc = teclat.nextLine();
+		//l'usuari introdueix la descripicio del servei
 		
 		System.out.println ("Indica el tipus del servei");
 		String tipus = teclat.nextLine();
+		//l'usuari introdueix el tipus de servei
 		
 		System.out.println ("Indica la data d'inici del servei");
 		String dataini = teclat.nextLine();
+		//l'usuari introdueix la data d'inici del servei
 		
 		System.out.println ("Indica la data de finalitzacio del servei");
 		String datafi = teclat.nextLine();
+		//l'usuari introdueix la data de finalitzacio del servei
 		
 		Serveis s = new Serveis(actual.getAlies(), nom, desc, tipus, false, dataini, datafi);
+		//es crea una nova instancia serveis amb les dades que s'han introduit per teclat
 		
 		llistaServ.afegirServei(s);
+		//s'afegeix a la llista de serveis
 		
 		escriureInstanciaServeis(s);
+		//s'afegeix al fitxer de serveis
 		
 		return llistaServ;
-		//FALTA AFEGIR AL FITXER DE TEXT EL NOU SERVEI
 	}
 	
+	/* Procediment que conte la opcio 6 per afegir un nou be 
+	 * @param alies, l'usuari que te actualment la sessio iniciada
+	 * @param llistaBe, la llista de bens per afegir un nou be 
+	 * @return la llista de bens amb la nova instancia afegida
+	 */
 	public static LlistaBens opcio6(Usuaris alies, LlistaBens llistaBe) {
-
+		
 		boolean error = false;
 		int amplada = 0, alçada = 0, fons = 0, pes = 0;
+		//inicialitzem parametres enters
 		
 		System.out.println ("Introdueix els següents camps: ");
+		//demanem per teclat al usuari els atribus del objecte be
 		
 		System.out.println ("Indica el nom del producte fisic");
 		String nom = teclat.nextLine();
@@ -332,14 +373,17 @@ public class Main {
 		String datacrea = teclat.nextLine();
 		
 		System.out.println ("Indica l'amplada del producte fisic");
+		//com que aquest es una variable entera, hem de fer un control per que fiqui valors numerics
 		
 		while (!error) {
 			try {
 				amplada = Integer.parseInt(teclat.nextLine());
+				//demanem per teclat l'amplada del be
 				error = true;
 			}
 			catch (NumberFormatException e) {
 				System.out.println("ERROR, has ficat un caracter que no es un numero!!");
+				//si l'usuari introdueix caracters que no son numeros
 			}
 		}
 		error = false;
@@ -349,10 +393,12 @@ public class Main {
 		while (!error) {
 			try {
 				alçada = Integer.parseInt(teclat.nextLine());
+				//demanem per teclat l'alçada del be
 				error = true;
 			}
 			catch (NumberFormatException e) {
 				System.out.println("ERROR, has ficat un caracter que no es un numero!!");
+				//si l'usuari introdueix caracters que no son numeros
 			}
 		}
 		error = false;
@@ -362,10 +408,12 @@ public class Main {
 		while (!error) {
 			try {
 				fons = Integer.parseInt(teclat.nextLine());
+				//demanem per teclat el fons del be
 				error = true;
 			}
 			catch (NumberFormatException e) {
 				System.out.println("ERROR, has ficat un caracter que no es un numero!!");
+				//si l'usuari introdueix caracters que no son numeros
 			}
 		}
 		error = false;
@@ -375,21 +423,35 @@ public class Main {
 		while (!error) {
 			try {
 				pes = Integer.parseInt(teclat.nextLine());
+				//demanem per teclat el pes del be
 				error = true;
 			}
 			catch (NumberFormatException e) {
 				System.out.println("ERROR, has ficat un caracter que no es un numero!!");
+				//si l'usuari introdueix caracters que no son numeros
 			}
 		}
 		
 		Bens b = new Bens(alies.getAlies(), nom, desc, tipus, true, datacrea, amplada, alçada, fons, pes);
+		//creem la nova instancia del be amb els parametres que l'usuari a introduit per teclat
 		
 		llistaBe.afegirBe(b);
+		//l'afegim a la llista de bens
 		
 		escriureInstanciaBens(b);
+		//l'afegim al fitxer de bens
+		
 		return(llistaBe);
 	}
 	
+	/* Procediment que conte la opcio 7 que crea una peticio on l'usuari actual es el emisor de la oferta
+	 * @param u, que es l'usuari que actualent te iniciada la ssessio
+	 * @param llistaPet que conte la llista de peticions per afegir la nova peticio que es creeara en aquest procediment
+	 * @param llistaUser que conte la llisat d'usaris per controlar que els productes que s'afegeixen a la peticio es realacionen amb l'usuari
+	 * @param llistaBe per controlar que el producte existeixi en el cas de que sigui un be
+	 * @param llistaServ per controlar que el servei existeixi en el cas de que sigui un servei
+	 * @return la llista de peticions amb la peticio creada en aquest procediment
+	 */
 	public static LlistaPeticions opcio7(Usuaris u, LlistaPeticions llistaPet, LlistaUsuaris llistaUser, LlistaBens llistaBe, LlistaServeis llistaServ) {
 		
 		String userRep = null, prodAcon = null, prodOfer = null;
@@ -398,70 +460,90 @@ public class Main {
 		
 		System.out.println ("Introdueix els següents camps: ");
 		
-		Random rnd = new Random();
-		int str = rnd.nextInt(99999 - 10000 + 1) + 10000;	
-		String id = String.valueOf(str);		
+		int id = llistaPet.idSeguentPeticio();
+		//es crida un procediment per crear una id. aquesta començara per 1 i anira sumant 1 cada cop que es creï una peticio
 		
 		String userPet = u.getAlies();
+		//l'usuari que fa la peticio es l'usuari que te iniciada la sessio
 		
 		System.out.println ("A quin usuari vols oferir la peticio? (Indica l'alies del usuari)");
 		
 		while (!error) {
 			try {
 				userRep = teclat.nextLine();
+				//l'usuari introdueix a qui vol enviar la peticio
 				if (llistaUser.comprovaUsuari(userRep)) {
+					//es controla que l'usuari no introdueixi un alies no registrat
 					usuariCopia = llistaUser.trobaUsuari(userRep);
+					//es fa una copa del usuari que ha introduit l'emissor, que s'utilitzara mes tard
 					error = true;
 				}
 				else {
 					throw new NoEsTrobaException();
+					//en cas de que no es trobi l'usuari a la llista d'usuaris
 				}
 			}
 			catch (NullPointerException e) {
 				System.out.println ("No s'ha trobat l'usuari");
+				//si l'usuari no introdueix res
 			}
 			catch (NoEsTrobaException e) {
 				System.out.println ("No s'ha trobat l'usuari. Introdueix un usuari registrat");
+				//si l'usuari introduiex un alies que no es troba a la llista
 			}
 		}
 		error = false;
 		
 		System.out.println ("Indica el nom del producte que vols aconseguir");
+		//demanem a l'usuari el producte que vol aconseguir 
 		
 		while (!error) {
 			try {
 				prodAcon = teclat.nextLine();
 				if (llistaBe.comprovaBe(userRep, prodAcon)) {
+					//comprovem si el producte esta afegida a la llista de bens
+					//tambe comprovem que el producte que demana es propietat del usuari que ha introduït abans
 					error = true;
 				}
 				else {
+					//en cas contrari comprovarem si el producte esta afegit a la llista de serveis
 					if (llistaServ.comprovaServei(userRep, prodAcon)) {
+						//tambe comprovem que el producte que demana es propietat del usuari que ha introduït abans
 						error = true;
 					}
 					else {
 						throw new NoEsTrobaException();
+						//si tampoc es troba a la llista, salta la excepcio de que no es troba la llista
 					}
 				}
 			}
 			catch (NullPointerException e) {
 				System.out.println ("No s'ha trobat el producte");
+				//si l'usuari no intodueix res
 			}
 			catch (NoEsTrobaException e) {
 				System.out.println ("No s'ha trobat el producte. Introduieix un producte registrat a l'aplicatiu");
+				//si l'usuari introdueix un be o servei que no esta a les llistes
 			}
 		}
 		error = false;
 		
 		System.out.println ("Indica el nom del producte que ofereixes");
+		//demanem a l'usuari el nom del prducte que ofereix 
 		
 		while (!error) {
 			try {
 				prodOfer = teclat.nextLine();
 				if (llistaBe.comprovaBe(u.getAlies(), prodOfer)) {
+					//comprovem si el producte esta afegida a la llista de bens
+					//tambe comprovem que el producte que demana es propietat del usuari que actualment te inciada la sessio
 					error = true;
 				}
 				else {
-					if (llistaServ.comprovaServei(u.getAlies(), prodOfer)) {
+
+					if (llistaServ.comprovaServei(userPet, prodOfer)) {
+						//en cas contrari comprovarem si el producte esta afegit a la llista de serveis
+						//tambe comprovem que el producte que demana es propietat del usuari que actualment te inciada la sessio
 						error = true;
 					}
 					else {
@@ -471,60 +553,84 @@ public class Main {
 			}
 			catch (NullPointerException e) {
 				System.out.println ("No s'ha trobat el producte");
+				// en cas de que l'usuari no introdueixi res
 			}
 			catch (NoEsTrobaException e) {
 				System.out.println ("No s'ha trobat el producte. Introduieix un producte registrat a l'aplicatiu");
+				// en cas de que l'usuari introdueixi algun be o servei que no es trobi a les llistes
 			}
 		}
 		
 		System.out.println("La peticio s'ha creat correctament amb codi " + id);
 		u.setOfertaProd((u.getOfertaProd())+1);
+		//es suma una unitat a l'atribut de l'usuari d'ofertes produides
 		
 		Peticions p1 = new Peticions (id, userPet, userRep, prodAcon, prodOfer);
+		//es crea la instancia de peticio amb els atributs coresponents
 		
 		llistaPet.afegirPeticio(p1);
+		//s'afegeix la nova instancia a la llista de peticions
         
+		escriureInstanciaPeticio(p1);
+		//s'afegeix al fitxer de peticions
+		
         return llistaPet;
     }
 	
+	/* Procediment que conte la opcio 8 que dona la opcio a l'usuari d'acceptar o refusar les peticions on l'usuari que actualment te iniciada la sessio es qui rep la peticio
+	 * @param u, l'usuari que te actualment la sessio inciciada
+	 * @param llistaPet la llista de peticions
+	 * @param llistaUser la llista d'usuaris
+	 */
 	public static void opcio8(Usuaris u, LlistaPeticions llistaPet, LlistaUsuaris llistaUser) {
 			
 		int opcioAccept = 0, opcioAccept2 = 0, i = 0;
 		boolean error = false;
 		LlistaPeticions llistaPetNova = new LlistaPeticions(100);
+		//Creem una nova llista per guardar unicament les peticions les quals el usuari que te iniciada la sessio es el receptor de la peticio
 		int valoracioRep = 0;
 
 		try {
 			for (i = 0; i < llistaPet.getNElem(); i++) {
 				if (llistaPet.comprovarUsuariRepPet(i).equals(u.getAlies())) {
+					//fem un recorregut per totes les peticions i agafem unicament les que coincideixi que el nom del usuari que te la sessio iniciada sigui el mateix que el nom del receptor de les peticions de la llista
 					Peticions peticioAgafa = llistaPet.agafarPeticio(i);
+					//cridem la fucio agafarpeticio(i) per agafar l'objecte peticio de la llista
 					llistaPetNova.afegirPeticio(peticioAgafa);
+					//afegim aquesta peticio que hem agafat a la llista nova per imprimir-la despres
 				}
-		}
+			}
 		}
 		catch (NullPointerException e){
 			System.out.println("No tens peticions per acceptar/refusar");
+			//en cas de que no hi hagi res a la llista salta la excepcio
 		}
 		
-		System.out.println ("Aquestes son les peticions que has d'acceptar");
+		System.out.println ("Aquestes son les peticions que has d'acceptar/refusar");
 			
 		System.out.println(llistaPetNova.mostrarPetNoRespostes().toString());
+		//s'imprimeix la llista nova per mostrar unicament les peticions que ha d'acceptar. 
+		//Aquestes peticions estaran numerades per que despres l'usuari pugui dir quina vol acceptar o refusar
 			
 		System.out.println ("Selecciona quina peticio vols acceptar/refusar");
 		
 		while(!error) {	
 			try {
 				opcioAccept = Integer.parseInt(teclat.nextLine());
+				//demanem a l'usuari el numero de peticio que vol acceptar/refusar
 				if (opcioAccept < 1 || opcioAccept > llistaPetNova.getNElem()) {
+					//es crea el rang segons el numero de peticions que hi hagi a la nova llista
 					throw new NumeroForaRangException();
 				}
 				error = true;
 			}
 			catch (NumberFormatException e) {
 				System.out.println("ERROR, has ficat un caracter que no es un numero!!");
+				//si l'usuari fica un caracter que no sigui un numero
 			}
 			catch (NumeroForaRangException e) {
 				System.out.println("ERROR, has ficat un numero fora del rang indicat");
+				//si l'usuari fica un numero fora del rang indicat abans a la llista
 			}
 		}
 		error = false;
@@ -532,54 +638,67 @@ public class Main {
 		System.out.println("Vols acceptar la peticio d'intercanvi?");
 		System.out.println("1 Acceptar");
 		System.out.println("2 Refusar");
+		//demanem a l'usuari si vol acceptar o refusar la peticio
 		
 		while (!error) {
 			try {
 				opcioAccept2 = Integer.parseInt(teclat.nextLine());
 				if (opcioAccept2 < 1 || opcioAccept2 > 2) {
+					//comprovem que l'usuari fiqui 1 o 2 
 					throw new NumeroForaRangException ();
 				}
 				error = true;
 			}
 			catch (NumberFormatException e) {
 				System.out.println("ERROR, has ficat un caracter que no es un numero!!");
+				//si l'usuari no fica un numero
 			}
 			catch (NumeroForaRangException e) {
 				System.out.println("ERROR, has introduit un numbero que no es ni 1 ni 2!");
+				//si l'usuari fica un numero que no sigui 1 o 2
 			}
 		}
 		
 		if (opcioAccept2 == 1) {
+			//si accepta la peticio
 			System.out.println("Has acceptat la peticio");
 			Peticions peticioAgafa = llistaPetNova.agafarPeticio(opcioAccept-1);
+			//agafem la peticio de la mateixa manera que hem fet abans
 			llistaPet.acceptarPet(llistaPet.comprovarPosicio(peticioAgafa));
+			//posem el parametre resposat de la peticio a 1 a la llista peticions
 			llistaPetNova.acceptarPet(opcioAccept-1);
+			//tambe ho fem amb la llista nova que em creat anteriorment
 			System.out.println("Introdueix la valoracio de l'oferta");
-			
-			//p.setValoracioUserRebPet(valoracioRep);
 			
 			error = false;
 			while (!error) {
 				try {
 					valoracioRep = Integer.parseInt(teclat.nextLine());
+					//demanem a l'usuari la valoracio de la peticio ja que ha acceptat la oferta
+					//la guardem a valoracioRep perque ho esta valorant l'usuari que te iniciada la sessio que es qui ha rebut la oferta
 					error = true;
 				}
 				catch (NumberFormatException e) {
 					System.out.println("ERROR, has ficat un caracter que no es un numero!!");
+					//si l'usuari introdueix un caracter que no es un numero
 				}
 			}
 			
 			llistaPet.posarValoracioPet(llistaPet.comprovarPosicio(peticioAgafa), valoracioRep);
+			//canviem el parametre valoracioRep de la peticio i el fiquem al numero que ha introduit l'usuari
 			u.setIntercanvis((u.getIntercanvis())+1);
+			//canviem el parametre de setIntercanvis del usuari i sumem 1 intercanvi
 			
-			/*Usuaris usuariAssignarIntercanvi = llistaUser.trobaUsuari(peticioAgafa.getUserPeticio());
-			usuariAssignarIntercanvi.setIntercanvis((usuariAssignarIntercanvi.getIntercanvis())+1);*/
 		}
 		else {
+			//si l'usuari refusa la peticio
 			System.out.println("Has refusat la peticio");
 			Peticions peticioAgafa = llistaPetNova.agafarPeticio(opcioAccept-1);
+			//agafem la peticio de la llista nova i l'editem
 			llistaPet.refusarPet(llistaPet.comprovarPosicio(peticioAgafa));
+			//canviem el parametre de refusarPet de la peticio i el posem a 2
 			llistaPetNova.refusarPet(opcioAccept-1);
+			//ho fem tambe amb la peticio de la llista nova creada anteriorment
 		}
 	}
 	
@@ -589,9 +708,28 @@ public class Main {
 		int codiPost = 0;
 		
 		System.out.println ("Introdueix els següents camps: ");
+		String nom = new String();
+		while (!error)
+		{
+			try {
+		
+			System.out.println ("Usuari:");
+			nom = teclat.nextLine();
+			if (llistaUser.comprovaUsuari(nom)) {
+				throw new NoEsTrobaException();
+			}
+			else
+			{
+				error=true;
+			}
+			}
+			catch (NoEsTrobaException e) {
+				System.out.println("Aquest Alies ja existeix!");
+			}
 			
-		System.out.println ("Usuari:");
-		String nom = teclat.nextLine();
+		}
+		
+		error=false;
 			
 		System.out.println ("Correu del usuari: ");
 		String correu = teclat.nextLine();
@@ -626,12 +764,12 @@ public class Main {
 	
 	public static void opcio10(Usuaris usuariactual, LlistaBens llistaBens) {
 		
-		System.out.println("Indica quin bé vols eliminar de la llista");
+		System.out.println("Indica quin be vols eliminar de la llista");
 		String nom = teclat.nextLine();
 		
 		try {
 			if (!llistaBens.comprovaBe(usuariactual.getAlies(), nom)){
-				System.out.println("No s'ha pogut trobat el bé que volies eliminar");
+				System.out.println("No s'ha pogut trobat el be que volies eliminar");
 			}
 			else {
 				llistaBens.eliminaBe(usuariactual, nom);
@@ -752,43 +890,9 @@ public class Main {
 		LlistaUsuaris llistaUser = new LlistaUsuaris(100);
 		LlistaPeticions llistaPet = new LlistaPeticions(100);
 		int opcio=0;
-		//llistaUser= carregarUsuaris();
-		//Usuaris usuariActual = iniciasessio(llistaUser);
+		//llistaUser = carregarUsuaris();
+		Usuaris usuariActual = iniciasessio(llistaUser);
 		//llistaUser.donaAlta(usuariActual);
-		
-		//Usuaris usuariActual = null;
-		
-		Usuaris usuariActual = new Usuaris ("srgerard", "ger@ard.com", 43002);
-		Usuaris chen = new Usuaris ("chenc11", "ch@en.com", 43003);
-		Usuaris cabreiroa = new Usuaris ("oscarcabre03", "osc@car.com", 43365);
-		llistaUser.donaAlta(usuariActual);
-		llistaUser.donaAlta(chen);
-		llistaUser.donaAlta(cabreiroa);
-		
-		Serveis mecanic = new Serveis ("chenc11", "Arreglar cotxe", "servei de reparacio de cotxes", "mecanic", false, "5-1-2023", "6-1-2023");
-		Serveis cuina = new Serveis ("oscarcabre03", "cuina macarrons", "et fa els macarrons", "cuina", false, "10-1-2023", "10-2-2023");
-		Serveis neteja = new Serveis ("srgerard", "neteja casa", "et neteja la casa", "neteja", false, "23-4-2022", "14-2-2023");
-		Bens pilota = new Bens ("srgerard", "pilota", "cosa rodona", "joguina", true, "2-1-2023", 23, 432, 5, 54);
-		Bens sabata = new Bens ("oscarcabre03", "sabata", "cosa que tapa el peu", "roba", true, "1-1-1923", 321, 32, 45, 2);
-		Bens polvoro = new Bens ("chenc11", "polvoro", "menjar dolç per nadal", "menjar", true, "22-11-2022", 23, 432, 5, 54);
-		
-		Peticions p1 = new Peticions ("00001", "srgerard", "oscarcabre03", "sabata", "pilota");
-		Peticions p2 = new Peticions ("00002", "chenc11", "oscarcabre03", "sabata", "polvoro");
-		Peticions p3 = new Peticions ("00003", "oscarcabre", "srgerard", "pilota", "sabata");
-		Peticions p4 = new Peticions ("00004", "chenc11", "srgerard", "pilota", "polovoro");
-		
-		llistaServ.afegirServei(mecanic);
-		llistaServ.afegirServei(cuina);
-		llistaServ.afegirServei(neteja);
-		
-		llistaBe.afegirBe(pilota);
-		llistaBe.afegirBe(sabata);
-		llistaBe.afegirBe(polvoro);
-		
-		llistaPet.afegirPeticio(p1);
-		llistaPet.afegirPeticio(p2);
-		llistaPet.afegirPeticio(p3);
-		llistaPet.afegirPeticio(p4);
 		
 		mostrarMenu();
 		while (opcio != 17) {
@@ -827,7 +931,7 @@ public class Main {
 				opcio10(usuariActual, llistaBe);
 				break;
 			case 11:
-				//opcio11();
+				opcio11(usuariActual, llistaServ);
 				break;
 			case 12:
 				opcio12(llistaPet);
@@ -848,7 +952,5 @@ public class Main {
 			mostrarMenu();
 		}
 		System.out.println("Has sortit de l'aplicacio, adeu!");
-		//altaUsuari();
-		//llegirFitxerSerial();*/
 	}
 }

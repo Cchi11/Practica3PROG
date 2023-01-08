@@ -1,6 +1,7 @@
 package interficieGrafica;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -24,7 +25,7 @@ public class Registrarse extends JFrame {
 	private JTextField cPost;
 	private JButton acceptar;
 	private JPanel panell;
-	private Usuaris nouUsuari;
+
 	
 	public Registrarse (JFrame ventana, LlistaUsuaris llistaUser) {
 
@@ -32,6 +33,7 @@ public class Registrarse extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(300,200);
 		this.setVisible(true);
+		
 	    panell = new JPanel(new GridLayout(3,2));
 	    Font buttonFont = new Font("Roboto", Font.PLAIN, 16);
 	    titolAlies = new JLabel ("Usuari:");
@@ -70,6 +72,8 @@ public class Registrarse extends JFrame {
 	    JPanel botons = new JPanel(new FlowLayout());
 	    
 	    BotoAcceptarActionListener accioBoto = new BotoAcceptarActionListener (ventana, llistaUser, this, alies, correu, cPost);
+
+
 	    
 	    acceptar.addActionListener(accioBoto);
 	    
@@ -77,18 +81,10 @@ public class Registrarse extends JFrame {
 	    
 	    botons.add(acceptar);
 	
-	    nouUsuari = accioBoto.getUsuari();
 	    
 	    setVisible(true);
 
 	}
-	
-	
-	public Usuaris getUsuaris() {
-		return nouUsuari;
-	}
-	
-	
 	
 
 }

@@ -41,7 +41,7 @@ public class Opcio5ActionListener implements ActionListener {
 				{
 					if (llistaUser.comprovaUsuari(nom)) {
 						error=true;
-						user = llistaUser.trobaUsuari(nom).copia();
+						MainGrafic.usuari = llistaUser.trobaUsuari(nom).copia();
 					}
 					else{
 						throw new NoEsTrobaException ();
