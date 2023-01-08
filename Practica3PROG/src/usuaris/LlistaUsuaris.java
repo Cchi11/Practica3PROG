@@ -42,31 +42,50 @@ public class LlistaUsuaris {			//Clase feta per Chenxing Chi
 			nElem++;
 		}
 		
+		/* metode per comprovar si l'usuari pertany a la llista
+		 * @param aliesUsuar, el nom del usuari que volem comprovar
+		 * 
+		 */
 		public boolean comprovaUsuari (String aliesUsuari) {
 			
 			boolean trobat = false;
 			int i =0;
 			
 			for ( i=0; !trobat && i <nElem; i++) {
+				//cerquem la llista d'usuaris
 				if (llista[i].getAlies().equals(aliesUsuari)) {
+					//comprovem si l'alies introduït coincideix amb el de la llista
 					trobat = true;
+					//si coincideix posem el boolea a true i sortim de la llista
 				}
 			}
 			i--;
+			//restem 1 a la i perque al ser un for, la ultima instancia suma 1 unitat a la i
 			return (trobat);
 		}	
 		
+		/* metode per trobar si un usuari pertany a la llista (Es el mateix que l'anteror pero ara retorna un usuari i no un boolea)
+		 * @param aliesUsuari, el nom del usuari que volem comprovar
+		 * @return l'usuari que s'ha trobat, no el nom
+		 */
 		public Usuaris trobaUsuari (String aliesUsuari) {
 			
 			boolean trobat = false;
 			int i=0;
 			for (i=0; !trobat && i <= nElem; i++) {
+				//cerquem a la llista
 				if (llista[i].getAlies().equals(aliesUsuari)) {
+					//comprovem si l'alies introduït coincideix amb el de la llista
 					trobat = true;
+					//si coincideix posem el boolea a true i sortim de la llista
+
 				}
 			}
+			//restem 1 a la i perque al ser un for, la ultima instancia suma 1 unitat a la i
 			i--;
+			//posem l'usuari trobat en una variable local per retornar-la
 			Usuaris nou = llista[i].copia();
+			
 			return nou;
 		}	
 		

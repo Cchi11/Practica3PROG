@@ -1,4 +1,9 @@
 package dadesProductesServeis;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import usuaris.Usuaris;
 
 public class LlistaServeis {   //Clase feta per Chenxing Chi
@@ -41,18 +46,32 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		nElem++;
 	}
 	
+	/* Metode per comprovar si el servei introduït es troba a la llisa de serveis i si pertany a l'usuari
+	 * @param usuari, l'alies de l'usuari que te iniciada la sessio actualment
+	 * @param nomServ, el nom del servei que es vol comprovar
+	 * @return un boolea que indica si ha trobat o no el servei
+	 */
 	public boolean comprovaServei (String usuari, String nomServ) {
 
         boolean trobat = false;
 
         for (int i=0; !trobat && i < nElem; i++) {
+        	//cerquem a la llista de serveis
             if ((llista[i].getNom().equals(nomServ)) && (usuari.equals(llista[i].getUsuari()))) {
+            	//si coincideix amb el que ha ficat l'usuari
                 trobat = true;
+                //posem el boolea a true
             }
         }
         return (trobat);
     }
 	
+	/**
+	 * Metode que fa el mateix que el comprovaServei, pero ara mira sense tenir en compte l'usuari
+	 * @param usuari usuari a busccar
+	 * @param nomServ producte a buscar
+	 * @return boolea si ha trobat o no
+	 */
 	public boolean comprovaServeiSenseUsuari (String usuari, String nomServ) {
 
         boolean trobat = false;
@@ -65,6 +84,12 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
         return (trobat);
     }
 	
+	/**
+	 * Metode que fa el mateix que el comprovaServei, pero ara mira sense tenir en compte l'usuari y ara retorna un String amb el nom d'aquest usuari trobat
+	 * @param usuari usuari a busccar
+	 * @param nomServ producte a buscar
+	 * @return String amb el nom del usuari trobat i sino retorna null
+	 */
 	public String comprovaServeiSenseUsuariStr (String usuari, String nomProd) {
 		
 		boolean trobat = false;
@@ -78,15 +103,45 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		return us;
 	}
 	
+	/* metode que retorna en una llista de serveis tots els que estan actius
+	 * @return la llista amb els serveis actius
+	 */
 	public LlistaServeis llistaServeisActiu() {
 		LlistaServeis actius = new LlistaServeis(100);
+		//creem la llista on ficarem els serveis actius
 		for(int i = 0; i < this.nElem; i++) {
+			//recorrem la llista
 			if (llista[i].getActiu()) {
+				//comprovem si el servei es actiu
 				actius.afegirServei(llista[i]);
+				//l'afegim a la llista
 			}
 		}
 		return actius;
 	}
+
+
+	public void escriureLlistaServeis() {
+		try (BufferedWriter g = new BufferedWriter(new FileWriter("dadesServeis.txt"))) {
+			String frase = "";
+			int i = 0;
+
+			for(i = 0; i < nElem; i++) {
+				frase = llista[i].getUsuari()+";"+llista[i].getNom()+";"+llista[i].getDesc()+";"+llista[i].getTipus()+";false;"+llista[i].getData()+";"+llista[i].getDataFiOferiment();
+				g.write(frase);
+				g.newLine();
+			}
+			g.close();
+		}
+		catch(FileNotFoundException e) {
+			System.out.println("L'arxiu d'entrada no existeix");
+		}
+		catch(IOException e) {
+			System.out.println("S'ha produit un error en els arxius");
+		}
+	}
+	
+	
 
 	/**
 	 * Dona de baixa un servei sense esborrarlo de la llista

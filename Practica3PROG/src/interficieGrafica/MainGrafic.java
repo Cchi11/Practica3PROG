@@ -46,6 +46,7 @@ public class MainGrafic extends JFrame {
 	public MainGrafic(LlistaUsuaris llistaUser, LlistaBens llistaBe, LlistaServeis llistaServis, LlistaPeticions llistaPeti) {
 
 		setVisible(false);
+		this.setLocation(500, 250);
 		//Primer cridem la funcio aquesta per tenir clara qui te la sessio iniciada
 		usuari = IniciaSessio(llistaUser);
 
@@ -65,7 +66,7 @@ public class MainGrafic extends JFrame {
 		 
 		//Posem text per a cada boto opcio i a cada boto li asignem el seu corresponent ActioListener
 		buttons[0].setText("Buscar ofertes d'intercanvi actives");
-		Opcio2ActionListener opcio2 = new Opcio2ActionListener(llistaBe, llistaServis);
+		Opcio2ActionListener opcio2 = new Opcio2ActionListener(llistaBe, llistaServis, this);
 		buttons[0].addActionListener(opcio2);
 		
 		buttons[1].setText("Afegir una peticio d'intercanvi d'alguna de les ofertes actives");

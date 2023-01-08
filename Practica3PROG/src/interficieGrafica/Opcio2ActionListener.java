@@ -21,15 +21,25 @@ public class Opcio2ActionListener implements ActionListener {
 	
 	private LlistaBens llistaBe;
 	private LlistaServeis llistaServ;
+	private JFrame finestraP;
 	
-	public Opcio2ActionListener (LlistaBens llistaBe, LlistaServeis llistaServ) {
+	/* Constructor per passar parametres
+	 * @param llistaBe la llista de bens
+	 * @param llistaServ la llista de serveis
+	 * @param finestraP la finestra principal on surten les opcions
+	 */
+	public Opcio2ActionListener (LlistaBens llistaBe, LlistaServeis llistaServ, JFrame finestraP) {
 		this.llistaBe = llistaBe;
 		this.llistaServ = llistaServ;
+		this.finestraP = finestraP;
 	}
 	
 	public void actionPerformed(ActionEvent e) {
 		
 		JButton b = (JButton) e.getSource();
-		Opcio2Finestra o2 = new Opcio2Finestra(llistaBe, llistaServ);
+		finestraP.setVisible(false);
+		//una vegada s'acciona el boto, la finestra principal es fa invisible per donar pas a la finestra de la opcio 2
+		Opcio2Finestra o2 = new Opcio2Finestra(llistaBe, llistaServ, finestraP);
+		//es crea una instancia de la opcio 2
 	}
 }

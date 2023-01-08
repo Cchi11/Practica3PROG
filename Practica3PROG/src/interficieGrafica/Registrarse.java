@@ -43,6 +43,7 @@ public class Registrarse extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(300,200);
 		this.setVisible(true);
+		this.setLocation(800, 400);
 		
 		//Creem un panel de 3x2 components
 	    panell = new JPanel(new GridLayout(3,2));
