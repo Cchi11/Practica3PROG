@@ -12,6 +12,11 @@ import Exceptions.NoEsTrobaException;
 import usuaris.LlistaUsuaris;
 import usuaris.Usuaris;
 
+/**
+ * Clase per implementar l'accio del boto acceptar de la finestra Registrarse
+ * @author chenc
+ *
+ */
 public class BotoAcceptarActionListener implements ActionListener {
 
 	private LlistaUsuaris llistaUser;
@@ -19,8 +24,16 @@ public class BotoAcceptarActionListener implements ActionListener {
 	private JTextField usuari;
 	private JTextField correu;
 	private JTextField cPost;
-	private boolean registrat;
 	private JFrame ventana;
+	
+	/**
+	 * Pasar parametres pel constructor i guardarles en les nostres variables privades
+	 * @param ventana FinestraRegistrarse
+	 * @param llistaUser Llista d'usuaris on es guarden tots els usuaris
+	 * @param usuari JTextField de la part de esciure usuari
+	 * @param correu JTextField de la part de esciure correu
+	 * @param cPost JTextField de la part de esciure cPost
+	 */
 	
 	public BotoAcceptarActionListener (JFrame ventana, LlistaUsuaris llistaUser, JFrame registrarse, JTextField usuari, JTextField correu, JTextField cPost) {
 		this.ventana=ventana;
@@ -29,14 +42,16 @@ public class BotoAcceptarActionListener implements ActionListener {
 		this.usuari=usuari;
 		this.correu=correu;
 		this.cPost=cPost;
-		registrat=false;
 		
 	}
 	@Override
 	
-	
+	/**
+	 * Creacio de la accio
+	 */
 	public void actionPerformed(ActionEvent e) {
 		JButton b = (JButton) e.getSource();
+		//Si al donarli al boto d'acceptar esta buit, mostrar Missatge d'error
 		try {
 			if (usuari.getText().equals("") || correu.getText().equals("")|| cPost.getText().equals("") ||
 					usuari.getText().equals(null) || correu.getText().equals(null) || cPost.getText().equals(null)) {
@@ -44,18 +59,21 @@ public class BotoAcceptarActionListener implements ActionListener {
 				}
 			else
 			{
-
+					//Intenta passar el codi postal a un int. Si l'usuari pasa caracters, mostra missatge d'error
+				
 					int cPostInt = Integer.parseInt(cPost.getText());
+					
+					//Si el nom d'usuari indicat es un nom que ja existerix, mostrar missatge d'error
 					if (llistaUser.comprovaUsuari(usuari.getText())) {
 						throw new NoEsTrobaException();
 					}
 					Usuaris nou = new Usuaris (usuari.getText(), correu.getText(), cPostInt);
-					registrat=true;
-					llistaUser.donaAlta(nou);
-					MainGrafic.usuari=nou;
-					//System.out.println(nouUsuari.toString());
+				
+					llistaUser.donaAlta(nou); //Afegeix a la llista l'usuari
+					MainGrafic.usuari=nou; //Cambia la sessio del usuari actual pel nou registrat
+					
+					//si tot va be, amaga la finestra de registrarse y mostra la de la finestra principal
 					registrar.setVisible(false);
-					//si tot va be
 					ventana.setVisible(true);
 			}
 		}
@@ -72,14 +90,6 @@ public class BotoAcceptarActionListener implements ActionListener {
 		}
 	}
 	
-
-	
-	public boolean getRegistrat() {
-		return registrat;
-	}
-	public LlistaUsuaris getLlistaUser() {
-		return llistaUser;
-	}
 }
 	
 

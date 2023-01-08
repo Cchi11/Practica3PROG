@@ -30,13 +30,13 @@ import usuaris.LlistaUsuaris;
 public class Main {
 	static Scanner teclat = new Scanner(System.in);
 	
+
 	public static Usuaris iniciasessio(LlistaUsuaris llista) {
 		Usuaris nou = new Usuaris();
 		System.out.println("Benvingut/da a l'aplicacio");
 		System.out.println("\n\nTria una opcio: ");
 		System.out.println("\n\t1. Iniciar sessio");
 		System.out.println("\t2. Registra't si no tens compte");
-		System.out.println("\t3. Sortir de l'aplicacio");
 		int opcioini = 0;
 		boolean error = false;
 		while (!error)
@@ -45,7 +45,7 @@ public class Main {
 			{
 				String llegirnum = teclat.nextLine();
 				opcioini = Integer.parseInt(llegirnum);
-				if (opcioini<1 || opcioini>3)
+				if (opcioini<1 || opcioini>2)
 				{
 					throw new NumeroForaRangException();
 				}
@@ -92,9 +92,20 @@ public class Main {
 		}
 		else {
 			if (opcioini == 2) {
-				String usuari;
-				System.out.print("Indica el teu alies:");
-				usuari = teclat.nextLine();
+				String usuari = new String();
+				error =false;
+				while (!error)
+				{
+					System.out.print("Indica el teu alies:");
+					usuari = teclat.nextLine();
+					
+					if (llista.comprovaUsuari(usuari)) {
+						System.out.println("Aquest alies ja existeix!!");
+					}
+					else {
+						error=true;
+					}
+				}
 
 				System.out.println("Indica el teu correu electronic:");
 				String correu = teclat.nextLine();
@@ -127,6 +138,9 @@ public class Main {
 		return nou;
 		
 	}
+	/**
+	 * Mostra el menu
+	 */
 	
 	public static void mostrarMenu () {
 		System.out.println("\n\nOpcions del menu:");
@@ -585,6 +599,10 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Dona alta a un usuari, pasant per parametre la llistaUsuaris on es guarda
+	 * @param llistaUser Llista on es guarden tots els Usuaris
+	 */
 	public static void opcio9(LlistaUsuaris llistaUser) {
 			
 		boolean error = false;
@@ -592,19 +610,24 @@ public class Main {
 		
 		System.out.println ("Introdueix els següents camps: ");
 		String nom = new String();
+		
+		//Si introdueix un nom d'usuari que existeix, mostrar missatge d'error i tornar a començar
+		
 		while (!error)
 		{
-			try {
-		
-			System.out.println ("Usuari:");
-			nom = teclat.nextLine();
-			if (llistaUser.comprovaUsuari(nom)) {
-				throw new NoEsTrobaException();
-			}
-			else
+			try 
 			{
-				error=true;
-			}
+				System.out.println ("Usuari:");
+				nom = teclat.nextLine();
+				
+				//Si el nom ja existeix, mostra error
+				if (llistaUser.comprovaUsuari(nom)) {
+					throw new NoEsTrobaException();
+				}
+				else
+				{
+					error=true;
+				}
 			}
 			catch (NoEsTrobaException e) {
 				System.out.println("Aquest Alies ja existeix!");
@@ -612,13 +635,16 @@ public class Main {
 			
 		}
 		
+		//reiniciem la variable
 		error=false;
 			
 		System.out.println ("Correu del usuari: ");
 		String correu = teclat.nextLine();
 		
 		System.out.println ("Codi postal del usuari:");
-
+		
+		//Controlar que l'usuari introdueixi una variable enterea i no altres caracters
+		
 		while (!error) {
 			try {
 				codiPost = Integer.parseInt(teclat.nextLine());
@@ -629,6 +655,7 @@ public class Main {
 			}
 		}
 		
+		//Si tot va be, crear un nou usuari i afegirlo a la llista;
 		Usuaris u1 = new Usuaris(nom, correu, codiPost);
 		
 		llistaUser.donaAlta(u1);
@@ -645,6 +672,12 @@ public class Main {
 	    }*/
 	}
 	
+	/**
+	 * Donar de baixa un bé o producte físic a intercanviar i eliminar-lo de la llista. Només es podrà
+	 * de donar de baixa si encara no s’ha fet cap intercanvi amb ell.
+	 * @param usuariactual
+	 * @param llistaBens
+	 */
 	public static void opcio10(Usuaris usuariactual, LlistaBens llistaBens) {
 		
 		System.out.println("Indica quin be vols eliminar de la llista");
@@ -681,6 +714,10 @@ public class Main {
 				System.out.println("S'ha donat de baixa correctament el servei");
 	}
 	
+	/**
+	 * Mostrar les peticions d’intercanvi pendents de respondre amb un toString de la llista
+	 * @param llistaPet Llista amb totes les peticions
+	 */
 	public static void opcio12(LlistaPeticions llistaPet) {
 
 		System.out.println(llistaPet.mostrarPetNoRespostes().toString());
@@ -774,8 +811,10 @@ public class Main {
 		LlistaPeticions llistaPet = new LlistaPeticions(100);
 		int opcio=0;
 		//llistaUser = carregarUsuaris();
+		Usuaris usuari1= new Usuaris ("chen", "re", 123);
+		llistaUser.donaAlta(usuari1);
 		Usuaris usuariActual = iniciasessio(llistaUser);
-		//llistaUser.donaAlta(usuariActual);
+		
 		mostrarMenu();
 		while (opcio != 17) {
 			opcio = Integer.parseInt(teclat.nextLine());

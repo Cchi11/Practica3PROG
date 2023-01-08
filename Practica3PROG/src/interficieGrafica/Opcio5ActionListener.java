@@ -4,75 +4,41 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import Exceptions.NoEsTrobaException;
 import usuaris.LlistaUsuaris;
 import usuaris.Usuaris;
 
+/**
+ * Clase per configurar l'accio del boto 5, el de canviar d'usuari
+ * @author chenc
+ *
+ */
 public class Opcio5ActionListener implements ActionListener {
 	
 	private LlistaUsuaris llistaUser;
-	private Usuaris user;
+	private JFrame finestraP;
 	
-	public Opcio5ActionListener(LlistaUsuaris llistaUser, Usuaris usuariactual) {
+	/**
+	 * Pasem parametres y les guardem a les nostres variables
+	 * @param finestraP Finestra principal (Interficie Grafica)
+	 * @param llistaUser Llista d'usuaris on es guarden tots els usuaris
+	 */
+	public Opcio5ActionListener(JFrame finestraP, LlistaUsuaris llistaUser) {
 		this.llistaUser=llistaUser;
-		this.user=usuariactual;
+		this.finestraP=finestraP;
 	}
-	@Override
+
+	/**
+	 * Metode de accionar el boto5. Crea una instancia nova per poder iniciar sessio graficament
+	 */
 	public void actionPerformed(ActionEvent e) {
 		JButton b = (JButton) e.getSource();
-		
-		boolean error = false;
-		
-		boolean sortir=false;
-		int intents=0;
-		
-		while (!error && !sortir){
-			
-			if (intents!=2)
-			{
-				String nom = JOptionPane.showInputDialog("Indica el teu codi d'usuari");
-				if (nom == null || nom.equals("")) {
-					JOptionPane.showMessageDialog(null, "Cal un codi", "ERROR", JOptionPane.ERROR_MESSAGE);
-					nom = JOptionPane.showInputDialog("Indica el teu codi d'usuari");
-				}				
-				try
-				{
-					if (llistaUser.comprovaUsuari(nom)) {
-						error=true;
-						MainGrafic.usuari = llistaUser.trobaUsuari(nom).copia();
-					}
-					else{
-						throw new NoEsTrobaException ();
-					}
-							
-						
-				}
-				catch (NullPointerException ex1) {
-					JOptionPane.showMessageDialog(null, "No s'ha pogut trobar el teu usuari", "ERROR", JOptionPane.ERROR_MESSAGE);
-				}	
-				catch (NoEsTrobaException ex2) {
-					JOptionPane.showMessageDialog(null, "No s'ha pogut trobar el teu usuari", "ERROR", JOptionPane.ERROR_MESSAGE);
-				}
-			
-			}
-			else
-			{
-				String [] opcions1 = {"Si", "No"};
-				int resultat1 = JOptionPane.showOptionDialog(null, 
-								"Vols Sortir?", "", 
-								JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
-								null, opcions1, 
-								0);
-				if (resultat1==JOptionPane.YES_OPTION)
-					sortir=true;
-				else
-					intents=0;
-			}
-				
-			intents++;
-		}
+		IniciaSessio canviarUsuari = new IniciaSessio (finestraP, llistaUser);
+		//quan s'inicia, oculta la finestraPrincipal
+		finestraP.setVisible(false);
 	}
 
 

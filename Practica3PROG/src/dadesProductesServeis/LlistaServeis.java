@@ -23,7 +23,12 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		return(nElem);
 	}
 		
+	/**
+	 * 	Afegir servei a un a llista
+	 * @param s Servei a afegir a la llista
+	 */
 	public void afegirServei (Serveis s) {
+		//Si la llista esta plena, la fem mes gran
 		if (nElem>=llista.length) {
 			Serveis [] llistanova = new Serveis [nElem*2];
 			for (int i=0; i<nElem; i++)
@@ -83,7 +88,12 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		return actius;
 	}
 
-	
+	/**
+	 * Dona de baixa un servei sense esborrarlo de la llista
+	 * @param usuari
+	 * @param nomServei
+	 * @return boolea que indica si s'ha donat de baixa o no
+	 */
 	public boolean donaBaixaServei (Usuaris usuari, String nomServei) {
 		boolean trobat=false;
 		for (int i=0; i<nElem; i++) {

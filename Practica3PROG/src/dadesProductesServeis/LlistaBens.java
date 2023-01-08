@@ -25,7 +25,12 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 		return nElem;
 	}
 	
+	/**
+	 * Metode per afegir un be a la llista
+	 * @param b el be a afegir
+	 */
 	public void afegirBe (Bens b) {
+		//Si la llista esta plena, la fem més gran
 		if (nElem>=llista.length) {
 			Bens [] llistanova = new Bens [nElem*2];
 			for (int i=0; i<nElem; i++)
@@ -37,6 +42,7 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 		llista[nElem] = b.copia();
 		nElem++;
 	}
+	
 	
 	public boolean comprovaBe (String usuari, String nomProd) {
 		
@@ -50,6 +56,12 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 		return (trobat);
 	}	
 	
+	/**
+	 * Metode que realitza el mateix que el metode ComprovaBe, pero ara mira sense tenir en compte l'usuari
+	 * @param usuari Nom usuari a buscar
+	 * @param nomProd Nom del producte a buscar
+	 * @return Retorna si a trobat o no
+	 */
 	public boolean comprovaBeSenseUsuari (String usuari, String nomProd) {
 		
 		boolean trobat = false;
@@ -74,7 +86,12 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 		}
 		return us;
 	}
-	
+
+	/**
+	 * Elimina un Be de la llista tenint en compte que nomes es pot esborrar si no s'ha intercanviat
+	 * @param usuari Usuari actual
+	 * @param nomProd nom del producte a esborrar
+	 */
 	public void eliminaBe (Usuaris usuari, String nomProd) {
 		int i=0;
 			while (i<nElem) {

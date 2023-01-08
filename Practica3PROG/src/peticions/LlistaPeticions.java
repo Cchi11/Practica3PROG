@@ -22,6 +22,10 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 		return(nElem);
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 */
 	public void afegirPeticio (Peticions p) {
 		if (nElem>=llista.length) {
 			Peticions [] llistanova = new Peticions[nElem*2];
@@ -35,10 +39,15 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 		nElem++;
 	}
 	
+	
 	public Peticions agafarPeticio (int i) {
 		return (llista[i]);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public LlistaPeticions mostrarPetNoRespostes () {	
 		LlistaPeticions llistaPet = new LlistaPeticions (100);
 		for (int i=0; i < nElem; i++) {
@@ -48,15 +57,6 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 		}
 		return llistaPet;
 	}
-	
-	/*public LlistaPeticions BuscarOfertesActives () {
-		LlistaPeticions llistaNova = new LlistaPeticions (100);
-		for (int i = 0; i < nElem ; i++) {
-			//if (llista[i].get)
-			llistaNova.afegirPeticio(llista[i]);
-		}
-		return llistaNova;
-	}*/
 	
 	
 	public void mostrarPetAccept () {		
@@ -83,12 +83,16 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 		llista[i].setResposat(2);
 	}
 	
-
+	/**
+	 * 
+	 * @return
+	 */
 	public int idSeguentPeticio() {
 		int ultimaId;
 		ultimaId = nElem+1;
 		return ultimaId;
 	}
+	
 	
 	public void posarValoracioPet (int i, int v) {
 		llista[i].setValoracioUserRebPet(v);

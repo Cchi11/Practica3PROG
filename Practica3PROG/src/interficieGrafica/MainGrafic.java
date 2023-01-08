@@ -35,11 +35,14 @@ public class MainGrafic extends JFrame {
 	public static Usuaris usuari;
 
 
-	 /**
-	  * Constructor de la finestra principal
-	  * @param llistaUser LlistaUsuaris com a parametre
-	  */
-
+	
+	/**
+	 * Constructor de la finestra principal
+	 * @param llistaUser LlistaUsuaris on es guarden els usuaris
+	 * @param llistaBe	Llista de bens 
+	 * @param llistaServis	Llista de Serveis
+	 * @param llistaPeti LlistaPeti
+	 */
 	public MainGrafic(LlistaUsuaris llistaUser, LlistaBens llistaBe, LlistaServeis llistaServis, LlistaPeticions llistaPeti) {
 
 		setVisible(false);
@@ -59,6 +62,7 @@ public class MainGrafic extends JFrame {
 			//els posem de color blanc de moment
 			buttons[i].setBackground(Color.WHITE);
 		}
+		 
 		//Posem text per a cada boto opcio i a cada boto li asignem el seu corresponent ActioListener
 		buttons[0].setText("Buscar ofertes d'intercanvi actives");
 		Opcio2ActionListener opcio2 = new Opcio2ActionListener(llistaBe, llistaServis);
@@ -71,37 +75,43 @@ public class MainGrafic extends JFrame {
 		buttons[2].setText("Consultar els intercanvis que ha fet l'usuari");
 		
 		buttons[3].setText("Canviar el codi d'usuari que esta  utilitzant l'aplicacio");
-
-		Opcio5ActionListener opcio5 = new Opcio5ActionListener(llistaUser, usuari);
+		Opcio5ActionListener opcio5 = new Opcio5ActionListener (this, llistaUser);
 		buttons[3].addActionListener(opcio5);
+		
 		//El text del titol
 		JLabel titol = new JLabel();
-		titol.setText("Indica quina opcio vols");
-
+		titol.setText("Indica quina opcio vols:");
+		this.add(titol, BorderLayout.NORTH);
 		
-		 //configurem cada boto amb la seva font y l'afegim al panell 
+		 //Configurem cada boto amb la seva font y l'afegim al panell 
 		for (int i = 0; i < buttons.length; i++) {
 			Font buttonFont = new Font("Roboto", Font.PLAIN, 16);
 			buttons[i].setFont(buttonFont);
 			panellBotons.add(buttons[i]);
 		}
-		//afegim el panell al centre de tot
+		
+		//Afegim el panell al centre de tot
 		add(panellBotons, BorderLayout.CENTER);
 		add(titol, BorderLayout.NORTH);
 		
 		pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1000, 500);
-		//setVisible(true);
 		 
 	}
 
-	 
+	 /**
+	  * Procediment que retorna un Usuari que sera el usuari que te la sessióActual
+	  * @param llistaUser Llista on es guarda l'usuari
+	  * @return UsuariActual que te la sessió
+	  */
 	 private Usuaris IniciaSessio (LlistaUsuaris llistaUser) {
 		 
+		 	//Panell de opcions
 			String [] opcions = {"Registra't", "Ja tinc un compte"};
 			boolean error = false;
-				
+			
+			//Finestra que mostra 2 opcions, la de registrarse o iniciar sessio
 			int resultat = JOptionPane.showOptionDialog(null, 
 						   "Benvingut! Registra't o ja tens compte", "Plataforma d'intercanvi", 
 						   JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
@@ -109,92 +119,16 @@ public class MainGrafic extends JFrame {
 						   0);
 			
 			
+			//L'usuari li dona a iniciar sessió
 			 if (resultat == JOptionPane.NO_OPTION) {
-				boolean sortir=false;
-				int intents=0;
-				
-				while (!error && !sortir){
-					
-					if (intents!=2)
-					{
-						String nom = JOptionPane.showInputDialog("Indica el teu codi d'usuari");
-						if (nom == null || nom.equals("")) {
-							/*if (nom == JOptionPane.CANCEL_OPTION)
-							{
-								break;
-							}
-							*/
-							// Missatge d'error.
-							JOptionPane.showMessageDialog(null, "Cal un codi", "ERROR", JOptionPane.ERROR_MESSAGE);
-							nom = JOptionPane.showInputDialog("Indica el teu codi d'usuari");
-						}				
-						try
-						{
-							if (llistaUser.comprovaUsuari(nom)) {
-								error=true;
-								usuari = llistaUser.trobaUsuari(nom).copia();
-								setVisible(true);
-							}
-							else{
-								throw new NoEsTrobaException ();
-							}
-									
-								
-						}
-						catch (NullPointerException e) {
-							JOptionPane.showMessageDialog(null, "No s'ha pogut trobar el teu usuari", "ERROR", JOptionPane.ERROR_MESSAGE);
-								
-							if (intents==2)
-							{
-								String [] opcions1 = {"Si", "No"};
-								int resultat1 = JOptionPane.showOptionDialog(null, 
-												"Vols Sortir?", "", 
-												JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
-												null, opcions1, 
-												0);
-								if (resultat1==JOptionPane.YES_OPTION)
-								{
-									sortir=true;
-									setVisible(false);
-								}
-							}
-							intents++;
-						}
-						catch (NoEsTrobaException e) {
-							JOptionPane.showMessageDialog(null, "No s'ha pogut trobar el teu usuari", "ERROR", JOptionPane.ERROR_MESSAGE);
-						}
-					
-					}
-					else
-						{
-							String [] opcions1 = {"Si", "No"};
-							int resultat1 = JOptionPane.showOptionDialog(null, 
-											"Vols Sortir?", "", 
-											JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
-											null, opcions1, 
-											0);
-							if (resultat1==JOptionPane.YES_OPTION)
-							{
-								sortir=true;
-								setVisible(false);
-							}
-							else
-								intents=0;
-						}
-						
-					intents++;
-				}
-			}
-			 
-			else{
-				
+				 IniciaSessio finestraSessio = new IniciaSessio(this, llistaUser);
+			 }
+			 else{
+				//Si ha seleccionat el boto de registrarse, crea finestra de registrarse
 				if (resultat == JOptionPane.YES_OPTION) {
-
 					Registrarse finestraRegistrar = new Registrarse(this, llistaUser);
 				}
-
 			}
-
 			return usuari;
 		 }
 
