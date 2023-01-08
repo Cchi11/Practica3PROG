@@ -1,4 +1,9 @@
 package dadesProductesServeis;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import usuaris.Usuaris;
 
 public class LlistaServeis {   //Clase feta per Chenxing Chi
@@ -98,6 +103,26 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		return actius;
 	}
 
+	public void escriureLlistaServeis() {
+		try (BufferedWriter g = new BufferedWriter(new FileWriter("dadesServeis.txt"))) {
+			String frase = "";
+			int i = 0;
+
+			for(i = 0; i < nElem; i++) {
+				frase = llista[i].getUsuari()+";"+llista[i].getNom()+";"+llista[i].getDesc()+";"+llista[i].getTipus()+";false;"+llista[i].getData()+";"+llista[i].getDataFiOferiment();
+				g.write(frase);
+				g.newLine();
+			}
+			g.close();
+		}
+		catch(FileNotFoundException e) {
+			System.out.println("L'arxiu d'entrada no existeix");
+		}
+		catch(IOException e) {
+			System.out.println("S'ha produit un error en els arxius");
+		}
+	}
+	
 	
 	public boolean donaBaixaServei (Usuaris usuari, String nomServei) {
 		boolean trobat=false;
