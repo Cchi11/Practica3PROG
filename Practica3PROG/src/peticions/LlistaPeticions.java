@@ -1,5 +1,10 @@
 package peticions;
 
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class LlistaPeticions { //Clase realitzada per Pol Regy
 	private int nElem;
 	private Peticions[] llista;
@@ -109,6 +114,26 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 		}
 		i--;
 		return i;
+	}
+	
+	public void escriureLlistaPeticions() {
+		try (BufferedWriter g = new BufferedWriter(new FileWriter("dadesPeticions.txt"))) {
+			String frase = "";
+			int i = 0;
+
+			for(i = 0; i < nElem; i++) {
+				frase = llista[i].getIdPeticio()+";"+llista[i].getUserPeticio()+";"+llista[i].getUserRebPet()+";"+llista[i].getProducAcons()+";"+llista[i].getProducOfe();
+				g.write(frase);
+				g.newLine();
+			}
+			g.close();
+		}
+		catch(FileNotFoundException e) {
+			System.out.println("L'arxiu d'entrada no existeix");
+		}
+		catch(IOException e) {
+			System.out.println("S'ha produit un error en els arxius");
+		}
 	}
 	
 	public String toString() {

@@ -308,8 +308,6 @@ public class Main {
 		
 		llistaServ.afegirServei(s);
 		
-		escriureInstanciaServeis(s);
-		
 		return llistaServ;
 	}
 	
@@ -387,7 +385,6 @@ public class Main {
 		
 		llistaBe.afegirBe(b);
 		
-		escriureInstanciaBens(b);
 		return(llistaBe);
 	}
 	
@@ -452,7 +449,7 @@ public class Main {
 		error = false;
 		
 		System.out.println ("Indica el nom del producte que ofereixes");
-		
+		System.out.println(userPet);
 		while (!error) {
 			try {
 				prodOfer = teclat.nextLine();
@@ -483,8 +480,6 @@ public class Main {
 		Peticions p1 = new Peticions (id, userPet, userRep, prodAcon, prodOfer);
 		
 		llistaPet.afegirPeticio(p1);
-        
-		escriureInstanciaPeticio(p1);
 		
         return llistaPet;
     }
@@ -713,60 +708,6 @@ public class Main {
 		Fit.close();
 	}
 	
-	public static void escriureInstanciaBens(Bens b) {
-		try {
-			BufferedWriter w=new BufferedWriter(new FileWriter("dadesBens.txt", true));
-			String frase = "";
-			frase = b.getUsuari()+";"+b.getNom()+";"+b.getDesc()+";"+b.getTipus()+";true;"+b.getData()+";"+b.getAmplada()+";"+b.getAmplada()+";"+b.getAlçada()+";"+b.getFons()+";"+b.getPes();
-			//System.out.println(frase);
-			w.newLine();
-			w.write(frase);
-			w.close();
-		}
-		catch(FileNotFoundException e) {
-			System.out.println("L'arxiu d'entrada no existeix");
-		}
-		catch(IOException e) {
-			System.out.println("S'ha produit un error en els arxius");
-		}
-	}
-	
-	public static void escriureInstanciaServeis(Serveis s) {
-		try {
-			BufferedWriter w=new BufferedWriter(new FileWriter("dadesServeis.txt", true));//Anar al final del document 
-			String frase = "";
-			frase = s.getUsuari()+";"+s.getNom()+";"+s.getDesc()+";"+s.getTipus()+";false;"+s.getData()+";"+s.getDataFiOferiment();
-			//System.out.println(frase);
-			w.newLine();
-			w.write(frase);
-			w.close();
-		}
-		catch(FileNotFoundException e) {
-			System.out.println("L'arxiu d'entrada no existeix");
-		}
-		catch(IOException e) {
-			System.out.println("S'ha produit un error en els arxius");
-		}
-	}
-	
-	public static void escriureInstanciaPeticio(Peticions p) {
-		try {
-			BufferedWriter w=new BufferedWriter(new FileWriter("dadesPeticions.txt", true));//Anar al final del document 
-			String frase = "";
-			frase = p.getIdPeticio()+";"+p.getUserPeticio()+";"+p.getUserRebPet()+";"+p.getProducAcons()+";"+p.getProducOfe();
-			//System.out.println(frase);
-			w.newLine();
-			w.write(frase);
-			w.close();
-		}
-		catch(FileNotFoundException e) {
-			System.out.println("L'arxiu d'entrada no existeix");
-		}
-		catch(IOException e) {
-			System.out.println("S'ha produit un error en els arxius");
-		}
-	}
-	
 	public static void main(String[] args) throws ClassNotFoundException, IOException {
 		LlistaBens llistaBe = new LlistaBens(100);
 		LlistaServeis llistaServ = new LlistaServeis(100);
@@ -774,8 +715,9 @@ public class Main {
 		LlistaPeticions llistaPet = new LlistaPeticions(100);
 		int opcio=0;
 		//llistaUser = carregarUsuaris();
+		Usuaris usuari1 = new Usuaris ("chen", "ioqjeoi", 2365);
+		llistaUser.donaAlta(usuari1);
 		Usuaris usuariActual = iniciasessio(llistaUser);
-		//llistaUser.donaAlta(usuariActual);
 		mostrarMenu();
 		while (opcio != 17) {
 			opcio = Integer.parseInt(teclat.nextLine());
@@ -832,6 +774,41 @@ public class Main {
 				break;
 			}
 			mostrarMenu();
+		}
+		System.out.println("Vols guardar les llistes en un fitxer?!");
+		
+		boolean error= false;
+		
+		System.out.println("1 Acceptar");
+		System.out.println("2 Refusar");
+		
+		int opcioAccept2;
+		
+		while (!error) {
+			try {
+				opcioAccept2 = Integer.parseInt(teclat.nextLine());
+				if (opcioAccept2 < 1 || opcioAccept2 > 2) {
+					throw new NumeroForaRangException ();
+				}
+				else {
+					if(opcioAccept2 == 1) {
+						llistaBe.escriureLlistaBens();
+						llistaServ.escriureLlistaServeis();
+						llistaPet.escriureLlistaPeticions();
+						System.out.println("S'han carrgat les dades!!");
+					}
+					else {
+						System.out.println("Gracies");
+					}
+					error = true;
+				}
+			}
+			catch (NumberFormatException e) {
+				System.out.println("ERROR, has ficat un caracter que no es un numero!!");
+			}
+			catch (NumeroForaRangException e) {
+				System.out.println("ERROR, has introduit un numbero que no es ni 1 ni 2!");
+			}
 		}
 		System.out.println("Has sortit de l'aplicacio, adeu!");
 		//altaUsuari();
