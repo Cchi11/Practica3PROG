@@ -1,4 +1,4 @@
-package Exceptions;
+wpackage Exceptions;
 
 public class NoEsTrobaException extends Exception {
 

@@ -534,7 +534,7 @@ public class Main {
 				}
 				else {
 
-					if (llistaServ.comprovaServei(userPet, prodOfer)) {
+					if (llistaServ.comprovaServei(u.getAlies(), prodOfer)) {
 						//en cas contrari comprovarem si el producte esta afegit a la llista de serveis
 						//tambe comprovem que el producte que demana es propietat del usuari que actualment te inciada la sessio
 						error = true;
