@@ -185,7 +185,6 @@ public class Main {
 		System.out.println("\t17. Sortir de l’aplicacio");
 		System.out.print("\n\t\t\tIndica opcio:\n");
 	}
-
 	/**
 	 * Carrga les dades de un ritxer a una llista
 	 * @return la llista
@@ -602,7 +601,15 @@ public class Main {
 					error = true;
 				}
 				else {
+
+					if (llistaServ.comprovaServei(u.getAlies(), prodOfer)) {
+						//en cas contrari comprovarem si el producte esta afegit a la llista de serveis
+						//tambe comprovem que el producte que demana es propietat del usuari que actualment te inciada la sessio
+						error = true;
+					}
+					else {
 						throw new NoEsTrobaException();
+					}
 				}
 			}
 			catch (NullPointerException e) {
@@ -838,8 +845,8 @@ public class Main {
 		String nom = teclat.nextLine();
 		
 		try {
-			if (!llistaBens.comprovaBe(usuariactual.getAlies(), nom)){
-				System.out.println("No s'ha pogut trobat el be que volies eliminar");
+			if (!llistaBens.comprovaBeSenseIntercanviat(usuariactual.getAlies(), nom)){
+				System.out.println("No s'ha pogut trobat el be que volies eliminar o el bé s'ha intercanviat més d'un cop");
 			}
 			else {
 				llistaBens.eliminaBe(usuariactual, nom);
@@ -982,7 +989,6 @@ public class Main {
 		System.out.println("2 Refusar");
 		
 		int opcioAccept2;
-		
 		while (!error) {
 			try {
 				opcioAccept2 = Integer.parseInt(teclat.nextLine());
