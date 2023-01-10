@@ -97,7 +97,11 @@ public class LlistaUsuaris {			//Clase feta per Oscar Cabre
 		}	
 		
 
-		
+		/** 
+		 * Metode que retorna els usuaris(objecte) que supren el llindar
+		 * @param noms usuaris que superen el llindar
+		 * @return retorna els usuaris que superen el llindar
+		 */
 		public LlistaUsuaris mostrarUsuarisValor (String[] usuaris) {	
 			LlistaUsuaris usuarisVal = new LlistaUsuaris (100);
 			int j;	

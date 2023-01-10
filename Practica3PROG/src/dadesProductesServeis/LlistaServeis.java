@@ -219,6 +219,11 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		}
 	}
 	
+	
+	/** 
+	 * Metode que cerca en lla llista de serveis el servei que mes es repeteix
+	 * @return retorna el servei amb mes repeticions
+	 */
 	public Serveis mesRepeticion() {	
 		int repMajor, id =0;
 		repMajor=0;

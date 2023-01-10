@@ -860,25 +860,8 @@ public class Main {
 		Usuaris u1 = new Usuaris(nom, correu, codiPost);
 		
 		llistaUser.donaAlta(u1);
-		
-		//Falta Afegir i crear fitxer serialitzat
-		
-	    /*try (FileOutputStream fos = new FileOutputStream("serialized_object.bin", true)) {         
-	    	try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-	            oos.writeObject(u1);
-	        }
-	    }
-	  	catch (IOException e) {
-	  		System.out.println ("no");
-	    }*/
 	}
-	
-	/**
-	 * Donar de baixa un bé o producte físic a intercanviar i eliminar-lo de la llista. Només es podrà
-	 * de donar de baixa si encara no s’ha fet cap intercanvi amb ell.
-	 * @param usuariactual
-	 * @param llistaBens
-	 */
+		
 	public static void opcio10(Usuaris usuariactual, LlistaBens llistaBens) {
 		
 		System.out.println("Indica quin be vols eliminar de la llista");
@@ -924,18 +907,34 @@ public class Main {
 		System.out.println(llistaPet.mostrarPetNoRespostes().toString());
 	}
 	
+	
+	/**
+	 * Mostrar les peticions d’intercanvi acceptades amb un toString de la llista
+	 * @param mostrarPetAc Llista amb totes les peticions
+	 */
 	public static void opcio13(LlistaPeticions mostrarPetAc) {
 
-		System.out.println(mostrarPetAc.mostrarPetAccept().toString());												//////////////AQUIII///////////////////
+		System.out.println(mostrarPetAc.mostrarPetAccept().toString());												
 	}
 	
+	
+
+	/**
+	 * Mostrar les peticions d’intercanvi rebutjades amb un toString de la llista
+	 * @param mostrarPetRef Llista amb totes les peticions
+	 */
 	public static void opcio14(LlistaPeticions mostrarPetRef) {
 
 		System.out.println(mostrarPetRef.mostrarPetRefus().toString());
 	}
 	
-	
-	
+
+
+	/** 
+	 * Mostra quins usuaris tenen una valoració més alta que el llindar establert per l'usuari
+	 * @param usuarisVal Usuaris que supern el llindar 
+	 * @param pet llista de les peticions
+	 */
 	public static void opcio15(LlistaUsuaris usuarisVal, LlistaPeticions pet) {
 	int numero = 0;
     boolean error = false;
@@ -944,7 +943,7 @@ public class Main {
 		{
 			try
 			{
-				//printf
+				System.out.println("Escriu el llindar (0-5)");
 				String llegirnum = teclat.nextLine();
 				numero = Integer.parseInt(llegirnum);
 				if (numero < 0 || numero > 5)
@@ -977,6 +976,10 @@ public class Main {
 	}
 	
 
+	/** 
+	 * Metode que mostra per pantalla el servei que mes s'ha repetit
+	 * @param serv llista de serveis
+	 */
 	public static void opcio16(LlistaServeis serv) {
 		
 		Serveis mesRepetit = serv.mesRepeticion();
@@ -984,6 +987,10 @@ public class Main {
 	}
 	
 	
+	/**
+	 * Procediment que llegeix un fitxer serialitzat i retorna les dades
+	 * @return retorna la llista que ha llegit del fitxer
+	 */
 	public static LlistaUsuaris carregarUsuaris() {
 		LlistaUsuaris llista = new LlistaUsuaris(100);
         try {
