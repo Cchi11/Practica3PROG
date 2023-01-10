@@ -1,6 +1,12 @@
 package usuaris;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.IOException;
 import dadesProductesServeis.Serveis;
+import peticions.LlistaPeticions;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 
 public class LlistaUsuaris {			//Clase feta per Chenxing Chi
 		private int nElem;
@@ -90,6 +96,23 @@ public class LlistaUsuaris {			//Clase feta per Chenxing Chi
 		}	
 		
 
+		
+		public LlistaUsuaris mostrarUsuarisValor (String[] usuaris) {	
+			LlistaUsuaris usuarisVal = new LlistaUsuaris (100);
+			int j;	
+	        for (int i=0; i < nElem; i++) {
+	        	j=0;
+					while (usuaris[i] != llista[j].getAlies()) {
+						j++;
+					}
+
+				usuarisVal.donaAlta(llista[j]);	
+			}
+			return usuarisVal;
+		}
+		
+		
+				
 		/**
 		 * Retorna la copia de lultim usuari de la llista
 		 * @param i posicio
@@ -109,6 +132,23 @@ public class LlistaUsuaris {			//Clase feta per Chenxing Chi
 		public int retornarIndex () {
 			return nElem-1;
 		}
+		
+		
+		public void escriureLlistaUsuaris() {
+	        try {
+	            FileOutputStream foutput = new FileOutputStream("dadesUsuaris.ser");
+	            ObjectOutputStream soutput = new ObjectOutputStream(foutput);
+	            int i = 0;
+	            while(i < nElem) {
+	                soutput.writeObject(llista[i]);
+	                i++;
+	            }
+	            foutput.close();
+	            soutput.close();
+	        } catch (IOException e) {
+	            System.out.println("Error en la creacio del fitxer serialitzat d'usuaris.");
+	        }
+	    }
 		
 		
 		public String toString() {

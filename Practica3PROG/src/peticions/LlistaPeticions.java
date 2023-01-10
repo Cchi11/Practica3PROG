@@ -68,24 +68,66 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 		return llistaPet;
 	}
 	
+	
 
-
-	public void mostrarPetAccept () {		
-		for (int i=0; i < llista.length; i++) {
+	public LlistaPeticions mostrarPetAccept () {	
+		LlistaPeticions llistaPetAct = new LlistaPeticions (100);
+		for (int i=0; i < nElem; i++) {
 			if (llista[i].getResposat() == 1) {
-				llista[i].toString();
+				llistaPetAct.afegirPeticio(llista[i]);
 			}
 		}
+		return llistaPetAct;
 	}
 	
-	public void mostrarPetRefus () {		
-		for (int i=0; i < llista.length; i++) {
+	
+	
+	public LlistaPeticions mostrarPetRefus () {	
+		LlistaPeticions llistaPetRef = new LlistaPeticions (100);
+		for (int i=0; i < nElem; i++) {
 			if (llista[i].getResposat() == 2) {
-				llista[i].toString();
+				llistaPetRef.afegirPeticio(llista[i]);
 			}
 		}
+		return llistaPetRef;
 	}
+	
+	
 
+	
+	
+	public String[] sobreLlindar(int llindar) {
+		
+		int j = 0;
+		String[] sobreLlindar = new String[nElem];
+		for (int i=0; i < nElem; i++) {
+			if (llista[i].getValoracioUserPeticio() > llindar ) {
+				sobreLlindar[i] = llista[i].getUserRebPet();
+				j++;
+			}
+			if (llista[i].getValoracioUserRebPet() > llindar) {
+				sobreLlindar[j] = llista[i].getUserPeticio();
+				j++;
+			} 
+
+		}
+		return sobreLlindar;
+	}
+	
+	
+	
+	public LlistaPeticions peticionsUsuari () {	
+		LlistaPeticions petUsuaris = new LlistaPeticions (100);
+		for (int i=0; i < nElem; i++) {
+			if (llista[i].getUserRebPet() == NOMUSUARI || llista[i].getUserRebPet() == NOMUSUARI) {
+				petUsuaris.afegirPeticio(llista[i]);
+			}
+		}
+		return petUsuaris;
+	}
+	
+	
+	
 	/* Metode per acceptar una peticio. Canvia l'atribut resposat a 1 
 	 * @param i, index de la llista
 	 */

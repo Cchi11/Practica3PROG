@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import peticions.LlistaPeticions;
 import usuaris.Usuaris;
 
 public class LlistaServeis {   //Clase feta per Chenxing Chi
@@ -162,6 +163,21 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		return trobat;
 	}
 	
+	
+	public Serveis mesRepeticion() {	
+		int repMajor, id =0;
+		repMajor=0;
+		for (int i=0; i < nElem; i++) {
+			if (llista[i].getRepeticions() >= repMajor) {
+				//repMajor = llista[i].getRepeticions(); 
+				id = i;
+			}	
+		}
+		Serveis mesRep = llista[id];
+		return mesRep;
+	}
+	
+
 	
 	public String toString() {
 		String aux;

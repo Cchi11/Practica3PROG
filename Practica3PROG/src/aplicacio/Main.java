@@ -1,5 +1,8 @@
 package aplicacio;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.EOFException;
 import java.io.File;
@@ -13,17 +16,17 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
 import java.util.Random;
-
+import java.io.*;
 import Exceptions.NoEsTrobaException;
 import Exceptions.NumeroForaRangException;
 import dadesProductesServeis.Bens;
 import dadesProductesServeis.LlistaBens;
 import dadesProductesServeis.LlistaServeis;
 import dadesProductesServeis.Serveis;
+//import dadesUsuaris.Usuaris;
 import peticions.LlistaPeticions;
 import peticions.Peticions;
 import usuaris.LlistaUsuaris;
-//import fitxers.LlistaUsuaris;
 import usuaris.Usuaris;
 import usuaris.LlistaUsuaris;
 
@@ -242,6 +245,7 @@ public class Main {
 		return llista;
 	}
 	
+
 	public static LlistaPeticions opcio1Pet () throws FileNotFoundException, IOException {
 		return carregarPeticions();
 	}
@@ -834,40 +838,99 @@ public class Main {
 		System.out.println(llistaPet.mostrarPetNoRespostes().toString());
 	}
 	
-	public static void opcio13(LlistaPeticions llistaPet) {
-		
-		llistaPet.mostrarPetAccept();
+	public static void opcio13(LlistaPeticions mostrarPetAc) {
+
+		System.out.println(mostrarPetAc.mostrarPetAccept().toString());												//////////////AQUIII///////////////////
 	}
 	
-	public static void opcio14(LlistaPeticions llistaPet) {
-		
-		llistaPet.mostrarPetRefus();
-	}
+	public static void opcio14(LlistaPeticions mostrarPetRef) {
 
-	public static void llegirFitxerSerial() throws IOException, ClassNotFoundException {
+		System.out.println(mostrarPetRef.mostrarPetRefus().toString());
+	}
+	
+	
+	
+	public static void opcio15(LlistaUsuaris usuarisVal, LlistaPeticions pet) {
+	int numero = 0;
+    boolean error = false;
+    
+		while (!error)
+		{
+			try
+			{
+				//printf
+				String llegirnum = teclat.nextLine();
+				numero = Integer.parseInt(llegirnum);
+				if (numero < 0 || numero > 5)
+				{
+					throw new NumeroForaRangException();
+					//excepcio creada per detectar numeros fora del rang indicat al menu d'opcions
+				}
+				error=true;
+				//si no hi ha excpecio error = true continua amb el codi
 				
-		ObjectInputStream Fit = new ObjectInputStream(new FileInputStream("serialized_object.bin"));
-		Usuaris instancia;
-		boolean ok = false;
-		
-		while (!ok) {
-			try { 
-				instancia = (Usuaris) Fit.readObject();
-				System.out.println(instancia.toString());
-			} catch (EOFException e) {
-				ok = true;
+			}
+			catch (NumberFormatException e) {
+				//Si no fica un nombre enter
+				System.out.println("Indica un numero! No un altre caracter!");
+				error=false;
+			}
+			catch (NumeroForaRangException e) {
+				//si fica un numero fora del rang indicat
+				System.out.println("Introdueix una opció valida dintre del rang!!");
+				error=false;
 			}
 		}
-		Fit.close();
+		
+		String[]  sobreLlindar = pet.sobreLlindar(numero);
+		
+		LlistaUsuaris  usuarisLlindar = new LlistaUsuaris (100);
+		
+
+		System.out.println(usuarisLlindar.mostrarUsuarisValor(sobreLlindar).toString());
 	}
 	
+
+	public static void opcio16(LlistaServeis serv) {
+		
+		Serveis mesRepetit = serv.mesRepeticion();
+		System.out.println(mesRepetit.toString());
+	}
+	
+	
+	public static LlistaUsuaris carregarUsuaris() {
+		LlistaUsuaris llista = new LlistaUsuaris(100);
+        try {
+            FileInputStream finput = new FileInputStream("dadesUsuaris.ser");
+            ObjectInputStream sinput = new ObjectInputStream(finput);
+            Usuaris aux;
+            while(finput.available() > 0) {
+                aux = (Usuaris) sinput.readObject();
+                llista.donaAlta(aux);
+            }
+            finput.close();
+            sinput.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("No s'ha trobat el fitxer.");
+        } catch (IOException e) {
+            System.out.println("Error");
+        } catch(ClassNotFoundException e) {
+            System.out.println("Error en la càrrega de dades.");
+        }
+        return llista;
+    }
+	
+
 	public static void main(String[] args) throws ClassNotFoundException, IOException {
 		LlistaBens llistaBe = new LlistaBens(100);
 		LlistaServeis llistaServ = new LlistaServeis(100);
 		LlistaUsuaris llistaUser = new LlistaUsuaris(100);
 		LlistaPeticions llistaPet = new LlistaPeticions(100);
+		
+		
 		int opcio=0;
-		//llistaUser = carregarUsuaris();
+		
+		llistaUser = carregarUsuaris();
 		
 		Usuaris usuari1 = new Usuaris ("chen", "ioqjeoi", 2365);
 
@@ -923,10 +986,10 @@ public class Main {
 				opcio14(llistaPet);
 				break;
 			case 15:
-				//opcio15();
+				opcio15(llistaUser, llistaPet);
 				break;
 			case 16:
-				//opcio16();
+				opcio16(llistaServ);
 				break;
 			}
 			mostrarMenu();
@@ -951,6 +1014,8 @@ public class Main {
 						llistaBe.escriureLlistaBens();
 						llistaServ.escriureLlistaServeis();
 						llistaPet.escriureLlistaPeticions();
+						llistaUser.escriureLlistaUsuaris();
+						
 						System.out.println("S'han carrgat les dades!!");
 					}
 					else {
