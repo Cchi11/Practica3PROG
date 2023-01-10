@@ -70,6 +70,7 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 	
 	
 
+
 	public LlistaPeticions mostrarPetAccept () {	
 		LlistaPeticions llistaPetAct = new LlistaPeticions (100);
 		for (int i=0; i < nElem; i++) {
@@ -90,7 +91,12 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 			}
 		}
 		return llistaPetRef;
+
 	}
+	
+		
+	
+
 	
 	
 
@@ -116,7 +122,7 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 	
 	
 	
-	public LlistaPeticions peticionsUsuari () {	
+/*	public LlistaPeticions peticionsUsuari () {	
 		LlistaPeticions petUsuaris = new LlistaPeticions (100);
 		for (int i=0; i < nElem; i++) {
 			if (llista[i].getUserRebPet() == NOMUSUARI || llista[i].getUserRebPet() == NOMUSUARI) {
@@ -124,7 +130,7 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 			}
 		}
 		return petUsuaris;
-	}
+	}*/
 	
 	
 	
@@ -190,15 +196,19 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 		return i;
 	}
 	
+	/**
+	 * Escriure una llisat en un fitxer
+	 */
 	public void escriureLlistaPeticions() {
 		try (BufferedWriter g = new BufferedWriter(new FileWriter("dadesPeticions.txt"))) {
 			String frase = "";
 			int i = 0;
 
-			for(i = 0; i < nElem; i++) {
+			for(i = 0; i < nElem; i++) {	//fins que s'acabi la llista
+				// Escribim tots el aprametres en una frase
 				frase = llista[i].getIdPeticio()+";"+llista[i].getUserPeticio()+";"+llista[i].getUserRebPet()+";"+llista[i].getProducAcons()+";"+llista[i].getProducOfe();
-				g.write(frase);
-				g.newLine();
+				g.write(frase); // Escrivim la frase al fitxer
+				g.newLine(); //Saltem de linia
 			}
 			g.close();
 		}

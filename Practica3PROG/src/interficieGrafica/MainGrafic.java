@@ -49,6 +49,7 @@ public class MainGrafic extends JFrame {
 		this.setLocation(500, 250);
 		//Primer cridem la funcio aquesta per tenir clara qui te la sessio iniciada
 		usuari = IniciaSessio(llistaUser);
+		
 
 		//Creem un panell on afegirem Botons per al main
 		JPanel panellBotons = new JPanel();
@@ -98,6 +99,7 @@ public class MainGrafic extends JFrame {
 		pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1000, 500);
+		
 		 
 	}
 

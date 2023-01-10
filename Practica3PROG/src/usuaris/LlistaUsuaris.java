@@ -8,7 +8,8 @@ import peticions.LlistaPeticions;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
-public class LlistaUsuaris {			//Clase feta per Chenxing Chi
+public class LlistaUsuaris {			//Clase feta per Oscar Cabre
+
 		private int nElem;
 		private Usuaris [] llista;
 		
@@ -78,7 +79,7 @@ public class LlistaUsuaris {			//Clase feta per Chenxing Chi
 			
 			boolean trobat = false;
 			int i=0;
-			for (i=0; !trobat && i <= nElem; i++) {
+			for (i=0; !trobat && i < nElem; i++) {
 				//cerquem a la llista
 				if (llista[i].getAlies().equals(aliesUsuari)) {
 					//comprovem si l'alies introduït coincideix amb el de la llista

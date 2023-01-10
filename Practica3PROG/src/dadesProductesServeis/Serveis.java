@@ -20,9 +20,7 @@ public class Serveis extends Producte{   //Clase realitzada per Pol Regy
 	}
 
 	
-	/** getter
-	 * 
-	 * @return data limit de l'oferiment
+	/** getters
 	 */
 	public String getDataFiOferiment() {
 		return (dataFiOferiment);

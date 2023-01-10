@@ -50,6 +50,9 @@ public class Bens extends Producte{   //Clase feta per Chenxing Chi
 		return dataIntercanvi;
 	}
 	
+	public void setDataIntercanvi (String data) {
+		this.dataIntercanvi = data;
+	}
 	
 	public Bens copia() {
 		Bens copia = new Bens (super.usuari, super.nom, super.desc, super.tipus, super.be, super.data, amplada, alçada, fons, pes);

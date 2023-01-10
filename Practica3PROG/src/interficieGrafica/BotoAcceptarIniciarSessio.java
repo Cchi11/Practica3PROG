@@ -57,8 +57,10 @@ public class BotoAcceptarIniciarSessio implements ActionListener {
 				//Si el codi indicat, es un usuari existent, iniciar sessio
 				
 				if (llistaUser.comprovaUsuari(usuari.getText())) {
+					
 					Usuaris nou = llistaUser.trobaUsuari(usuari.getText()); //Retorna una copia del usuari trobat
 					MainGrafic.usuari=nou; // Canvia la sessio del usuari actual
+					
 					iniciar.setVisible(false);
 					finestraP.setVisible(true);
 				}

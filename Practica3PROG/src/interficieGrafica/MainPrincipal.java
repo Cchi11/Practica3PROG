@@ -16,7 +16,12 @@ import usuaris.Usuaris;
 
 public class MainPrincipal {
 	
-
+	/**
+	 * Carrga les dades de un ritxer a una llista
+	 * @return la llista
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public static LlistaServeis carregarServeis () throws FileNotFoundException, IOException {
 		Scanner f = new Scanner(new File("dadesServeis.txt"));
 		LlistaServeis llista = new LlistaServeis(100);
@@ -35,6 +40,12 @@ public class MainPrincipal {
 		return llista;
 	}
 	
+	/**
+	 * Carrga les dades de un ritxer a una llista
+	 * @return la llista
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public static LlistaBens carregarBens () throws FileNotFoundException, IOException {
 		Scanner f = new Scanner(new File("dadesBens.txt"));
 		LlistaBens llista = new LlistaBens(100);
@@ -57,6 +68,12 @@ public class MainPrincipal {
 		return llista;
 	}
 	
+	/**
+	 * Carrga les dades de un ritxer a una llista
+	 * @return la llista
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public static LlistaPeticions carregarPeticions () throws FileNotFoundException, IOException {
 		Scanner f = new Scanner(new File("dadesPeticions.txt"));
 		LlistaPeticions llista = new LlistaPeticions(100);
@@ -75,17 +92,27 @@ public class MainPrincipal {
 		return llista;
 	}
 	
+	/**
+	 * carregar llista de peticions
+	 */
 	public static LlistaPeticions opcio1Pet () throws FileNotFoundException, IOException {
 		return carregarPeticions();
 	}
 	
+	/**
+	 * carregar llista de Serveis
+	 */
 	public static LlistaServeis opcio1Serv () throws FileNotFoundException, IOException {
 		return carregarServeis();
 	}
 	
+	/**
+	 * carregar llista de Peticions
+	 */
 	public static LlistaBens opcio1Be () throws FileNotFoundException, IOException {
 		return carregarBens();
 	}
+	
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		LlistaUsuaris llistaUser = new LlistaUsuaris(100);		
@@ -99,12 +126,10 @@ public class MainPrincipal {
 		llistaServ = opcio1Serv();
 		llistaBe = opcio1Be();
 
-
 		Usuaris usuari1 = new Usuaris ("chen", "ioqjeoi", 2365);
 		llistaUser.donaAlta(usuari1);
 
 		MainGrafic finestra = new MainGrafic(llistaUser, llistaBe, llistaServ, llistaPet);
-		
 	}
 
 }

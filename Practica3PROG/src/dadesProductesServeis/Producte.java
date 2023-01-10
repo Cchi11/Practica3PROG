@@ -71,5 +71,9 @@ public abstract class Producte {	//Clase feta per Gerard Altadill
 	public String getData () {
 		return (data);
 	}
+	
+	public void setUsuari (String alies) {
+		this.usuari = alies;
+	}
 
 }
