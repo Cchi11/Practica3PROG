@@ -1,20 +1,11 @@
 package interficieGrafica;
-import java.awt.BorderLayout;
+
 import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JTextArea;
-
-import dadesProductesServeis.LlistaBens;
-import dadesProductesServeis.LlistaServeis;
-import peticions.LlistaPeticions;
 
 import java.awt.event.ActionListener;
-
-import peticions.LlistaPeticions;
-import usuaris.LlistaUsuaris;
-import usuaris.Usuaris;
 
 public class Opcio2ActionListenerBotoOk implements ActionListener {
 		

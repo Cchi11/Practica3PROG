@@ -5,11 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
-import Exceptions.NoEsTrobaException;
 import usuaris.LlistaUsuaris;
-import usuaris.Usuaris;
 
 /**
  * Clase per configurar l'accio del boto 5, el de canviar d'usuari

@@ -11,13 +11,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.IconifyAction;
 
 import dadesProductesServeis.LlistaBens;
 import dadesProductesServeis.LlistaServeis;
 import peticions.LlistaPeticions;
 import peticions.Peticions;
-import usuaris.Usuaris;
 
 public class BotoAcceptarPeticionsActionListener implements ActionListener {
 

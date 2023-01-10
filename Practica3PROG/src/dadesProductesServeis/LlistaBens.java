@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import peticions.Peticions;
 import usuaris.Usuaris;
 
 public class LlistaBens {  //Clase feta per Chenxing Chi

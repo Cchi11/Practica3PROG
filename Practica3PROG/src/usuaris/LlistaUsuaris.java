@@ -3,10 +3,6 @@ package usuaris;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.IOException;
-import dadesProductesServeis.Serveis;
-import peticions.LlistaPeticions;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
 
 public class LlistaUsuaris {			//Clase feta per Oscar Cabre
 

@@ -10,7 +10,6 @@ import dadesProductesServeis.LlistaBens;
 import dadesProductesServeis.LlistaServeis;
 import peticions.LlistaPeticions;
 
-import usuaris.LlistaUsuaris;
 import usuaris.Usuaris;
 
 public class Opcio3ActionListener implements ActionListener {

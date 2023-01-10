@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import peticions.LlistaPeticions;
 import usuaris.Usuaris;
 
 public class LlistaServeis {   //Clase feta per Chenxing Chi

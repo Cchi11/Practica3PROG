@@ -2,26 +2,15 @@ package interficieGrafica;
 import java.awt.BorderLayout;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-import Exceptions.NoEsTrobaException;
 import dadesProductesServeis.LlistaBens;
 import dadesProductesServeis.LlistaServeis;
 import peticions.LlistaPeticions;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import usuaris.LlistaUsuaris;
 import usuaris.Usuaris;
@@ -114,7 +103,6 @@ public class MainGrafic extends JFrame {
 		 
 		 	//Panell de opcions
 			String [] opcions = {"Registra't", "Ja tinc un compte"};
-			boolean error = false;
 			
 			//Finestra que mostra 2 opcions, la de registrarse o iniciar sessio
 			int resultat = JOptionPane.showOptionDialog(null, 
