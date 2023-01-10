@@ -71,19 +71,11 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 
 
 	public void mostrarPetAccept () {		
-		for (int i=0; i < llista.length; i++) {
-			if (llista[i].getResposat() == 1) {
-				llista[i].toString();
-			}
-		}
+
 	}
 	
 	public void mostrarPetRefus () {		
-		for (int i=0; i < llista.length; i++) {
-			if (llista[i].getResposat() == 2) {
-				llista[i].toString();
-			}
-		}
+	
 	}
 
 	/* Metode per acceptar una peticio. Canvia l'atribut resposat a 1 
@@ -148,15 +140,19 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 		return i;
 	}
 	
+	/**
+	 * Escriure una llisat en un fitxer
+	 */
 	public void escriureLlistaPeticions() {
 		try (BufferedWriter g = new BufferedWriter(new FileWriter("dadesPeticions.txt"))) {
 			String frase = "";
 			int i = 0;
 
-			for(i = 0; i < nElem; i++) {
+			for(i = 0; i < nElem; i++) {	//fins que s'acabi la llista
+				// Escribim tots el aprametres en una frase
 				frase = llista[i].getIdPeticio()+";"+llista[i].getUserPeticio()+";"+llista[i].getUserRebPet()+";"+llista[i].getProducAcons()+";"+llista[i].getProducOfe();
-				g.write(frase);
-				g.newLine();
+				g.write(frase); // Escrivim la frase al fitxer
+				g.newLine(); //Saltem de linia
 			}
 			g.close();
 		}
