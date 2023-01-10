@@ -32,9 +32,9 @@ public class Opcio3ActionListener implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		
-		JButton b = (JButton) e.getSource();
-		fines.setVisible(false);
-		Opcio3Finestra finestra = new Opcio3Finestra(fines, MainGrafic.usuari, llistaBe, llistaServ, llistaPet);
+		JButton b = (JButton) e.getSource();// Quan cliques se activa 
+		fines.setVisible(false); // finestre prinsipal se amaga
+		Opcio3Finestra finestra = new Opcio3Finestra(fines, MainGrafic.usuari, llistaBe, llistaServ, llistaPet); // obrim finestre peticio
 
 	}
 

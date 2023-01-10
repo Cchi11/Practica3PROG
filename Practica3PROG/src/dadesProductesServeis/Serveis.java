@@ -4,6 +4,7 @@ public class Serveis extends Producte{   //Clase realitzada per Pol Regy
 	
 	private String dataFiOferiment;
 	private boolean actiu;
+	int repeticions;
 	
 	
 	/** Constructor de la clase producte
@@ -14,11 +15,12 @@ public class Serveis extends Producte{   //Clase realitzada per Pol Regy
 		super (alies, name, descripcio, tip, b, dat);
 		this.dataFiOferiment=data;
 		actiu=true;
+		repeticions = 0;
+		
 	}
+
 	
-	/** getter
-	 * 
-	 * @return data limit de l'oferiment
+	/** getters
 	 */
 	public String getDataFiOferiment() {
 		return (dataFiOferiment);
@@ -28,8 +30,20 @@ public class Serveis extends Producte{   //Clase realitzada per Pol Regy
 		return actiu;
 	}
 	
+	public int getRepeticions() {
+		return repeticions;
+	}
+	
 	public void setActiu(boolean n) {
 		actiu=n;
+	}
+	
+	public void setRepeticions(int rep) {
+		repeticions = rep;
+	}
+	
+	public void incremRepe() {
+		repeticions = repeticions + 1;
 	}
 	
 	public Serveis copia () {

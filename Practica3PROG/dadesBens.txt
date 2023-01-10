@@ -1,3 +1,3 @@
-chen;pelota;pelota para jugar;pasatiempo;true;12/08/2022;20;20;20;20;1
-Roger;nevera;Nevera no gaira vella amb bon estat;electrodomestics;true;12/08/2022;2000;2000;200;200;15000
-chen;taula;taula per a un habitacio;mobles;true;01/10/2006;90;90;70;101;202
+chen;pelota;pelota para jugar;pasatiempo;true;12/08/2022;20;20;20;20;20
+Roger;nevera;Nevera no gaira vella amb bon estat;electrodomestics;true;12/08/2022;2000;2000;2000;2000;200
+chen;taula;taula per a un habitacio;mobles;true;01/10/2006;90;90;90;90;70

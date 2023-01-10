@@ -70,24 +70,63 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 		return llistaPet;
 	}
 	
+	
 
-
-	public void mostrarPetAccept () {		
-		for (int i=0; i < llista.length; i++) {
+	/**
+	 * Metode que retorna una llista amb totes les instancies de peticions respostes
+	 * @return llistaNova Peticions no respostes
+	 */
+	public LlistaPeticions mostrarPetAccept () {	
+		LlistaPeticions llistaPetAct = new LlistaPeticions (100);
+		for (int i=0; i < nElem; i++) {
 			if (llista[i].getResposat() == 1) {
-				llista[i].toString();
+				llistaPetAct.afegirPeticio(llista[i]);
 			}
 		}
+		return llistaPetAct;
 	}
 	
-	public void mostrarPetRefus () {		
-		for (int i=0; i < llista.length; i++) {
+	
+	/**
+	 * Metode que retorna una llista amb totes les instancies de peticions rebutjades
+	 * @return llistaNova Peticions rebutjades
+	 */
+	public LlistaPeticions mostrarPetRefus () {	
+		LlistaPeticions llistaPetRef = new LlistaPeticions (100);
+		for (int i=0; i < nElem; i++) {
 			if (llista[i].getResposat() == 2) {
-				llista[i].toString();
+				llistaPetRef.afegirPeticio(llista[i]);
 			}
 		}
-	}
+		return llistaPetRef;
 
+	}
+	
+
+	/** 
+	 * Metode que busca els noms dels usuaris que tenen una valoracio major al llindar
+	 * @param llindar valor que les valoracions dels usuaris han de superar
+	 * @return noms dels usuaris que superen el llindar
+	 */
+	public String[] sobreLlindar(int llindar) {
+		
+		int j = 0;
+		String[] sobreLlindar = new String[nElem];
+		for (int i=0; i < nElem; i++) {
+			if (llista[i].getValoracioUserPeticio() > llindar ) {
+				sobreLlindar[i] = llista[i].getUserRebPet();
+				j++;
+			}
+			if (llista[i].getValoracioUserRebPet() > llindar) {
+				sobreLlindar[j] = llista[i].getUserPeticio();
+				j++;
+			} 
+
+		}
+		return sobreLlindar;
+	}
+	
+	
 	/* Metode per acceptar una peticio. Canvia l'atribut resposat a 1 
 	 * @param i, index de la llista
 	 */
@@ -151,6 +190,7 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 	}
 	
 	/**
+<<<<<<< HEAD
 	 * metode que retorna el num de elements de una llista amb nomes peticions creades per l'usuari i interncaviades amb èxit
 	 * @return num elements
 	 */
@@ -180,15 +220,21 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 		return l;
 	}
 	
+	
+	/**
+	 * 
+	 * Escriure una llisat en un fitxer
+	 */
 	public void escriureLlistaPeticions() {
 		try (BufferedWriter g = new BufferedWriter(new FileWriter("dadesPeticions.txt"))) {
 			String frase = "";
 			int i = 0;
 
-			for(i = 0; i < nElem; i++) {
+			for(i = 0; i < nElem; i++) {	//fins que s'acabi la llista
+				// Escribim tots el aprametres en una frase
 				frase = llista[i].getIdPeticio()+";"+llista[i].getUserPeticio()+";"+llista[i].getUserRebPet()+";"+llista[i].getProducAcons()+";"+llista[i].getProducOfe();
-				g.write(frase);
-				g.newLine();
+				g.write(frase); // Escrivim la frase al fitxer
+				g.newLine(); //Saltem de linia
 			}
 			g.close();
 		}

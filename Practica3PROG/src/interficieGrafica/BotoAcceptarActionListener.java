@@ -71,7 +71,7 @@ public class BotoAcceptarActionListener implements ActionListener {
 				
 					llistaUser.donaAlta(nou); //Afegeix a la llista l'usuari
 					MainGrafic.usuari=nou; //Cambia la sessio del usuari actual pel nou registrat
-					
+					llistaUser.escriureLlistaUsuaris();
 					//si tot va be, amaga la finestra de registrarse y mostra la de la finestra principal
 					registrar.setVisible(false);
 					ventana.setVisible(true);

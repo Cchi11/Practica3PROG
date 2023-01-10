@@ -13,6 +13,7 @@ import peticions.LlistaPeticions;
  * @author Pol Regy
  *
  */
+
 public class Opcio4ActionListener implements ActionListener  {
 
 	private JFrame finestraP;
@@ -47,7 +48,7 @@ public class Opcio4ActionListener implements ActionListener  {
 	
 		
 		
-		
 	}
-
 }
+
+

@@ -1,4 +1,9 @@
+
 package aplicacio;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.EOFException;
@@ -13,17 +18,17 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
 import java.util.Random;
-
+import java.io.*;
 import Exceptions.NoEsTrobaException;
 import Exceptions.NumeroForaRangException;
 import dadesProductesServeis.Bens;
 import dadesProductesServeis.LlistaBens;
 import dadesProductesServeis.LlistaServeis;
 import dadesProductesServeis.Serveis;
+//import dadesUsuaris.Usuaris;
 import peticions.LlistaPeticions;
 import peticions.Peticions;
 import usuaris.LlistaUsuaris;
-//import fitxers.LlistaUsuaris;
 import usuaris.Usuaris;
 import usuaris.LlistaUsuaris;
 
@@ -159,8 +164,8 @@ public class Main {
 	}
 	
 
-	/*Procediment per imprimir per pantall un ventall d'opcions per fer a l'aplicatiu
-	 * 
+	/**
+	 * Procediment per imprimir per pantall un ventall d'opcions per fer a l'aplicatiu
 	 */
 	public static void mostrarMenu () {
 		//mostrem menu d'opcions per pantalla
@@ -184,26 +189,37 @@ public class Main {
 		System.out.println("\t17. Sortir de l’aplicacio");
 		System.out.print("\n\t\t\tIndica opcio:\n");
 	}
-	
+	/**
+	 * Carrga les dades de un ritxer a una llista
+	 * @return la llista
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public static LlistaServeis carregarServeis () throws FileNotFoundException, IOException {
 		Scanner f = new Scanner(new File("dadesServeis.txt")); 	
 		LlistaServeis llista = new LlistaServeis(100);			
 		String [] lSplited  = new String[7];;				
 		String cat;
 		
-		while (f.hasNextLine()) {								
-			cat=f.nextLine();									
-			lSplited = cat.split(";");							
-			Boolean b = Boolean.parseBoolean(lSplited[4]);		
+		while (f.hasNextLine()) {	// Mentres el fitxer tingui lines								
+			cat=f.nextLine();	//cat te la lina									
+			lSplited = cat.split(";");	//Separem							
+			Boolean b = Boolean.parseBoolean(lSplited[4]);	//pasem un parametre a bolea	
 			// Crem la instancia
 			Serveis serveis = new Serveis(lSplited[0], lSplited[1], lSplited[2], lSplited[3], b, lSplited[5], lSplited[6]);
-			llista.afegirServei(serveis);						
+			llista.afegirServei(serveis);	//Afegim a la llista					
 		}
 		
 		f.close();												
 		return llista;											
 	}
 	
+	/**
+	 * Carrga les dades de un ritxer a una llista
+	 * @return la llista
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public static LlistaBens carregarBens () throws FileNotFoundException, IOException {
 		Scanner f = new Scanner(new File("dadesBens.txt"));		
 		LlistaBens llista = new LlistaBens(100);				
@@ -211,54 +227,83 @@ public class Main {
 		int [] numInt = new int[4]; 
 		String cat;
 		
-		while (f.hasNextLine()) {								
-			cat=f.nextLine();									
-			lSplited = cat.split(";");							
-			Boolean b = Boolean.parseBoolean(lSplited[3]);		
+		while (f.hasNextLine()) {	// Mentres el fitxer tingui lines								
+			cat=f.nextLine();		//cat te la lina							
+			lSplited = cat.split(";");			//Separem				
+			Boolean b = Boolean.parseBoolean(lSplited[3]);		//pasem un parametre a int
 			numInt[0] = Integer.parseInt(lSplited[6]);				
 			numInt[1] = Integer.parseInt(lSplited[7]);				
 			numInt[2] = Integer.parseInt(lSplited[8]);				
-			numInt[3] = Integer.parseInt(lSplited[9]);			
+			numInt[3] = Integer.parseInt(lSplited[9]);		
+			// Crem la instancia
 			Bens bens = new Bens(lSplited[0], lSplited[1], lSplited[2], lSplited[3], b, lSplited[5], numInt[0], numInt[1], numInt[2], numInt[3]);
-			llista.afegirBe(bens);								
+			llista.afegirBe(bens); //Afegim a la llista									
 		}
 		f.close();												
-		return llista;											
+		return llista;
 	}
 	
+	/**
+	 * Carrga les dades de un ritxer a una llista
+	 * @return la llista
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public static LlistaPeticions carregarPeticions () throws FileNotFoundException, IOException {
 		Scanner f = new Scanner(new File("dadesPeticions.txt"));
 		LlistaPeticions llista = new LlistaPeticions(100);
 		String [] lSplited  = new String[5];;
 		String cat;
 		
-		while (f.hasNextLine()) {
-			cat=f.nextLine();
-			lSplited = cat.split(";");
-			int numInt = Integer.parseInt(lSplited[0]);
+		while (f.hasNextLine()) {// Mentres el fitxer tingui lines
+			cat=f.nextLine();//cat te la lina
+			lSplited = cat.split(";");//Separem
+			int numInt = Integer.parseInt(lSplited[0]); //pasem un parametre a int
+			// Crem la instancia
 			Peticions peticions = new Peticions(numInt, lSplited[1], lSplited[2], lSplited[3], lSplited[4]);
-			llista.afegirPeticio(peticions);
+			llista.afegirPeticio(peticions); //Afegim a la llista	
 		}
 		f.close();
 		
 		return llista;
 	}
 	
+
+
+
+	/**
+	 * Opcio 1.1 carregar llista de peticions
+	 */
+
 	public static LlistaPeticions opcio1Pet () throws FileNotFoundException, IOException {
 		return carregarPeticions();
 	}
 	
+	/**
+	 * Opcio 1.2 carregar llista de serveis
+	 */
 	public static LlistaServeis opcio1Serv () throws FileNotFoundException, IOException {
 		return carregarServeis();
 	}
 	
+	/**
+	 * Opcio 1.3 carregar llista de bens
+	 */
+
 	public static LlistaBens opcio1Be () throws FileNotFoundException, IOException {
 		return carregarBens();
 	}
 	
+	/**
+	 * Mostra per pantalla llista de usuaris, peticion, serveis, bens 
+	 * @param llistaPet  llista de peticions
+	 * @param llistaServ llista de serveis
+	 * @param llistaBe	llista de bens 
+	 * @param llistaUser llista de usuaris
+	 */
 	public static void opcio2 (LlistaPeticions llistaPet, LlistaServeis llistaServ, LlistaBens llistaBe, LlistaUsuaris llistaUser) {
 		int opcioll=0;
-		while (opcioll != 6) {
+		while (opcioll != 6) { // Menu per intracciona amb el usuari
 			System.out.println("\n\nLlistes del programa:");
 			System.out.println("\t1. Mostra totes le llistes");
 			System.out.println("\t2. Llista de peticions");
@@ -272,9 +317,9 @@ public class Main {
 			{
 				try
 				{
-					String llegirnum = teclat.nextLine();
-					opcioll = Integer.parseInt(llegirnum);
-					if (opcioll<1 || opcioll>6)
+					String llegirnum = teclat.nextLine();		//LLegim un numero
+					opcioll = Integer.parseInt(llegirnum);		
+					if (opcioll<1 || opcioll>6)					// Si no esta dintre de rang salra a la exepcio
 					{
 						throw new NumeroForaRangException();
 					}
@@ -282,14 +327,14 @@ public class Main {
 				}
 				catch (NumberFormatException e) {
 					System.out.println("Indica un numero! No un altre caracter!");
-					error=false;
+					error=false;								// Ho torna fer
 				}
 				catch (NumeroForaRangException e) {
 					System.out.println("Introdueix una opció valida dintre del rang!!");
-					error=false;
+					error=false;								// Ho torna fer
 				}
 			}
-				switch (opcioll) {
+				switch (opcioll) { //switch que fa les diferentes opcions del menu
 				case 1: 
 					System.out.println(llistaPet.toString());
 					System.out.println(llistaServ.toString());
@@ -312,16 +357,24 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Mostra per pantalla la llista de serveis actius
+	 * @param llistaServ llista de serveis
+	 */
 	public static void opcio3 (LlistaServeis llistaServ) {
 		System.out.println(llistaServ.llistaServeisActiu().toString());
 	}
 	
+	/**
+	* Mostra per pantalla la llista de bens actius
+	* @param llistaBe llista de bens
+	*/
 	public static void opcio4 (LlistaBens llistaBe) {
 		System.out.println(llistaBe.llistaBensNoIntercanvia().toString());
 	}
 	
 	
-	/* Procediment que conte la opcio 5 per afegir un nou servei
+	/** Procediment que conte la opcio 5 per afegir un nou servei
 	 * 
 	 * @param actual, es l'usuari que te actualment la sessio iniciada
 	 * @param llistaServ, la llista de serveis per afegir el nou servei
@@ -361,7 +414,8 @@ public class Main {
 		return llistaServ;
 	}
 	
-	/* Procediment que conte la opcio 6 per afegir un nou be 
+	/** 
+	 * Procediment que conte la opcio 6 per afegir un nou be 
 	 * @param alies, l'usuari que te actualment la sessio iniciada
 	 * @param llistaBe, la llista de bens per afegir un nou be 
 	 * @return la llista de bens amb la nova instancia afegida
@@ -468,7 +522,6 @@ public class Main {
 		
 		String userRep = null, prodAcon = null, prodOfer = null;
 		boolean error = false;
-		Usuaris usuariCopia = new Usuaris();
 		
 		System.out.println ("Introdueix els següents camps: ");
 		
@@ -482,12 +535,11 @@ public class Main {
 		
 		while (!error) {
 			try {
+				userRep = "";
 				userRep = teclat.nextLine();
 				//l'usuari introdueix a qui vol enviar la peticio
 				if (llistaUser.comprovaUsuari(userRep)) {
 					//es controla que l'usuari no introdueixi un alies no registrat
-					usuariCopia = llistaUser.trobaUsuari(userRep);
-					//es fa una copa del usuari que ha introduit l'emissor, que s'utilitzara mes tard
 					error = true;
 				}
 				else {
@@ -511,6 +563,7 @@ public class Main {
 		
 		while (!error) {
 			try {
+				prodAcon = "";
 				prodAcon = teclat.nextLine();
 				if (llistaBe.comprovaBe(userRep, prodAcon)) {
 					//comprovem si el producte esta afegida a la llista de bens
@@ -542,12 +595,12 @@ public class Main {
 		
 		System.out.println ("Indica el nom del producte que ofereixes");
 		//demanem a l'usuari el nom del prducte que ofereix 
-		System.out.println(userPet);
 
 		while (!error) {
 			try {
+				prodOfer = "";
 				prodOfer = teclat.nextLine();
-				if (llistaBe.comprovaBe(u.getAlies(), prodOfer)) {
+				if (llistaBe.comprovaBe(u.getAlies(), prodOfer) || llistaServ.comprovaServei(u.getAlies(), prodOfer)) {
 					//comprovem si el producte esta afegida a la llista de bens
 					//tambe comprovem que el producte que demana es propietat del usuari que actualment te inciada la sessio
 					error = true;
@@ -592,7 +645,7 @@ public class Main {
 	 * @param llistaPet la llista de peticions
 	 * @param llistaUser la llista d'usuaris
 	 */
-	public static void opcio8(Usuaris u, LlistaPeticions llistaPet, LlistaUsuaris llistaUser) {
+	public static void opcio8(Usuaris u, LlistaPeticions llistaPet, LlistaUsuaris llistaUser, LlistaBens llistaBe, LlistaServeis llistaServ) {
 			
 		int opcioAccept = 0, opcioAccept2 = 0, i = 0;
 		boolean error = false;
@@ -698,7 +751,42 @@ public class Main {
 			//canviem el parametre valoracioRep de la peticio i el fiquem al numero que ha introduit l'usuari
 			u.setIntercanvis((u.getIntercanvis())+1);
 			//canviem el parametre de setIntercanvis del usuari i sumem 1 intercanvi
+			Usuaris userAltre = llistaUser.trobaUsuari(peticioAgafa.getUserPeticio());
+			userAltre.setIntercanvis((userAltre.getIntercanvis())+1);
 			
+			String dataAvui = "";
+			
+			if (llistaBe.comprovaBe(u.getAlies(), peticioAgafa.getProducAcons())) {
+				Bens beAgafa =  llistaBe.agafarBe (u.getAlies(), peticioAgafa.getProducAcons());
+				if (beAgafa.getDataIntercanvi().equals("0")){
+					System.out.println ("Introdueix la data d'avui");
+					dataAvui = teclat.nextLine();
+					llistaBe.canviarDataInter(u.getAlies(), peticioAgafa.getProducAcons(), dataAvui);
+					llistaBe.canviarUsuariBe(u.getAlies(), peticioAgafa.getProducAcons(), peticioAgafa.getUserPeticio());
+				}
+			}
+			else {
+				if (llistaServ.comprovaServei(u.getAlies(), peticioAgafa.getProducAcons())) {
+					llistaServ.incrRepe(u.getAlies(), peticioAgafa.getProducAcons());
+					llistaServ.canviarUsuariServei(u.getAlies(), peticioAgafa.getProducAcons(), peticioAgafa.getUserPeticio());
+
+ 				}
+			}
+			
+			if (llistaBe.comprovaBe(peticioAgafa.getUserPeticio(), peticioAgafa.getProducOfe())) {
+				Bens beAgafa =  llistaBe.agafarBe (peticioAgafa.getUserPeticio(), peticioAgafa.getProducOfe());
+				if (beAgafa.getDataIntercanvi().equals("0")){
+					llistaBe.canviarDataInter(peticioAgafa.getUserPeticio(), peticioAgafa.getProducOfe(), dataAvui);
+					llistaBe.canviarUsuariBe(peticioAgafa.getUserPeticio(), peticioAgafa.getProducOfe(), u.getAlies());
+					
+				}
+			}
+			else {
+				if (llistaServ.comprovaServei(peticioAgafa.getUserPeticio(), peticioAgafa.getProducOfe())) {
+					llistaServ.incrRepe(peticioAgafa.getUserPeticio(), peticioAgafa.getProducOfe());
+					llistaServ.canviarUsuariServei(peticioAgafa.getUserPeticio(), peticioAgafa.getProducAcons(), u.getAlies());
+				}
+			}	
 		}
 		else {
 			//si l'usuari refusa la peticio
@@ -772,25 +860,8 @@ public class Main {
 		Usuaris u1 = new Usuaris(nom, correu, codiPost);
 		
 		llistaUser.donaAlta(u1);
-		
-		//Falta Afegir i crear fitxer serialitzat
-		
-	    /*try (FileOutputStream fos = new FileOutputStream("serialized_object.bin", true)) {         
-	    	try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-	            oos.writeObject(u1);
-	        }
-	    }
-	  	catch (IOException e) {
-	  		System.out.println ("no");
-	    }*/
 	}
-	
-	/**
-	 * Donar de baixa un bé o producte físic a intercanviar i eliminar-lo de la llista. Només es podrà
-	 * de donar de baixa si encara no s’ha fet cap intercanvi amb ell.
-	 * @param usuariactual
-	 * @param llistaBens
-	 */
+		
 	public static void opcio10(Usuaris usuariactual, LlistaBens llistaBens) {
 		
 		System.out.println("Indica quin be vols eliminar de la llista");
@@ -836,45 +907,130 @@ public class Main {
 		System.out.println(llistaPet.mostrarPetNoRespostes().toString());
 	}
 	
-	public static void opcio13(LlistaPeticions llistaPet) {
-		
-		llistaPet.mostrarPetAccept();
+	
+	/**
+	 * Mostrar les peticions d’intercanvi acceptades amb un toString de la llista
+	 * @param mostrarPetAc Llista amb totes les peticions
+	 */
+	public static void opcio13(LlistaPeticions mostrarPetAc) {
+
+		System.out.println(mostrarPetAc.mostrarPetAccept().toString());												
 	}
 	
-	public static void opcio14(LlistaPeticions llistaPet) {
-		
-		llistaPet.mostrarPetRefus();
-	}
+	
 
-	public static void llegirFitxerSerial() throws IOException, ClassNotFoundException {
+	/**
+	 * Mostrar les peticions d’intercanvi rebutjades amb un toString de la llista
+	 * @param mostrarPetRef Llista amb totes les peticions
+	 */
+	public static void opcio14(LlistaPeticions mostrarPetRef) {
+
+		System.out.println(mostrarPetRef.mostrarPetRefus().toString());
+	}
+	
+
+
+	/** 
+	 * Mostra quins usuaris tenen una valoració més alta que el llindar establert per l'usuari
+	 * @param usuarisVal Usuaris que supern el llindar 
+	 * @param pet llista de les peticions
+	 */
+	public static void opcio15(LlistaUsuaris usuarisVal, LlistaPeticions pet) {
+	int numero = 0;
+    boolean error = false;
+    
+		while (!error)
+		{
+			try
+			{
+				System.out.println("Escriu el llindar (0-5)");
+				String llegirnum = teclat.nextLine();
+				numero = Integer.parseInt(llegirnum);
+				if (numero < 0 || numero > 5)
+				{
+					throw new NumeroForaRangException();
+					//excepcio creada per detectar numeros fora del rang indicat al menu d'opcions
+				}
+				error=true;
+				//si no hi ha excpecio error = true continua amb el codi
 				
-		ObjectInputStream Fit = new ObjectInputStream(new FileInputStream("serialized_object.bin"));
-		Usuaris instancia;
-		boolean ok = false;
-		
-		while (!ok) {
-			try { 
-				instancia = (Usuaris) Fit.readObject();
-				System.out.println(instancia.toString());
-			} catch (EOFException e) {
-				ok = true;
+			}
+			catch (NumberFormatException e) {
+				//Si no fica un nombre enter
+				System.out.println("Indica un numero! No un altre caracter!");
+				error=false;
+			}
+			catch (NumeroForaRangException e) {
+				//si fica un numero fora del rang indicat
+				System.out.println("Introdueix una opció valida dintre del rang!!");
+				error=false;
 			}
 		}
-		Fit.close();
+		
+		String[]  sobreLlindar = pet.sobreLlindar(numero);
+		
+		LlistaUsuaris  usuarisLlindar = new LlistaUsuaris (100);
+		
+
+		System.out.println(usuarisLlindar.mostrarUsuarisValor(sobreLlindar).toString());
 	}
 	
+
+	/** 
+	 * Metode que mostra per pantalla el servei que mes s'ha repetit
+	 * @param serv llista de serveis
+	 */
+	public static void opcio16(LlistaServeis serv) {
+		
+		Serveis mesRepetit = serv.mesRepeticion();
+		System.out.println(mesRepetit.toString()+"\nNumero de vegades repetit:"+mesRepetit.getRepeticions());
+	}
+	
+	
+	/**
+	 * Procediment que llegeix un fitxer serialitzat i retorna les dades
+	 * @return retorna la llista que ha llegit del fitxer
+	 */
+	public static LlistaUsuaris carregarUsuaris() {
+		LlistaUsuaris llista = new LlistaUsuaris(100);
+        try {
+            FileInputStream finput = new FileInputStream("dadesUsuaris.ser");
+            ObjectInputStream sinput = new ObjectInputStream(finput);
+            Usuaris aux;
+            while(finput.available() > 0) {
+                aux = (Usuaris) sinput.readObject();
+                llista.donaAlta(aux);
+            }
+            finput.close();
+            sinput.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("No s'ha trobat el fitxer.");
+        } catch (IOException e) {
+            System.out.println("Error");
+        } catch(ClassNotFoundException e) {
+            System.out.println("Error en la càrrega de dades.");
+        }
+        return llista;
+    }
+	
+
 	public static void main(String[] args) throws ClassNotFoundException, IOException {
 		LlistaBens llistaBe = new LlistaBens(100);
 		LlistaServeis llistaServ = new LlistaServeis(100);
 		LlistaUsuaris llistaUser = new LlistaUsuaris(100);
 		LlistaPeticions llistaPet = new LlistaPeticions(100);
-		int opcio=0;
-		//llistaUser = carregarUsuaris();
 		
-		Usuaris usuari1 = new Usuaris ("chen", "ioqjeoi", 2365);
+		
+		int opcio=0;
+		
+		llistaUser = carregarUsuaris();
+		
 
-		llistaUser.donaAlta(usuari1);
 		Usuaris usuariActual = iniciasessio(llistaUser);
+		
+		Usuaris roger = new Usuaris("Roger", "kms", 231);
+		llistaUser.donaAlta(roger);
+		
 		
 		mostrarMenu();
 		while (opcio != 17) {
@@ -904,7 +1060,7 @@ public class Main {
 				llistaPet = opcio7(usuariActual, llistaPet, llistaUser, llistaBe, llistaServ);
 				break;
 			case 8:
-				opcio8(usuariActual, llistaPet, llistaUser);
+				opcio8(usuariActual, llistaPet, llistaUser, llistaBe, llistaServ);
 				break;
 			case 9:
 				opcio9(llistaUser);
@@ -925,10 +1081,10 @@ public class Main {
 				opcio14(llistaPet);
 				break;
 			case 15:
-				//opcio15();
+				opcio15(llistaUser, llistaPet);
 				break;
 			case 16:
-				//opcio16();
+				opcio16(llistaServ);
 				break;
 			}
 			mostrarMenu();
@@ -941,7 +1097,6 @@ public class Main {
 		System.out.println("2 Refusar");
 		
 		int opcioAccept2;
-		
 		while (!error) {
 			try {
 				opcioAccept2 = Integer.parseInt(teclat.nextLine());
@@ -953,6 +1108,8 @@ public class Main {
 						llistaBe.escriureLlistaBens();
 						llistaServ.escriureLlistaServeis();
 						llistaPet.escriureLlistaPeticions();
+						llistaUser.escriureLlistaUsuaris();
+						
 						System.out.println("S'han carrgat les dades!!");
 					}
 					else {

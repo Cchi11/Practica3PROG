@@ -79,10 +79,6 @@ public class Usuaris implements Serializable{   //Clase feta per Gerard Altadill
 		this.intercanvis = intercanvis;
 	}
 	
-	/*public String toString() {
-		return ("Alies: " + alies + ", Correu: " + correu + " i Codi postal: " + codiPost);
-	}*/
-	
 	public Usuaris copia() {
 		Usuaris copia = new Usuaris (alies, correu, codiPost);
 		copia.intercanvis=this.intercanvis;

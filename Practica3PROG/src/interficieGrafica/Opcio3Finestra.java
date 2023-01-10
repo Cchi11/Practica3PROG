@@ -27,7 +27,14 @@ public class Opcio3Finestra extends JFrame {
 
 	private JButton acceptar;
 	private JPanel panell;
-		
+	/**
+	 * 	
+	 * @param fines		Fienstre principal
+	 * @param u	usuari
+	 * @param llistaBe llisat be
+	 * @param llistaServis llisat serveis
+	 * @param llistaPeti llista peti
+	 */
 	public Opcio3Finestra(JFrame fines, Usuaris u, LlistaBens llistaBe, LlistaServeis llistaServis, LlistaPeticions llistaPeti) {
 		super("Crear peticio");
 		this.pack();
@@ -35,7 +42,7 @@ public class Opcio3Finestra extends JFrame {
 		this.setSize(500,200);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
-		
+		//Creem finestre
 		this.add(new JLabel("Usuari: "+u.getAlies()), BorderLayout.NORTH);
 		
 		panell = new JPanel(new GridLayout(2,2));
@@ -67,6 +74,7 @@ public class Opcio3Finestra extends JFrame {
 	    this.add(panell, BorderLayout.CENTER);
 	    JPanel botons = new JPanel(new FlowLayout());
 	    
+	    //al donar boto de aceptar fa questa accio
 	    BotoAcceptarPeticionsActionListener accioBoto = new BotoAcceptarPeticionsActionListener(fines, this, producAco, producOfe, llistaBe, llistaServis, llistaPeti, u.getAlies());
 	    acceptar.addActionListener(accioBoto);
 	    this.setVisible(true);

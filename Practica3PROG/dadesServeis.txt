@@ -1,0 +1,6 @@
+Maria;Netflix;veure videos;streaming;false;12/08/2022;12/08/2023
+Axel;Youtube Premium;veure videos;streaming;false;12/08/2022;12/08/2023
+Marc;Clase de piano;apandras a tocar el piano;educacio;false;10/10/2021;20/20/7848
+Pau;Neteja casa;Et neteja la casa;Neteja;false;05/01/2023;20/12
+Roger;valo;clases de valo;clases;false;22/12/2020;20/20/2024
+chen;Fisieoterapeuta;secions de fisioetrapia;Sanitat;false;22/12/2020;20/20/2024

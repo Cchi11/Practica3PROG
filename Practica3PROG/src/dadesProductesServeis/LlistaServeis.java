@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import peticions.LlistaPeticions;
 import usuaris.Usuaris;
 
 public class LlistaServeis {   //Clase feta per Chenxing Chi
@@ -119,17 +120,21 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		}
 		return actius;
 	}
-
-
+	
+	
+	/**
+	 * Escriu la llista de serveis a un fitxer
+	 */
 	public void escriureLlistaServeis() {
 		try (BufferedWriter g = new BufferedWriter(new FileWriter("dadesServeis.txt"))) {
 			String frase = "";
 			int i = 0;
 
 			for(i = 0; i < nElem; i++) {
+				// Pasem els paramatres a un string saparats per ;
 				frase = llista[i].getUsuari()+";"+llista[i].getNom()+";"+llista[i].getDesc()+";"+llista[i].getTipus()+";false;"+llista[i].getData()+";"+llista[i].getDataFiOferiment();
-				g.write(frase);
-				g.newLine();
+				g.write(frase); //Escrivim la frase al fitxer
+				g.newLine();	//SAltem de linia
 			}
 			g.close();
 		}
@@ -162,6 +167,77 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		return trobat;
 	}
 	
+	/**
+	 * Aumenta la rpeticions
+	 */
+	public void incrRepe(String usuari, String nomProd) {
+		int i = 0;
+		boolean trobat = false;
+	
+		for (i=0; !trobat && i < nElem; i++) {
+			//fem una cerca per robar si es correspon a la llista
+			if ((llista[i].getNom().equals(nomProd)) && (usuari.equals(llista[i].getUsuari()))) {
+				//si el producte coincideix
+				trobat = true;
+				//el boolea sera cert
+				llista[i].incremRepe();
+				//canviem la data d'intercanvi 
+			}
+		}
+	}
+	
+	public Serveis agafaServei (String usuari, String nomServ) {
+        
+		int i = 0;
+		boolean trobat = false;
+
+        for (i=0; !trobat && i < nElem; i++) {
+        	//cerquem a la llista de serveis
+            if ((llista[i].getNom().equals(nomServ)) && (usuari.equals(llista[i].getUsuari()))) {
+            	//si coincideix amb el que ha ficat l'usuari
+                trobat = true;
+                //posem el boolea a true
+            }
+        }
+        i--;
+        return (llista[i].copia());
+	}
+	
+	public void canviarUsuariServei(String usuari, String nomProd, String userAltre) {
+		int i = 0;
+		boolean trobat = false;
+	
+		for (i=0; !trobat && i < nElem; i++) {
+			//fem una cerca per robar si es correspon a la llista
+			if ((llista[i].getNom().equals(nomProd)) && (usuari.equals(llista[i].getUsuari()))) {
+				//si el producte coincideix
+				trobat = true;
+				//el boolea sera cert
+				llista[i].setUsuari(userAltre);
+				//canviem l'usari propietari del producte
+			}
+		}
+	}
+	
+	
+	/** 
+	 * Metode que cerca en lla llista de serveis el servei que mes es repeteix
+	 * @return retorna el servei amb mes repeticions
+	 */
+	public Serveis mesRepeticion() {	
+		int repMajor, id =0;
+		repMajor=0;
+		for (int i=0; i < nElem; i++) {
+			if (llista[i].getRepeticions() >= repMajor) {
+				repMajor = llista[i].getRepeticions(); 
+				id = i;
+			}	
+		}
+		Serveis mesRep = llista[id];
+		return mesRep;
+	}
+	
+
 	
 	public String toString() {
 		String aux;
