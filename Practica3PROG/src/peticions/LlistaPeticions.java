@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import interficieGrafica.MainGrafic;
+
 public class LlistaPeticions { //Clase realitzada per Pol Regy
 	private int nElem;
 	private Peticions[] llista;
@@ -146,6 +148,36 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 		i--;
 		//restem 1 unitat al index perque al ser un for es suma 1 unitat a la i al trobar la peticio
 		return i;
+	}
+	
+	/**
+	 * metode que retorna el num de elements de una llista amb nomes peticions creades per l'usuari i interncaviades amb èxit
+	 * @return num elements
+	 */
+	public int numPeticionsUsuari() {
+		int num=0;
+		for (int i=0; i<nElem; i++) {
+			if  ((llista[i].getUserPeticio().equals(MainGrafic.usuari.getAlies()))&& (llista[i].getResposat()==1)) {
+				num++;
+			}
+		}
+		return num;
+	}
+	
+	/**
+	 * metode que retorna una llista amb nomes peticions creades per l'usuari i interncaviades amb èxit
+	 * @return LlistaPeticions
+	 */
+	public LlistaPeticions PeticionsUsuariAcceptades() {
+		LlistaPeticions l = new LlistaPeticions(100);
+		
+		for (int i=0; i<nElem; i++) {
+			if  ((llista[i].getUserPeticio().equals(MainGrafic.usuari.getAlies()))&& (llista[i].getResposat()==1)) {
+				Peticions p = llista[i].copia();
+				l.afegirPeticio(p);
+			}
+		}
+		return l;
 	}
 	
 	public void escriureLlistaPeticions() {

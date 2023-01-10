@@ -92,17 +92,41 @@ public class MainPrincipal {
 		LlistaBens llistaBe = new LlistaBens(100);
 		LlistaServeis llistaServ = new LlistaServeis(100);
 		LlistaPeticions llistaPet = new LlistaPeticions(100);
+		
+		Peticions p1 = new Peticions (00001, "srgerard", "oscarcabre03", "sabata", "pilota");
+		Peticions p2 = new Peticions (00002, "chen", "oscarcabre03", "sabata", "polvoro");
+		Peticions p3 = new Peticions (00003, "oscarcabre", "srgerard", "pilota", "sabata");
+		Peticions p4 = new Peticions (00004, "chen", "srgerard", "pilota", "polovoro");
+		Peticions p5 = new Peticions (00004, "chen", "srgerard", "comprar", "polovoro");
+		Peticions p6 = new Peticions (00004, "chen", "srgerard", "taulas", "polovoro");
+		
+		p4.setResposat(1);
+		p2.setResposat(1);
+		p4.setValoracioUserPeticio(5);
+		p2.setValoracioUserPeticio(3);
+		
+		
+		p5.setResposat(1);
+		p6.setResposat(1);
+		p5.setValoracioUserPeticio(0);
+		p6.setValoracioUserPeticio(2);
+		
 		//llistaUser = carregarUsuaris();
 		//Usuaris usuariActual = iniciasessio(llistaUser);
 		//llistaUser.donaAlta(usuariActual);
 		llistaPet = opcio1Pet();
 		llistaServ = opcio1Serv();
 		llistaBe = opcio1Be();
+		llistaPet.afegirPeticio(p4);
+		llistaPet.afegirPeticio(p2);
+		llistaPet.afegirPeticio(p5);
+		llistaPet.afegirPeticio(p6);
 
 
 		Usuaris usuari1 = new Usuaris ("chen", "ioqjeoi", 2365);
 		llistaUser.donaAlta(usuari1);
 
+		
 		MainGrafic finestra = new MainGrafic(llistaUser, llistaBe, llistaServ, llistaPet);
 		
 	}

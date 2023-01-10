@@ -75,6 +75,8 @@ public class MainGrafic extends JFrame {
 		buttons[1].addActionListener(opcio3);
 		
 		buttons[2].setText("Consultar els intercanvis que ha fet l'usuari");
+		Opcio4ActionListener opcio4 = new Opcio4ActionListener (this, llistaPeti);
+		buttons[2].addActionListener(opcio4);
 		
 		buttons[3].setText("Canviar el codi d'usuari que esta  utilitzant l'aplicacio");
 		Opcio5ActionListener opcio5 = new Opcio5ActionListener (this, llistaUser);
