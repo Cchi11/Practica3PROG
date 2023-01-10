@@ -70,7 +70,10 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 	
 	
 
-
+	/**
+	 * Metode que retorna una llista amb totes les instancies de peticions respostes
+	 * @return llistaNova Peticions no respostes
+	 */
 	public LlistaPeticions mostrarPetAccept () {	
 		LlistaPeticions llistaPetAct = new LlistaPeticions (100);
 		for (int i=0; i < nElem; i++) {
@@ -82,7 +85,10 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 	}
 	
 	
-	
+	/**
+	 * Metode que retorna una llista amb totes les instancies de peticions rebutjades
+	 * @return llistaNova Peticions rebutjades
+	 */
 	public LlistaPeticions mostrarPetRefus () {	
 		LlistaPeticions llistaPetRef = new LlistaPeticions (100);
 		for (int i=0; i < nElem; i++) {
@@ -94,14 +100,12 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 
 	}
 	
-		
-	
 
-	
-	
-
-	
-	
+	/** 
+	 * Metode que busca els noms dels usuaris que tenen una valoracio major al llindar
+	 * @param llindar valor que les valoracions dels usuaris han de superar
+	 * @return noms dels usuaris que superen el llindar
+	 */
 	public String[] sobreLlindar(int llindar) {
 		
 		int j = 0;
@@ -119,19 +123,6 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 		}
 		return sobreLlindar;
 	}
-	
-	
-	
-/*	public LlistaPeticions peticionsUsuari () {	
-		LlistaPeticions petUsuaris = new LlistaPeticions (100);
-		for (int i=0; i < nElem; i++) {
-			if (llista[i].getUserRebPet() == NOMUSUARI || llista[i].getUserRebPet() == NOMUSUARI) {
-				petUsuaris.afegirPeticio(llista[i]);
-			}
-		}
-		return petUsuaris;
-	}*/
-	
 	
 	
 	/* Metode per acceptar una peticio. Canvia l'atribut resposat a 1 
