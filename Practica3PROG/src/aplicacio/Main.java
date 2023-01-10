@@ -184,7 +184,7 @@ public class Main {
 		System.out.println("\t17. Sortir de l’aplicacio");
 		System.out.print("\n\t\t\tIndica opcio:\n");
 	}
-
+	
 	public static LlistaServeis carregarServeis () throws FileNotFoundException, IOException {
 		Scanner f = new Scanner(new File("dadesServeis.txt")); 	
 		LlistaServeis llista = new LlistaServeis(100);			
@@ -554,7 +554,7 @@ public class Main {
 				}
 				else {
 
-					if (llistaServ.comprovaServei(userPet, prodOfer)) {
+					if (llistaServ.comprovaServei(u.getAlies(), prodOfer)) {
 						//en cas contrari comprovarem si el producte esta afegit a la llista de serveis
 						//tambe comprovem que el producte que demana es propietat del usuari que actualment te inciada la sessio
 						error = true;
@@ -797,8 +797,8 @@ public class Main {
 		String nom = teclat.nextLine();
 		
 		try {
-			if (!llistaBens.comprovaBe(usuariactual.getAlies(), nom)){
-				System.out.println("No s'ha pogut trobat el be que volies eliminar");
+			if (!llistaBens.comprovaBeSenseIntercanviat(usuariactual.getAlies(), nom)){
+				System.out.println("No s'ha pogut trobat el be que volies eliminar o el bé s'ha intercanviat més d'un cop");
 			}
 			else {
 				llistaBens.eliminaBe(usuariactual, nom);

@@ -1,4 +1,0 @@
-1;Cchenc11;Oscar;Classes de program;Clases de Valorant o LoL
-2;Mario;Luigi;pelota;Netflix
-3;chen;Maria;Netflix;taula
-4;chen;Roger;nevera;pelota
