@@ -28,7 +28,7 @@ public class Opcio4ActionListener implements ActionListener  {
 			
 			JButton b = (JButton) e.getSource();
 			finestra.setVisible(false);
-			Opcio4Finestra fin4 = new Opcio4Finestra(finestra, MainGrafic.usuari, llistaPet);
+		
 
 		}
 

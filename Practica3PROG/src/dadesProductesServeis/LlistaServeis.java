@@ -120,7 +120,8 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		}
 		return actius;
 	}
-
+	
+	
 	/**
 	 * Escriu la llista de serveis a un fitxer
 	 */
@@ -164,6 +165,25 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 				
 		}
 		return trobat;
+	}
+	
+	/**
+	 * Aumenta la rpeticions
+	 */
+	public void incrRepe(String usuari, String nomProd) {
+		int i = 0;
+		boolean trobat = false;
+	
+		for (i=0; !trobat && i < nElem; i++) {
+			//fem una cerca per robar si es correspon a la llista
+			if ((llista[i].getNom().equals(nomProd)) && (usuari.equals(llista[i].getUsuari()))) {
+				//si el producte coincideix
+				trobat = true;
+				//el boolea sera cert
+				llista[i].incremRepe();
+				//canviem la data d'intercanvi 
+			}
+		}
 	}
 	
 	public Serveis agafaServei (String usuari, String nomServ) {

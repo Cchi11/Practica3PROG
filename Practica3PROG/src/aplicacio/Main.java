@@ -767,8 +767,10 @@ public class Main {
 			}
 			else {
 				if (llistaServ.comprovaServei(u.getAlies(), peticioAgafa.getProducAcons())) {
+					llistaServ.incrRepe(u.getAlies(), peticioAgafa.getProducAcons());
 					llistaServ.canviarUsuariServei(u.getAlies(), peticioAgafa.getProducAcons(), peticioAgafa.getUserPeticio());
-				}
+
+ 				}
 			}
 			
 			if (llistaBe.comprovaBe(peticioAgafa.getUserPeticio(), peticioAgafa.getProducOfe())) {
@@ -781,6 +783,7 @@ public class Main {
 			}
 			else {
 				if (llistaServ.comprovaServei(peticioAgafa.getUserPeticio(), peticioAgafa.getProducOfe())) {
+					llistaServ.incrRepe(peticioAgafa.getUserPeticio(), peticioAgafa.getProducOfe());
 					llistaServ.canviarUsuariServei(peticioAgafa.getUserPeticio(), peticioAgafa.getProducAcons(), u.getAlies());
 				}
 			}	

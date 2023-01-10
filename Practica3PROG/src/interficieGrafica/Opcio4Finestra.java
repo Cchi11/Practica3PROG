@@ -20,32 +20,5 @@ import usuaris.Usuaris;
 
 public class Opcio4Finestra extends JFrame {
 	
-	int numButtons;
 	
-
-		
-	public Opcio3Finestra(JFrame fines, Usuaris u, LlistaPeticions llistaPeti) {
-
-		
-		numButtons = 
-		
-
-				getIntercanvis
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	}
 }

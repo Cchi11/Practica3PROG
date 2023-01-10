@@ -42,6 +42,10 @@ public class Serveis extends Producte{   //Clase realitzada per Pol Regy
 		repeticions = rep;
 	}
 	
+	public void incremRepe() {
+		repeticions = repeticions + 1;
+	}
+	
 	public Serveis copia () {
 		Serveis copia =  new Serveis (super.usuari, super.nom, super.desc, super.tipus, super.be, super.data, dataFiOferiment);
 		copia.actiu=this.actiu;
