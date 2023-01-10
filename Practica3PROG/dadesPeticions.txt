@@ -2,3 +2,4 @@
 2;Mario;Luigi;pelota;Netflix
 3;chen;Maria;Netflix;taula
 4;chen;Roger;nevera;pelota
+5;Roger;chen;pelota;nevera

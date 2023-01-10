@@ -28,7 +28,12 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		return(nElem);
 	}
 		
+	/**
+	 * 	Afegir servei a un a llista
+	 * @param s Servei a afegir a la llista
+	 */
 	public void afegirServei (Serveis s) {
+		//Si la llista esta plena, la fem mes gran
 		if (nElem>=llista.length) {
 			Serveis [] llistanova = new Serveis [nElem*2];
 			for (int i=0; i<nElem; i++)
@@ -61,6 +66,12 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
         return (trobat);
     }
 	
+	/**
+	 * Metode que fa el mateix que el comprovaServei, pero ara mira sense tenir en compte l'usuari
+	 * @param usuari usuari a busccar
+	 * @param nomServ producte a buscar
+	 * @return boolea si ha trobat o no
+	 */
 	public boolean comprovaServeiSenseUsuari (String usuari, String nomServ) {
 
         boolean trobat = false;
@@ -73,6 +84,12 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
         return (trobat);
     }
 	
+	/**
+	 * Metode que fa el mateix que el comprovaServei, pero ara mira sense tenir en compte l'usuari y ara retorna un String amb el nom d'aquest usuari trobat
+	 * @param usuari usuari a busccar
+	 * @param nomServ producte a buscar
+	 * @return String amb el nom del usuari trobat i sino retorna null
+	 */
 	public String comprovaServeiSenseUsuariStr (String usuari, String nomProd) {
 		
 		boolean trobat = false;
@@ -103,6 +120,7 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		return actius;
 	}
 
+
 	public void escriureLlistaServeis() {
 		try (BufferedWriter g = new BufferedWriter(new FileWriter("dadesServeis.txt"))) {
 			String frase = "";
@@ -124,6 +142,13 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 	}
 	
 	
+
+	/**
+	 * Dona de baixa un servei sense esborrarlo de la llista
+	 * @param usuari
+	 * @param nomServei
+	 * @return boolea que indica si s'ha donat de baixa o no
+	 */
 	public boolean donaBaixaServei (Usuaris usuari, String nomServei) {
 		boolean trobat=false;
 		for (int i=0; i<nElem; i++) {
@@ -137,6 +162,38 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		return trobat;
 	}
 	
+	public Serveis agafaServei (String usuari, String nomServ) {
+        
+		int i = 0;
+		boolean trobat = false;
+
+        for (i=0; !trobat && i < nElem; i++) {
+        	//cerquem a la llista de serveis
+            if ((llista[i].getNom().equals(nomServ)) && (usuari.equals(llista[i].getUsuari()))) {
+            	//si coincideix amb el que ha ficat l'usuari
+                trobat = true;
+                //posem el boolea a true
+            }
+        }
+        i--;
+        return (llista[i].copia());
+	}
+	
+	public void canviarUsuariServei(String usuari, String nomProd, String userAltre) {
+		int i = 0;
+		boolean trobat = false;
+	
+		for (i=0; !trobat && i < nElem; i++) {
+			//fem una cerca per robar si es correspon a la llista
+			if ((llista[i].getNom().equals(nomProd)) && (usuari.equals(llista[i].getUsuari()))) {
+				//si el producte coincideix
+				trobat = true;
+				//el boolea sera cert
+				llista[i].setUsuari(userAltre);
+				//canviem l'usari propietari del producte
+			}
+		}
+	}
 	
 	public String toString() {
 		String aux;

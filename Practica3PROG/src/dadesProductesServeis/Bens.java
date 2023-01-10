@@ -30,7 +30,6 @@ public class Bens extends Producte{   //Clase feta per Chenxing Chi
 	}
 	
 	//Getters
-	
 	public int getAmplada() {
 		return amplada;
 	}
@@ -49,6 +48,10 @@ public class Bens extends Producte{   //Clase feta per Chenxing Chi
 	
 	public String getDataIntercanvi() {
 		return dataIntercanvi;
+	}
+	
+	public void setDataIntercanvi (String data) {
+		this.dataIntercanvi = data;
 	}
 	
 	public Bens copia() {

@@ -27,6 +27,7 @@ public class Opcio2Finestra extends JFrame {
 	    //configurem la mida de a finestra
 	    this.setLayout (new FlowLayout());
 	    //posem la finestra amb FlowLayout
+	    this.setLocation(400, 150);
 	    
 	    JButton b1 = new JButton();
 	    //creem un boto ok per quan l'usuari el premi quan hagi acabat de mirar la llista

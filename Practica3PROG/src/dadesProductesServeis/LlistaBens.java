@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import peticions.Peticions;
 import usuaris.Usuaris;
 
 public class LlistaBens {  //Clase feta per Chenxing Chi
@@ -30,7 +31,12 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 		return nElem;
 	}
 	
+	/**
+	 * Metode per afegir un be a la llista
+	 * @param b el be a afegir
+	 */
 	public void afegirBe (Bens b) {
+		//Si la llista esta plena, la fem més gran
 		if (nElem>=llista.length) {
 			Bens [] llistanova = new Bens [nElem*2];
 			for (int i=0; i<nElem; i++)
@@ -44,6 +50,7 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 	}
 	
 	
+
 	/* metode per comprovar si el be pertany al usuari
 	 * @param usuari, alies de l'usuari actual que te iniciada la sessio
 	 * @param nomProd, nom del producte que volem comprovar
@@ -53,7 +60,7 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 		
 		boolean trobat = false;
 		
-		for (int i=0; !trobat && i <= nElem; i++) {
+		for (int i=0; !trobat && i < nElem; i++) {
 			//fem una cerca per robar si es correspon a la llista
 			if ((llista[i].getNom().equals(nomProd)) && (usuari.equals(llista[i].getUsuari()))) {
 				//si el producte coincideix
@@ -64,6 +71,12 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 		return (trobat);
 	}	
 	
+	/**
+	 * Metode que realitza el mateix que el metode ComprovaBe, pero ara mira sense tenir en compte l'usuari
+	 * @param usuari Nom usuari a buscar
+	 * @param nomProd Nom del producte a buscar
+	 * @return Retorna si a trobat o no
+	 */
 	public boolean comprovaBeSenseUsuari (String usuari, String nomProd) {
 		
 		boolean trobat = false;
@@ -75,6 +88,13 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 		}
 		return (trobat);
 	}	
+	
+	/**
+	 * Metode que realitza el mateix que el metode comprovaBeSenseUsuari, nomes que ara retorna un String amb el nom de l'usuari trobat
+	 * @param usuari Usuaria buscar
+	 * @param nomProd	nom del producte a buscar
+	 * @return
+	 */
 	
 	public String comprovaBeSenseUsuariStr (String usuari, String nomProd) {
 		
@@ -88,7 +108,12 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 		}
 		return us;
 	}
-	
+
+	/**
+	 * Elimina un Be de la llista tenint en compte que nomes es pot esborrar si no s'ha intercanviat
+	 * @param usuari Usuari actual
+	 * @param nomProd nom del producte a esborrar
+	 */
 	public void eliminaBe (Usuaris usuari, String nomProd) {
 		int i=0;
 			while (i<nElem) {
@@ -140,6 +165,60 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 		}
 		catch(IOException e) {
 			System.out.println("S'ha produit un error en els arxius");
+		}
+	}
+	
+	/* Metode que agafa la llista i retorna la peticio en una posicio concreta de la llista
+	 * @param i, l'index de la llista
+	 * @return la peticio en aquella posicio de la llista
+	 */
+	
+	public Bens agafarBe (String usuari, String nomProd) {
+		
+		int i = 0;
+		boolean trobat = false;
+	
+		for (i=0; !trobat && i < nElem; i++) {
+			//fem una cerca per robar si es correspon a la llista
+			if ((llista[i].getNom().equals(nomProd)) && (usuari.equals(llista[i].getUsuari()))) {
+				//si el producte coincideix
+				trobat = true;
+				//el boolea sera cert
+			}
+		}
+		i--;
+		return (llista[i].copia());
+	}
+	
+	public void canviarDataInter (String usuari, String nomProd, String data) {
+		int i = 0;
+		boolean trobat = false;
+	
+		for (i=0; !trobat && i < nElem; i++) {
+			//fem una cerca per robar si es correspon a la llista
+			if ((llista[i].getNom().equals(nomProd)) && (usuari.equals(llista[i].getUsuari()))) {
+				//si el producte coincideix
+				trobat = true;
+				//el boolea sera cert
+				llista[i].setDataIntercanvi(data);
+				//canviem la data d'intercanvi 
+			}
+		}
+	}
+	
+	public void canviarUsuariBe(String usuari, String nomProd, String userAltre) {
+		int i = 0;
+		boolean trobat = false;
+	
+		for (i=0; !trobat && i < nElem; i++) {
+			//fem una cerca per robar si es correspon a la llista
+			if ((llista[i].getNom().equals(nomProd)) && (usuari.equals(llista[i].getUsuari()))) {
+				//si el producte coincideix
+				trobat = true;
+				//el boolea sera cert
+				llista[i].setUsuari(userAltre);
+				//canviem l'usari propietari del producte
+			}
 		}
 	}
 	

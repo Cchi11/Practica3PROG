@@ -1,4 +1,4 @@
-package aplicacio;
+ package aplicacio;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.EOFException;
@@ -30,19 +30,23 @@ import usuaris.LlistaUsuaris;
 public class Main {
 	static Scanner teclat = new Scanner(System.in);
 	
+	
 	/* Procediment per inicia sessio o registrar-se a l'aplicatiu
 	 * 
 	 * @param llista, la llista d'usuaris
 	 * @return el usuari que ha iniciat sessio o be el que s'acaba de registrar
 	 */
-	public static Usuaris iniciasessio(LlistaUsuaris llista) {
+
+	public static Usuaris iniciasessio (LlistaUsuaris llista) {
 		Usuaris nou = new Usuaris();
 		//Creem instancia d'usuari
 		System.out.println("Benvingut/da a l'aplicacio");    
 		System.out.println("\n\nTria una opcio: ");
 		System.out.println("\n\t1. Iniciar sessio");
 		System.out.println("\t2. Registra't si no tens compte");
+
 		//mostrem menu d'opcions
+
 		int opcioini = 0;
 		boolean error = false;
 		while (!error)
@@ -60,17 +64,19 @@ public class Main {
 				//si no hi ha excpecio error = true continua amb el codi
 				
 			}
+			//Controlem que no passi l'error de convertir un caracter a int
 			catch (NumberFormatException e) {
 				//Si no fica un nombre enter
 				System.out.println("Indica un numero! No un altre caracter!");
 				error=false;
-			}
+			} 
 			catch (NumeroForaRangException e) {
 				//si fica un numero fora del rang indicat
 				System.out.println("Introdueix una opció valida dintre del rang!!");
 				error=false;
 			}
 		}
+		
 		error =false;
 		
 		if (opcioini == 1) {
@@ -95,7 +101,7 @@ public class Main {
 					System.out.println("No s'ha pogut trobar aquest usuari. Intenta un altre cop:");
 					//si l'usuari no introdueix res
 					error=false;
-				}
+				} //No troba usuari a la llista
 				catch (NoEsTrobaException e) {
 					System.out.println("No s'ha pogut trobat aquest usuari. Intenta un altre cop");
 					//si l'usuari introdueix un usuari no registrat
@@ -104,42 +110,55 @@ public class Main {
 			}
 		}
 		else {
-			//opcio per registrar un usuari
-			String usuari;
-			System.out.print("Indica el teu alies:");
-			usuari = teclat.nextLine();
-			//es demana el nom d'usuari
-			System.out.println("Indica el teu correu electronic:");
-			String correu = teclat.nextLine();
-			//es demana el correu de l'usuari
-			System.out.println("Indica el teu codi postal");
-			//es demana el codi postal i controlarem que siguin numeros enters
-			error =false;
-			int codiP=0;
-			while (!error)
-			{
-				try {
-					String codiPostal = teclat.nextLine();
-					codiP = Integer.parseInt(codiPostal);
-					error=true;
-				}
-				catch (NumberFormatException e)
+			if (opcioini == 2) {
+				String usuari = new String();
+				error =false;
+				while (!error)
 				{
-					System.out.println("Indica un codi postal correcte! Torna a intentar:");
-					//si l'usuari introduix un numero no enter en el codi postal
-					error=false;
+					System.out.print("Indica el teu alies:");
+					usuari = teclat.nextLine();
+					
+					if (llista.comprovaUsuari(usuari)) {
+						System.out.println("Aquest alies ja existeix!!");
+					}
+					else {
+						error=true;
+					}
 				}
-			}			
-			Usuaris newUsuari = new Usuaris (usuari, correu, codiP);
-			//es crea la instancia usuari amb les dades que s'han introduit per teclat
-			nou=newUsuari;
-			llista.donaAlta(nou);		
-			//es crida la funcio donaAlta per afegir-lo a la llista d'usuaris
+
+				System.out.println("Indica el teu correu electronic:");
+				String correu = teclat.nextLine();
+				System.out.println("Indica el teu codi postal");
+				error =false;
+				int codiP=0;
+				while (!error)
+				{
+					try {
+						String codiPostal = teclat.nextLine();
+						codiP = Integer.parseInt(codiPostal);
+						error=true;
+					}
+					//Controlem que no passi l'error de convertir un caracter a int
+					catch (NumberFormatException e)
+					{
+						System.out.println("Indica un codi postal correcte! Torna a intentar:");
+						//si l'usuari introduix un numero no enter en el codi postal
+						error=false;
+					}
+				}
+				
+				Usuaris newUsuari = new Usuaris (usuari, correu, codiP);
+				//es crea la instancia usuari amb les dades que s'han introduit per teclat
+				nou=newUsuari;
+				llista.donaAlta(nou);		
+				//es crida la funcio donaAlta per afegir-lo a la llista d'usuaris
+			}
+		//retornem l'usuari recent registrat
 		}
 		return nou;
-		//retornem l'usuari recent registrat
 	}
 	
+
 	/*Procediment per imprimir per pantall un ventall d'opcions per fer a l'aplicatiu
 	 * 
 	 */
@@ -300,6 +319,7 @@ public class Main {
 	public static void opcio4 (LlistaBens llistaBe) {
 		System.out.println(llistaBe.llistaBensNoIntercanvia().toString());
 	}
+	
 	
 	/* Procediment que conte la opcio 5 per afegir un nou servei
 	 * 
@@ -572,7 +592,7 @@ public class Main {
 	 * @param llistaPet la llista de peticions
 	 * @param llistaUser la llista d'usuaris
 	 */
-	public static void opcio8(Usuaris u, LlistaPeticions llistaPet, LlistaUsuaris llistaUser) {
+	public static void opcio8(Usuaris u, LlistaPeticions llistaPet, LlistaUsuaris llistaUser, LlistaBens llistaBe, LlistaServeis llistaServ) {
 			
 		int opcioAccept = 0, opcioAccept2 = 0, i = 0;
 		boolean error = false;
@@ -678,7 +698,39 @@ public class Main {
 			//canviem el parametre valoracioRep de la peticio i el fiquem al numero que ha introduit l'usuari
 			u.setIntercanvis((u.getIntercanvis())+1);
 			//canviem el parametre de setIntercanvis del usuari i sumem 1 intercanvi
+			Usuaris userAltre = llistaUser.trobaUsuari(peticioAgafa.getUserPeticio());
+			userAltre.setIntercanvis((userAltre.getIntercanvis())+1);
 			
+			String dataAvui = "";
+			
+			if (llistaBe.comprovaBe(u.getAlies(), peticioAgafa.getProducAcons())) {
+				Bens beAgafa =  llistaBe.agafarBe (u.getAlies(), peticioAgafa.getProducAcons());
+				if (beAgafa.getDataIntercanvi().equals("0")){
+					System.out.println ("Introdueix la data d'avui");
+					dataAvui = teclat.nextLine();
+					llistaBe.canviarDataInter(u.getAlies(), peticioAgafa.getProducAcons(), dataAvui);
+					llistaBe.canviarUsuariBe(u.getAlies(), peticioAgafa.getProducAcons(), peticioAgafa.getUserPeticio());
+				}
+			}
+			else {
+				if (llistaServ.comprovaServei(u.getAlies(), peticioAgafa.getProducAcons())) {
+					llistaServ.canviarUsuariServei(u.getAlies(), peticioAgafa.getProducAcons(), peticioAgafa.getUserPeticio());
+				}
+			}
+			
+			if (llistaBe.comprovaBe(peticioAgafa.getUserPeticio(), peticioAgafa.getProducOfe())) {
+				Bens beAgafa =  llistaBe.agafarBe (peticioAgafa.getUserPeticio(), peticioAgafa.getProducOfe());
+				if (beAgafa.getDataIntercanvi().equals("0")){
+					llistaBe.canviarDataInter(peticioAgafa.getUserPeticio(), peticioAgafa.getProducOfe(), dataAvui);
+					llistaBe.canviarUsuariBe(peticioAgafa.getUserPeticio(), peticioAgafa.getProducOfe(), u.getAlies());
+					
+				}
+			}
+			else {
+				if (llistaServ.comprovaServei(peticioAgafa.getUserPeticio(), peticioAgafa.getProducOfe())) {
+					llistaServ.canviarUsuariServei(peticioAgafa.getUserPeticio(), peticioAgafa.getProducAcons(), u.getAlies());
+				}
+			}	
 		}
 		else {
 			//si l'usuari refusa la peticio
@@ -692,6 +744,11 @@ public class Main {
 		}
 	}
 	
+	
+	/**
+	 * Dona alta a un usuari, pasant per parametre la llistaUsuaris on es guarda
+	 * @param llistaUser Llista on es guarden tots els Usuaris
+	 */
 	public static void opcio9(LlistaUsuaris llistaUser) {
 			
 		boolean error = false;
@@ -699,19 +756,23 @@ public class Main {
 		
 		System.out.println ("Introdueix els següents camps: ");
 		String nom = new String();
+		//Si introdueix un nom d'usuari que existeix, mostrar missatge d'error i tornar a començar
+		
 		while (!error)
 		{
-			try {
-		
-			System.out.println ("Usuari:");
-			nom = teclat.nextLine();
-			if (llistaUser.comprovaUsuari(nom)) {
-				throw new NoEsTrobaException();
-			}
-			else
+			try 
 			{
-				error=true;
-			}
+				System.out.println ("Usuari:");
+				nom = teclat.nextLine();
+				
+				//Si el nom ja existeix, mostra error
+				if (llistaUser.comprovaUsuari(nom)) {
+					throw new NoEsTrobaException();
+				}
+				else
+				{
+					error=true;
+				}
 			}
 			catch (NoEsTrobaException e) {
 				System.out.println("Aquest Alies ja existeix!");
@@ -719,13 +780,16 @@ public class Main {
 			
 		}
 		
+		//reiniciem la variable
 		error=false;
 			
 		System.out.println ("Correu del usuari: ");
 		String correu = teclat.nextLine();
 		
 		System.out.println ("Codi postal del usuari:");
-
+		
+		//Controlar que l'usuari introdueixi una variable enterea i no altres caracters
+		
 		while (!error) {
 			try {
 				codiPost = Integer.parseInt(teclat.nextLine());
@@ -736,6 +800,7 @@ public class Main {
 			}
 		}
 		
+		//Si tot va be, crear un nou usuari i afegirlo a la llista;
 		Usuaris u1 = new Usuaris(nom, correu, codiPost);
 		
 		llistaUser.donaAlta(u1);
@@ -752,6 +817,12 @@ public class Main {
 	    }*/
 	}
 	
+	/**
+	 * Donar de baixa un bé o producte físic a intercanviar i eliminar-lo de la llista. Només es podrà
+	 * de donar de baixa si encara no s’ha fet cap intercanvi amb ell.
+	 * @param usuariactual
+	 * @param llistaBens
+	 */
 	public static void opcio10(Usuaris usuariactual, LlistaBens llistaBens) {
 		
 		System.out.println("Indica quin be vols eliminar de la llista");
@@ -788,6 +859,10 @@ public class Main {
 				System.out.println("S'ha donat de baixa correctament el servei");
 	}
 	
+	/**
+	 * Mostrar les peticions d’intercanvi pendents de respondre amb un toString de la llista
+	 * @param llistaPet Llista amb totes les peticions
+	 */
 	public static void opcio12(LlistaPeticions llistaPet) {
 
 		System.out.println(llistaPet.mostrarPetNoRespostes().toString());
@@ -827,9 +902,14 @@ public class Main {
 		LlistaPeticions llistaPet = new LlistaPeticions(100);
 		int opcio=0;
 		//llistaUser = carregarUsuaris();
+		
 		Usuaris usuari1 = new Usuaris ("chen", "ioqjeoi", 2365);
+
 		llistaUser.donaAlta(usuari1);
 		Usuaris usuariActual = iniciasessio(llistaUser);
+		
+		Usuaris roger = new Usuaris("Roger", "kms", 231);
+		llistaUser.donaAlta(roger);
 		
 		mostrarMenu();
 		while (opcio != 17) {
@@ -859,7 +939,7 @@ public class Main {
 				llistaPet = opcio7(usuariActual, llistaPet, llistaUser, llistaBe, llistaServ);
 				break;
 			case 8:
-				opcio8(usuariActual, llistaPet, llistaUser);
+				opcio8(usuariActual, llistaPet, llistaUser, llistaBe, llistaServ);
 				break;
 			case 9:
 				opcio9(llistaUser);

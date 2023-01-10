@@ -24,7 +24,12 @@ public class LlistaUsuaris {			//Clase feta per Chenxing Chi
 			return nElem;
 		}
 		
+		/**
+		 * Afegeix un usuari nou a la llista
+		 * @param a Usuari a afegir
+		 */
 		public void donaAlta (Usuaris a) {
+			//Si la llista esta plena, ferla mes gran
 			if (nElem>=llista.length) {
 				Usuaris [] llistanova = new Usuaris [nElem*2];
 				for (int i=0; i<nElem; i++)
@@ -33,7 +38,7 @@ public class LlistaUsuaris {			//Clase feta per Chenxing Chi
 				}
 				llista=llistanova;
 			}
-			llista[nElem] = a;
+			llista[nElem] = a.copia();
 			nElem++;
 		}
 		
@@ -67,7 +72,7 @@ public class LlistaUsuaris {			//Clase feta per Chenxing Chi
 			
 			boolean trobat = false;
 			int i=0;
-			for (i=0; !trobat && i <= nElem; i++) {
+			for (i=0; !trobat && i < nElem; i++) {
 				//cerquem a la llista
 				if (llista[i].getAlies().equals(aliesUsuari)) {
 					//comprovem si l'alies introduït coincideix amb el de la llista
@@ -76,21 +81,30 @@ public class LlistaUsuaris {			//Clase feta per Chenxing Chi
 
 				}
 			}
-			i--;
 			//restem 1 a la i perque al ser un for, la ultima instancia suma 1 unitat a la i
-			Usuaris nou = llista[i];
+			i--;
 			//posem l'usuari trobat en una variable local per retornar-la
+			Usuaris nou = llista[i].copia();
+			
 			return nou;
 		}	
 		
 
-		
+		/**
+		 * Retorna la copia de lultim usuari de la llista
+		 * @param i posicio
+		 * @return retorna copia de usuari a partir del index a la llistas
+		 */
 		public Usuaris ultimUsuari (int i) {
 			
 			Usuaris nou=llista[i].copia();
 			return nou;
 			
 		}
+		/**
+		 * retorna lindex de lultim element de la llsita
+		 * @return index
+		 */
 		
 		public int retornarIndex () {
 			return nElem-1;

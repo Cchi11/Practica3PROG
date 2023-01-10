@@ -27,6 +27,10 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 		return(nElem);
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 */
 	public void afegirPeticio (Peticions p) {
 		if (nElem>=llista.length) {
 			Peticions [] llistanova = new Peticions[nElem*2];
@@ -39,15 +43,21 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 		llista[nElem] = p.copia();
 		nElem++;
 	}
+
 	
 	/* Metode que agafa la llista i retorna la peticio en una posicio concreta de la llista
 	 * @param i, l'index de la llista
 	 * @return la peticio en aquella posicio de la llista
 	 */
+	
 	public Peticions agafarPeticio (int i) {
-		return (llista[i]);
+		return (llista[i].copia());
 	}
 	
+	/**
+	 * Metode que retorna una llista amb totes les instancies de peticions no respostes
+	 * @return llistaNova Peticions no respostes
+	 */
 	public LlistaPeticions mostrarPetNoRespostes () {	
 		LlistaPeticions llistaPet = new LlistaPeticions (100);
 		for (int i=0; i < nElem; i++) {
@@ -58,6 +68,8 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 		return llistaPet;
 	}
 	
+
+
 	public void mostrarPetAccept () {		
 		for (int i=0; i < llista.length; i++) {
 			if (llista[i].getResposat() == 1) {
@@ -88,7 +100,10 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 		llista[i].setResposat(2);
 	}
 	
-
+	/**
+	 * Retorna el nElem de la llista+1. Serveis per generar id peticions
+	 * @return id peticio
+	 */
 	public int idSeguentPeticio() {
 		int ultimaId;
 		ultimaId = nElem+1;
@@ -99,6 +114,7 @@ public class LlistaPeticions { //Clase realitzada per Pol Regy
 	 * @param i, l'index de la llista 
 	 * @param v, el valor de la valoracio de la peticio
 	 */
+
 	public void posarValoracioPet (int i, int v) {
 		llista[i].setValoracioUserRebPet(v);
 	}
