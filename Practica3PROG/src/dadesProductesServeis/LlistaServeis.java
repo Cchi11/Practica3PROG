@@ -120,16 +120,19 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		return actius;
 	}
 
-
+	/**
+	 * Escriu la llista de serveis a un fitxer
+	 */
 	public void escriureLlistaServeis() {
 		try (BufferedWriter g = new BufferedWriter(new FileWriter("dadesServeis.txt"))) {
 			String frase = "";
 			int i = 0;
 
 			for(i = 0; i < nElem; i++) {
+				// Pasem els paramatres a un string saparats per ;
 				frase = llista[i].getUsuari()+";"+llista[i].getNom()+";"+llista[i].getDesc()+";"+llista[i].getTipus()+";false;"+llista[i].getData()+";"+llista[i].getDataFiOferiment();
-				g.write(frase);
-				g.newLine();
+				g.write(frase); //Escrivim la frase al fitxer
+				g.newLine();	//SAltem de linia
 			}
 			g.close();
 		}

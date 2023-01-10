@@ -57,7 +57,6 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 	 * @return un boolea per si es troba el be a la llista
 	 */
 	public boolean comprovaBe (String usuari, String nomProd) {
-		
 		boolean trobat = false;
 		
 		for (int i=0; !trobat && i < nElem; i++) {
@@ -70,6 +69,27 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 		}
 		return (trobat);
 	}	
+	/**
+	 * Metode per veure si el be pertany al usuari i que no s'hagi intercanviat ningut cop
+	 * @param usuari nom del usuari a buscar
+	 * @param nomProd nom del usuari a intercanviar
+	 * @return boolea si ha trobat o no
+	 */
+	public boolean comprovaBeSenseIntercanviat (String usuari, String nomProd) {
+		
+		boolean trobat = false;
+		
+		for (int i=0; !trobat && i < nElem; i++) {
+			//fem una cerca per robar si es correspon a la llista
+			if ((llista[i].getNom().equals(nomProd)) && (usuari.equals(llista[i].getUsuari())) && (llista[i].getDataIntercanvi()=="0")) {
+				//si el producte coincideix
+				trobat = true;
+				//el boolea sera cert
+			}
+		}
+		return (trobat);
+	}	
+	
 	
 	/**
 	 * Metode que realitza el mateix que el metode ComprovaBe, pero ara mira sense tenir en compte l'usuari
@@ -82,7 +102,9 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 		boolean trobat = false;
 		
 		for (int i=0; !trobat && i < nElem; i++) {
+			//fem una cerca per robar si es correspon a la llista
 			if ((llista[i].getNom().equals(nomProd)) && !(usuari.equals(llista[i].getUsuari()))) {
+				//si el producte coincideix
 				trobat = true;
 			}
 		}
@@ -93,17 +115,20 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 	 * Metode que realitza el mateix que el metode comprovaBeSenseUsuari, nomes que ara retorna un String amb el nom de l'usuari trobat
 	 * @param usuari Usuaria buscar
 	 * @param nomProd	nom del producte a buscar
-	 * @return
+	 * @return Retorna el nom  del usuari
 	 */
 	
 	public String comprovaBeSenseUsuariStr (String usuari, String nomProd) {
 		
 		boolean trobat = false;
 		String us = null;
+		//fem una cerca per robar si es correspon a la llista
 		for (int i=0; !trobat && i < nElem; i++) {
 			if ((llista[i].getNom().equals(nomProd)) && !(usuari.equals(llista[i].getUsuari()))) {
+				//si el producte coincideix
 				trobat = true;
 				us = llista[i].getUsuari();
+				//el boolea sera cert i es copia el usuari
 			}
 		}
 		return us;
@@ -117,7 +142,7 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 	public void eliminaBe (Usuaris usuari, String nomProd) {
 		int i=0;
 			while (i<nElem) {
-				if ((llista[i].getNom().equals(nomProd)) && (usuari.getAlies().equals(llista[i].getUsuari()))) {
+				if ((llista[i].getNom().equals(nomProd)) && (usuari.getAlies().equals(llista[i].getUsuari())) && (llista[i].getDataIntercanvi()=="0")) {
 					
 					for (int j=i; j<nElem-1; j++)
 					{
@@ -148,15 +173,20 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 		return noInter;
 	}
 	
+
+	/**
+	 * LLegeix les dades de un fitxer y les copia a la llista 
+	 */
 	public void escriureLlistaBens() {
 		try (BufferedWriter g = new BufferedWriter(new FileWriter("dadesBens.txt"))) {
 			String frase = "";
 			int i = 0;
-
+			//Recorem tota la llista fins que s'acabi
 			for(i = 0; i < nElem; i++) {
+				//pasem tots el continguts al un format divit en ;
 				frase = llista[i].getUsuari()+";"+llista[i].getNom()+";"+llista[i].getDesc()+";"+llista[i].getTipus()+";true;"+llista[i].getData()+";"+llista[i].getAmplada()+";"+llista[i].getAmplada()+";"+llista[i].getAlçada()+";"+llista[i].getFons()+";"+llista[i].getPes();
-				g.write(frase);
-				g.newLine();
+				g.write(frase); // escribim frase
+				g.newLine(); // y saltem de linia
 			}
 			g.close();
 		}
@@ -222,6 +252,9 @@ public class LlistaBens {  //Clase feta per Chenxing Chi
 		}
 	}
 	
+	/**
+	 * Passa la taula a un string
+	 */
 	public String toString() {
 		String aux;
 		aux="Bens => numBens "+nElem;

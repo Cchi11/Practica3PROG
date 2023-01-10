@@ -112,7 +112,10 @@ public class Peticions {		//Clase feta per Òscar Cabré
 		this.valoracioUserRebPet = valoracioUserRebPet;
 	}
 	
-
+	/**
+	 * 
+	 * @return
+	 */
 	public Peticions copia() {
 		Peticions copia = new Peticions(idPeticio, userPeticio, userRebPet, producAcons, producOfe);
 		copia.resposat=this.resposat;

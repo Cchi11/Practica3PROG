@@ -1,8 +1,6 @@
 package usuaris;
 
-import dadesProductesServeis.Serveis;
-
-public class LlistaUsuaris {			//Clase feta per Chenxing Chi
+public class LlistaUsuaris {			//Clase feta per Oscar Cabre
 		private int nElem;
 		private Usuaris [] llista;
 		
