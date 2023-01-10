@@ -980,7 +980,7 @@ public class Main {
 	public static void opcio16(LlistaServeis serv) {
 		
 		Serveis mesRepetit = serv.mesRepeticion();
-		System.out.println(mesRepetit.toString());
+		System.out.println(mesRepetit.toString()+"\nNumero de vegades repetit:"+mesRepetit.getRepeticions());
 	}
 	
 	
@@ -1018,13 +1018,12 @@ public class Main {
 		
 		llistaUser = carregarUsuaris();
 		
-		Usuaris usuari1 = new Usuaris ("chen", "ioqjeoi", 2365);
 
-		llistaUser.donaAlta(usuari1);
 		Usuaris usuariActual = iniciasessio(llistaUser);
 		
 		Usuaris roger = new Usuaris("Roger", "kms", 231);
 		llistaUser.donaAlta(roger);
+		
 		
 		mostrarMenu();
 		while (opcio != 17) {

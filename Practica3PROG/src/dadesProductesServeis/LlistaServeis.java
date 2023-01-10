@@ -224,7 +224,7 @@ public class LlistaServeis {   //Clase feta per Chenxing Chi
 		repMajor=0;
 		for (int i=0; i < nElem; i++) {
 			if (llista[i].getRepeticions() >= repMajor) {
-				//repMajor = llista[i].getRepeticions(); 
+				repMajor = llista[i].getRepeticions(); 
 				id = i;
 			}	
 		}
